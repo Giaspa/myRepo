@@ -27,8 +27,7 @@ import { TextDotterComponent } from './contenuti/personaggio/input-custom/text-d
 import { ModaleComponent } from './utility/modale/modale.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CrudComponent } from './utility/crud/crud/crud.component';
-// import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
-// import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
 
 const firebaseConfig = {
   apiKey: "AIzaSyD1mxxOj0OnJzFMwVcWCv4sKos7dq2dsxQ",
@@ -73,8 +72,7 @@ const firebaseConfig = {
     ReactiveFormsModule,
     FormsModule,
     MatTooltipModule,
-    // provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    // provideFirestore(() => getFirestore()),
+    AngularFireModule.initializeApp(firebaseConfig),
   ],
   providers: [],
   bootstrap: [AppComponent],

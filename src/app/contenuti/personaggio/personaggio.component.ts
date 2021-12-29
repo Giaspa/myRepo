@@ -1,4 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Root } from 'src/app/service/root.model';
+import { TestService } from 'src/app/service/test.service';
 import { ModaleComponent } from 'src/app/utility/modale/modale.component';
 import { Utilities } from 'src/app/utility/utilities';
 
@@ -15,7 +17,7 @@ export class PersonaggioComponent implements OnInit {
 
   openedPanel: string = "Attributi"
 
-  constructor() { }
+  constructor(private testService: TestService) { }
 
   ngOnInit(): void {
   }
@@ -109,6 +111,62 @@ export class PersonaggioComponent implements OnInit {
     console.log("EVENT", event) //torna l'ID della cicatrice da eliminare
 
     window.alert("DELETE della CICATRICE da definire; ID = " + event)
+  }
+
+
+  //TEST
+  testDB() {
+    // this.testService.test().subscribe(res => {
+    //   console.log("TEST", res)
+    // })
+
+    var userId = 2;
+    var pgId = 1;
+
+    // this.testService.setUser(userId, Root.userEntity(userId))
+    // this.testService.setPg(userId, pgId, Root.pgEntity(pgId))
+    // this.testService.updatePgAttribute(userId, pgId, 'forza', 5);
+    // this.testService.updatePgAbility(userId, pgId, 'arceria', 5);
+    // this.testService.updatePgBackground(userId, pgId, 'riti', 5);
+    // this.testService.updatePgFGV(userId, pgId, 'furia', 4);
+
+    // this.testService.getUsersList().subscribe(res =>
+    //   console.log("lista utenti", res)
+    // );
+    // this.testService.getUser(userId).subscribe(res =>
+    //   console.log("utente", res)
+    // );
+    // this.testService.getPersonaggiList(userId).subscribe(res =>
+    //   console.log("lista personaggi", res)
+    // );
+    // this.testService.getPersonaggio(userId, pgId).subscribe(res =>
+    //   console.log("personaggio", res)
+    // );
+
+    // var giftId = 2;
+    // var dono = "Tocco della madre"
+    // var link = "http://kaputtmundi.wikidot.com/doni-teurgo#:~:text=%C2%B7%20Mother%27s%20Touch%20%2D%20Tocco%20della%20Madre%20(Livello%20Uno)%20%5BWerewolf%3A%20the%20Apocalypse%2C%20Rev.%5D%2C%20%5B20th%20Anniversary%5D";
+    // this.testService.setGift(userId, pgId, giftId, Root.giftEntity(giftId, dono, link));
+    // var meritId = 2;
+    // var nome = "Leader nato"
+    // var note = "+2 dadi a tiri Autorità";
+    // this.testService.setMerit(userId, pgId, meritId, Root.meritEntity(meritId, nome, note));
+    // var flawId = 1;
+    // var nome = "Tracce di corruzione"
+    // var note = "I doni di percezione del Wyrm riconosco il PG come un Nemico. L'atteggiamento dei Licantropi può essere ostile nei suoi confronti.";
+    // this.testService.setFlaw(userId, pgId, flawId, Root.flawEntity(flawId, nome, note));
+    // var scarId = 1;
+    // var nome = "Ustione su viso e braccio"
+    // var note = "Quando la temperatura è bassa, fa male...";
+    // this.testService.setScar(userId, pgId, scarId, Root.scarEntity(scarId, nome, note));
+    // var equipId = 1;
+    // var item = "Klaive Dedalea"
+    // var note = "For+3, CD 6; Gnosi 7: +1 Danni Aggravati e +2 tiri Sociali";
+    // this.testService.setEquip(userId, pgId, equipId, Root.equipEntity(equipId, item, note));
+    // this.testService.updatePgBio(userId, pgId, 'rango', 4);
+    // this.testService.updateUserAuth(userId, 'cognome', 'Spadazzi');
+
+
   }
 
 
