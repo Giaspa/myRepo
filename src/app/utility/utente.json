@@ -1,7 +1,5 @@
 {
-  "id": 1,
-  "player": {
-    "auth": {
+  "auth": {
       "nome": "Gianluca",
       "cognome": "Spadazzi",
       "email": "spadazzi.gianluca@gmail.com",
@@ -249,4 +247,3 @@
       }
     ]
   }
-}
