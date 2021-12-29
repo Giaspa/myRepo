@@ -1,0 +1,21 @@
+<div (click)="modalOpen($event)">
+  <ng-content select=".modale--apertura"></ng-content>
+</div>
+
+<div class="modale" [hidden]="hidden">
+  <div class="modale__pannello shadow-6">
+    <div class="modale__pannello--close flex flex-column align-items-center justify-content-center" (click)="modalClose($event)">
+      <i class="bi bi-x-circle icon--btn" matTooltip="Chiudi" matTooltipPosition="left"></i>
+    </div>
+
+    <div class="modale__pannello--body">
+      <div class="mb-3 modale__pannello__boby--header border-bottom-1" style="border-color: lightgray;">
+        <ng-content select=".modale--header"></ng-content>
+      </div>
+
+      <div class="modale__pannello__body--contenuto">
+        <ng-content select=".modale--contenuto"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

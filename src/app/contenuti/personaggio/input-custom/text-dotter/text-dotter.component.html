@@ -1,0 +1,66 @@
+<div class="form-floating mb-0" [ngSwitch]="type">
+  <!-- INPUT -->
+  <input *ngSwitchCase="'input'" type="text" class="form-control border-none pb-0 px-1"
+    style="height: fit-content; font-size: 2.5vmin" placeholder="Nome" [value]="value" readonly>
+
+  <!-- DOTTER -->
+  <ng-conteiner *ngSwitchCase="'dotter'" [ngTemplateOutlet]="dotter">
+  </ng-conteiner>
+
+  <!-- DEFAULT -->
+  <span *ngSwitchDefault> Nessun TYPE selezionato per text-dotter !</span>
+
+  <label #label class="px-0" style="height: fit-content; width: 10rem;">
+    <div #content>
+      <ng-content></ng-content>
+    </div>
+  </label>
+</div>
+
+<ng-template #dotter>
+  <div class="form-control border-none pb-0 px-0" style="margin-top: -1rem;">
+    <div class="form-check form-check-inline m-0 p-0">
+      <input #dot1 style="margin: 0 1px!important;" class="form-check-input border-circle p-0" type="checkbox"
+        name="dot1" value="1" (change)="dotClick($event)" [disabled]="isReadOnly">
+    </div>
+    <div class="form-check form-check-inline m-0 p-0">
+      <input #dot2 style="margin: 0 1px!important;" class="form-check-input border-circle m-0 p-0" type="checkbox"
+        name="dot2" value="2" (change)="dotClick($event)" [disabled]="isReadOnly">
+    </div>
+    <div class="form-check form-check-inline m-0 p-0">
+      <input #dot3 style="margin: 0 1px!important;" class="form-check-input border-circle m-0 p-0" type="checkbox"
+        name="dot3" value="3" (change)="dotClick($event)" [disabled]="isReadOnly">
+    </div>
+    <div class="form-check form-check-inline m-0 p-0">
+      <input #dot4 style="margin: 0 1px!important;" class="form-check-input border-circle m-0 p-0" type="checkbox"
+        name="dot4" value="4" (change)="dotClick($event)" [disabled]="isReadOnly">
+    </div>
+    <div class="form-check form-check-inline m-0 p-0">
+      <input #dot5 style="margin: 0 1px!important;" class="form-check-input border-circle m-0 p-0" type="checkbox"
+        name="dot5" value="5" (change)="dotClick($event)" [disabled]="isReadOnly">
+    </div>
+
+    <div *ngIf="isTenDot" class="form-check form-check-inline m-0 p-0">
+      <div class="form-check form-check-inline m-0 p-0">
+        <input #dot6 style="margin: 0 1px!important;" class="form-check-input border-circle p-0" type="checkbox"
+          name="dot6" value="6" (change)="dotClick($event)" [disabled]="isReadOnly">
+      </div>
+      <div class="form-check form-check-inline m-0 p-0">
+        <input #dot7 style="margin: 0 1px!important;" class="form-check-input border-circle m-0 p-0" type="checkbox"
+          name="dot7" value="7" (change)="dotClick($event)" [disabled]="isReadOnly">
+      </div>
+      <div class="form-check form-check-inline m-0 p-0">
+        <input #dot8 style="margin: 0 1px!important;" class="form-check-input border-circle m-0 p-0" type="checkbox"
+          name="dot8" value="8" (change)="dotClick($event)" [disabled]="isReadOnly">
+      </div>
+      <div class="form-check form-check-inline m-0 p-0">
+        <input #dot9 style="margin: 0 1px!important;" class="form-check-input border-circle m-0 p-0" type="checkbox"
+          name="dot9" value="9" (change)="dotClick($event)" [disabled]="isReadOnly">
+      </div>
+      <div class="form-check form-check-inline m-0 p-0">
+        <input #dot10 style="margin: 0 1px!important;" class="form-check-input border-circle m-0 p-0" type="checkbox"
+          name="dot10" value="10" (change)="dotClick($event)" [disabled]="isReadOnly">
+      </div>
+    </div>
+  </div>
+</ng-template>

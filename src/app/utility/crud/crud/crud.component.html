@@ -1,0 +1,81 @@
+<p *ngFor="let data of dataset; let i = index" class="grid p-0 m-0 mb-1 border-bottom-1"
+  style="border-color: var(--forth-color__light);">
+  <span class="col-9">{{i+1}}. {{data[name]}}</span>
+
+  <!-- view -->
+  <span class="col-1 text-center">
+    <modale #modalView>
+      <i *ngIf="data[description]" class="modale--apertura bi bi-chat-text icon--btn" matTooltip="Note"
+        matTooltipPosition="before"></i>
+
+      <h2 class="modale--header m-0">{{data[name]}}</h2>
+
+      <div class="modale--contenuto">
+        <div class="form-floating" style="bottom: 0">
+          <textarea class="form-control" placeholder="descrizione" id="floatingTextarea2" style="height: 15vh"
+            value="{{data[description]}}" disabled></textarea>
+          <label for="floatingTextarea2">{{descriptionLabel}}</label>
+        </div>
+
+        <div class="py-3 flex justify-content-center align-items-center">
+          <button type="button" class="btn btn-link" (click)="modalView.hidden=true">Indietro</button>
+        </div>
+      </div>
+    </modale>
+  </span>
+
+  <!-- modifica -->
+  <span class="col-1 text-center">
+    <modale #modalUpdate>
+      <i class="modale--apertura bi bi-gear icon--btn" matTooltip="Modifica" matTooltipPosition="before"></i>
+
+      <h2 class="modale--header m-0">{{editLabel}}</h2>
+
+      <div class="modale--contenuto">
+        <form>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="oggetto" value="{{data[name]}}">
+            <label for="floatingInput">{{nameLabel}}</label>
+          </div>
+
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="descrizione" id="floatingTextarea2" style="height: 15vh"
+              value="{{data[description]}}"></textarea>
+            <label for="floatingTextarea2">{{descriptionLabel}}</label>
+          </div>
+
+          <div class="py-3 flex justify-content-center align-items-center">
+            <button type="button" class="btn btn-link" (click)="modalUpdate.hidden=true">Indietro</button>
+            <button type="button" class="btn btn-primary" (click)="fieldUpdate(data[fieldId])">Modifica</button>
+          </div>
+        </form>
+      </div>
+    </modale>
+  </span>
+
+  <!-- elimina -->
+  <span class="col-1 text-center">
+    <modale #modalDelete>
+      <i class="modale--apertura bi bi-trash icon--btn" matTooltip="Elimina" matTooltipPosition="before"></i>
+      <h2 class="modale--header m-0">{{deleteLabel}}</h2>
+      <div class="modale--contenuto">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="oggetto" value="{{data[name]}}"
+            disabled>
+          <label for="floatingInput">{{nameLabel}}</label>
+        </div>
+
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="descrizione" id="floatingTextarea2" style="height: 15vh"
+            value="{{data[description]}}" disabled></textarea>
+          <label for="floatingTextarea2">{{descriptionLabel}}</label>
+        </div>
+
+        <div class="py-3 flex justify-content-center align-items-center">
+          <button type="button" class="btn btn-link" (click)="modalDelete.hidden=true">Indietro</button>
+          <button type="button" class="btn btn-danger" (click)="fieldDelete(data[fieldId])">Elimina</button>
+        </div>
+      </div>
+    </modale>
+  </span>
+</p>

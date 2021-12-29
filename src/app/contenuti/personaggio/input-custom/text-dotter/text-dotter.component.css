@@ -1,0 +1,15 @@
+.form-check-input:checked[type=checkbox]{
+  background-image: none
+}
+.form-check-input:checked{
+  background-color: black;
+  border-color: black;
+}
+
+.form-control{
+  background-color: transparent;
+}
+.form-control:disabled, .form-control[readonly]{
+  background-color: initial;
+  color: RGB(128, 128, 128);
+}

@@ -1,0 +1,524 @@
+<app-corpo-sx>
+  <div class="w-full h-screen--ridotto" style="background-color: none;">
+    <!-- +++++++++++++++ INFO personaggio +++++++++++++++ -->
+    <div class="grid">
+      <div class="col-4">
+        <text-dotter type="input" [value]="personaggio.nomeCompleto"><b>Personaggio</b></text-dotter>
+        <text-dotter type="input" [value]="personaggio.razza"><b>Razza</b></text-dotter>
+      </div>
+
+      <div class="col-4">
+        <text-dotter type="input" [value]="personaggio.auspicio"><b>Auspicio</b></text-dotter>
+        <text-dotter type="input" [value]="personaggio.tribu"><b>Tribù</b></text-dotter>
+      </div>
+
+      <div class="col-4">
+        <text-dotter type="input" [value]="getRango(personaggio.rango)"><b>Rango</b></text-dotter>
+        <text-dotter type="input" [value]="personaggio.branco"><b>Branco</b></text-dotter>
+      </div>
+    </div>
+
+    <hr>
+    <!-- PULSANTIERA -->
+    <div class="btn-group flex align-items-center justify-content-center align-content-center mb-2" role="group">
+      <!-- <button type="button" class="button__font btn btn-outline-primary">Furia, Gnosi & Volontà</button> -->
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked
+        (click)="setPanelOpen('Attributi')">
+      <label class="button__font btn btn-outline-primary" for="btnradio1">Attributi</label>
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"
+        (click)="setPanelOpen('Abilità')">
+      <label class="button__font btn btn-outline-primary" for="btnradio2">Abilità</label>
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off"
+        (click)="setPanelOpen('Background')">
+      <label class="button__font btn btn-outline-primary" for="btnradio3">Background</label>
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off"
+        (click)="setPanelOpen('Doni')">
+      <label class="button__font btn btn-outline-primary" for="btnradio4">Doni</label>
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off"
+        (click)="setPanelOpen('Equip.')">
+      <label class="button__font btn btn-outline-primary" for="btnradio5">Equip.</label>
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off"
+        (click)="setPanelOpen('Note')">
+      <label class="button__font btn btn-outline-primary" for="btnradio6">Note</label>
+    </div>
+
+    <!-- CONTENUTO -->
+    <div class="personaggio__contenuto" style="background-color: none;" [ngSwitch]="openedPanel">
+      <!-- +++++++++++++++ ATTRIBUTI +++++++++++++++ -->
+      <div class="grid" *ngSwitchCase="'Attributi'">
+        <!-- ----- FISICI ----- -->
+        <div class="col-4 flex flex-column align-items-center">
+          <h2><b>Fisici</b></h2>
+          <text-dotter type="dotter" [value]="personaggio.forza" [isReadOnly]="true"><b>Forza</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.destrezza" [isReadOnly]="true"><b>Destrezza</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.costituzione" [isReadOnly]="true"><b>Costituzione</b>
+          </text-dotter>
+        </div>
+
+        <!-- ----- SOCIALI ----- -->
+        <div class="col-4 flex flex-column align-items-center">
+          <h2><b>Sociali</b></h2>
+          <text-dotter type="dotter" [value]="personaggio.carisma" [isReadOnly]="true"><b>Carisma</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.persuasione" [isReadOnly]="true"><b>Persuasione</b>
+          </text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.aspetto" [isReadOnly]="true"><b>Aspetto</b></text-dotter>
+        </div>
+
+        <!-- ----- MENTALI ----- -->
+        <div class="col-4 flex flex-column align-items-center">
+          <h2><b>Mentali</b></h2>
+          <text-dotter type="dotter" [value]="personaggio.percezione" [isReadOnly]="true"><b>Percezione</b>
+          </text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.intelligenza" [isReadOnly]="true"><b>Intelligenza</b>
+          </text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.prontezza" [isReadOnly]="true"><b>Prontezza</b></text-dotter>
+        </div>
+
+        <!-- Furia -->
+        <div class="col-12 flex flex-column align-items-center">
+          <h2><b>Furia</b></h2>
+          <text-dotter type="dotter" [isTenDot]="true" [value]="personaggio.furia" [isReadOnly]="true"></text-dotter>
+        </div>
+
+        <!-- Gnosi -->
+        <div class="col-12 flex flex-column align-items-center" style="margin-top: -5vh;">
+          <h2><b>Gnosi</b></h2>
+          <text-dotter type="dotter" [isTenDot]="true" [value]="personaggio.gnosi" [isReadOnly]="true"></text-dotter>
+        </div>
+
+        <!-- Volontà -->
+        <div class="col-12 flex flex-column align-items-center" style="margin-top: -5vh;">
+          <h2><b>Volontà</b></h2>
+          <text-dotter type="dotter" [isTenDot]="true" [value]="personaggio.volonta" [isReadOnly]="true"></text-dotter>
+        </div>
+      </div>
+
+      <!-- +++++++++++++++ ABILITA' +++++++++++++++ -->
+      <div class="grid" *ngSwitchCase="'Abilità'">
+        <!-- ----- ATTITUDINI ----- -->
+        <div class="col-4 flex flex-column align-items-center">
+          <h2><b>Attitudini</b></h2>
+          <text-dotter type="dotter" [value]="personaggio.atletica" [isReadOnly]="true"><b>Atletica</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.autorita" [isReadOnly]="true"><b>Autorita</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.bassifondi" [isReadOnly]="true"><b>Bassifondi</b>
+          </text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.empatia" [isReadOnly]="true"><b>Empatia</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.espressivita" [isReadOnly]="true"><b>Espressivita</b>
+          </text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.intimidire" [isReadOnly]="true"><b>Intimidire</b>
+          </text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.istintoPrimordiale" [isReadOnly]="true"><b>Ist.
+              Primordiale</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.rissa" [isReadOnly]="true"><b>Rissa</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.sestoSenso" [isReadOnly]="true"><b>Sesto Senso</b>
+          </text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.sotterfugio" [isReadOnly]="true"><b>Sotterfugio</b>
+          </text-dotter>
+
+        </div>
+
+        <!-- ----- CAPACITA' ----- -->
+        <div class="col-4 flex flex-column align-items-center">
+          <h2><b>Capacità</b></h2>
+          <text-dotter type="dotter" [value]="personaggio.affinitaAnimale" [isReadOnly]="true"><b>Aff. Animale</b>
+          </text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.arceria" [isReadOnly]="true"><b>Arceria</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.armiDaMischia" [isReadOnly]="true"><b>Mischia</b>
+          </text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.cavalcare" [isReadOnly]="true"><b>Cavalcare</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.criminalita" [isReadOnly]="true"><b>Criminalita</b>
+          </text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.espressioneArtistica" [isReadOnly]="true"><b>Espr.
+              Artistica</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.furtivita" [isReadOnly]="true"><b>Furtivita</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.galateo" [isReadOnly]="true"><b>Galateo</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.manualita" [isReadOnly]="true"><b>Manualita</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.sopravvivenza" [isReadOnly]="true"><b>Sopravvivenza</b>
+          </text-dotter>
+        </div>
+
+        <!-- ----- CONOSCENZE ----- -->
+        <div class="col-4 flex flex-column align-items-center">
+          <h2><b>Conoscenze</b></h2>
+          <text-dotter type="dotter" [value]="personaggio.accademiche" [isReadOnly]="true"><b>Accademiche</b>
+          </text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.enigmi" [isReadOnly]="true"><b>Enigmi</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.investigare" [isReadOnly]="true"><b>Investigare</b>
+          </text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.legge" [isReadOnly]="true"><b>Legge</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.linguistica" [isReadOnly]="true"><b>Linguistica</b>
+          </text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.medicina" [isReadOnly]="true"><b>Medicina</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.occulto" [isReadOnly]="true"><b>Occulto</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.rituali" [isReadOnly]="true"><b>Rituali</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.saggezzaDellaTerra" [isReadOnly]="true"><b>Sagg. Terra</b>
+          </text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.scienza" [isReadOnly]="true"><b>Scienza</b></text-dotter>
+        </div>
+      </div>
+
+      <!-- +++++++++++++++ BACKGROUND +++++++++++++++ -->
+      <div class="grid" *ngSwitchCase="'Background'">
+        <div class="col-12 flex flex-column align-items-center">
+          <h2 class="m-0" style="height: fit-content;"><b>Background</b></h2>
+        </div>
+
+        <div class="col-6 flex flex-column align-items-center">
+          <text-dotter *ngIf="personaggio.alleati" type="dotter" [value]="personaggio.alleati" [isReadOnly]="true">
+            <b>Alleati</b>
+          </text-dotter>
+          <text-dotter *ngIf="personaggio.antenati" type="dotter" [value]="personaggio.antenati" [isReadOnly]="true">
+            <b>Antenati</b>
+          </text-dotter>
+          <text-dotter *ngIf="personaggio.contatti" type="dotter" [value]="personaggio.contatti" [isReadOnly]="true">
+            <b>Contatti</b>
+          </text-dotter>
+          <text-dotter *ngIf="personaggio.destino" type="dotter" [value]="personaggio.destino" [isReadOnly]="true">
+            <b>Destino</b>
+          </text-dotter>
+          <text-dotter *ngIf="personaggio.feticci" type="dotter" [value]="personaggio.feticci" [isReadOnly]="true">
+            <b>Feticci</b>
+          </text-dotter>
+          <text-dotter *ngIf="personaggio.kinfolk" type="dotter" [value]="personaggio.kinfolk" [isReadOnly]="true">
+            <b>Kinfolk</b>
+          </text-dotter>
+          <text-dotter *ngIf="personaggio.mentore" type="dotter" [value]="personaggio.mentore" [isReadOnly]="true">
+            <b>Mentore</b>
+          </text-dotter>
+          <text-dotter *ngIf="personaggio.networkSpirituale" type="dotter" [value]="personaggio.networkSpirituale"
+            [isReadOnly]="true"><b>Network Spirituale</b></text-dotter>
+          <text-dotter *ngIf="personaggio.numeTutelare" type="dotter" [value]="personaggio.numeTutelare"
+            [isReadOnly]="true"><b>Nume Tutelare</b></text-dotter>
+          <text-dotter *ngIf="personaggio.pesoPolitico" type="dotter" [value]="personaggio.pesoPolitico"
+            [isReadOnly]="true"><b>Peso Politico</b></text-dotter>
+        </div>
+        <div class="col-6 flex flex-column align-items-center">
+          <text-dotter *ngIf="personaggio.razzaPura" type="dotter" [value]="personaggio.razzaPura" [isReadOnly]="true">
+            <b>Razza Pura</b>
+          </text-dotter>
+          <text-dotter *ngIf="personaggio.retaggioSpirituale" type="dotter" [value]="personaggio.retaggioSpirituale"
+            [isReadOnly]="true"><b>Retaggio Spirituale</b></text-dotter>
+          <text-dotter *ngIf="personaggio.risorse" type="dotter" [value]="personaggio.risorse" [isReadOnly]="true">
+            <b>Risorse</b>
+          </text-dotter>
+          <text-dotter *ngIf="personaggio.riti" type="dotter" [value]="personaggio.riti" [isReadOnly]="true"><b>Riti</b>
+          </text-dotter>
+          <text-dotter *ngIf="personaggio.territorioDiCaccia" type="dotter" [value]="personaggio.territorioDiCaccia"
+            [isReadOnly]="true"><b>Territorio di Caccia</b></text-dotter>
+          <text-dotter *ngIf="personaggio.toccatoDalWyld" type="dotter" [value]="personaggio.toccatoDalWyld"
+            [isReadOnly]="true"><b>Toccato dal Wyld</b></text-dotter>
+          <text-dotter *ngIf="personaggio.toccatoDallaWeaver" type="dotter" [value]="personaggio.toccatoDallaWeaver"
+            [isReadOnly]="true"><b>Toccato dalla Weaver</b></text-dotter>
+          <text-dotter *ngIf="personaggio.toccatoDalWyrm" type="dotter" [value]="personaggio.toccatoDalWyrm"
+            [isReadOnly]="true"><b>Toccato dal Wyrm</b></text-dotter>
+          <text-dotter *ngIf="personaggio.totem" type="dotter" [value]="personaggio.totem" [isReadOnly]="true">
+            <b>Totem</b>
+          </text-dotter>
+        </div>
+      </div>
+
+      <!-- +++++++++++++++ DONI +++++++++++++++ -->
+      <div class="" *ngSwitchCase="'Doni'">
+        <div class="col-12 flex flex-column align-items-center">
+          <h2 class="m-0" style="height: fit-content;"><b>Doni</b></h2>
+        </div>
+
+        <!-- nuovo DONO -->
+        <div class="flex justify-content-center align-items-center">
+          <modale #modalGiftAdd>
+            <button type="button"
+              class="modale--apertura button-custom p-2 m-0 mb-1 border-1 flex justify-content-center align-items-center"
+              style="border-radius: 6px;">
+              <i class="bi bi-plus-circle"></i> &nbsp; Aggiungi dono
+            </button>
+
+            <h2 class="modale--header m-0">Aggiungi un dono</h2>
+
+            <div class="modale--contenuto">
+              <form>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" placeholder="dono">
+                  <label for="floatingInput">Dono</label>
+                </div>
+
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="floatingInput" placeholder="link">
+                  <label for="floatingInput">Link</label>
+                </div>
+
+                <div class="py-3 flex justify-content-center align-items-center">
+                  <button type="button" class="btn btn-link" (click)="modalGiftAdd.hidden=true">Indietro</button>
+                  <button type="button" class="btn btn-primary" (click)="addGift()">Aggiungi</button>
+                </div>
+              </form>
+            </div>
+          </modale>
+        </div>
+
+        <div class="col-12 grid m-0 p-0 personaggio__contenuto--overflow">
+          <div class="col-12">
+            <div *ngFor="let dono of personaggio.doni; let i = index">
+              <div class="grid pt-3">
+                <!-- voci elenco oggetti -->
+                <div class="col-10 p-0 border-bottom-1" style="border-color: lightgray; height: fit-content;">
+                  <p class="p-0 m-0 mb-1">
+                    {{i+1}}. <a *ngIf="dono.link; else noLink" [href]="dono.link" target="_blank">{{dono.dono}}</a>
+
+                    <ng-template #noLink>
+                      {{dono.dono}}
+                    </ng-template>
+                  </p>
+                </div>
+
+                <!-- pulsante "Modifica" -->
+                <div class="col-1 p-0 border-bottom-1" style="border-color: lightgray; cursor: pointer;">
+                  <modale #modalUpdateGift>
+                    <i class="modale--apertura bi bi-gear icon--btn" matTooltip="Modifica"
+                      matTooltipPosition="before"></i>
+                    <h2 class="modale--header m-0">Modifica dono</h2>
+                    <div class="modale--contenuto">
+                      <form>
+                        <div class="form-floating mb-3">
+                          <input type="text" class="form-control" id="floatingInput" placeholder="dono"
+                            value="{{dono.dono}}">
+                          <label for="floatingInput">Dono</label>
+                        </div>
+
+                        <div class="form-floating">
+                          <textarea class="form-control" placeholder="descrizione" id="floatingTextarea2"
+                            style="height: 15vh" value="{{dono.link}}"></textarea>
+                          <label for="floatingTextarea2">Link</label>
+                        </div>
+
+                        <div class="py-3 flex justify-content-center align-items-center">
+                          <button type="button" class="btn btn-link"
+                            (click)="modalUpdateGift.hidden=true">Indietro</button>
+                          <button type="button" class="btn btn-primary"
+                            (click)="giftUpdate($event, dono.id)">Modifica</button>
+                        </div>
+                      </form>
+                    </div>
+                  </modale>
+                </div>
+
+                <!-- pulsante "Elimina" -->
+                <div class="col-1 p-0 border-bottom-1" style="border-color: lightgray; cursor: pointer;">
+                  <modale #modalDeleteGift>
+                    <i class="modale--apertura bi bi-trash icon--btn" matTooltip="Elimina"
+                      matTooltipPosition="before"></i>
+                    <h2 class="modale--header m-0">Elimina dono</h2>
+                    <div class="modale--contenuto">
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="dono"
+                          value="{{dono.dono}}" disabled>
+                        <label for="floatingInput">Dono</label>
+                      </div>
+
+                      <div class="form-floating">
+                        <textarea class="form-control" placeholder="link" id="floatingTextarea2" style="height: 15vh"
+                          value="{{dono.link}}" disabled></textarea>
+                        <label for="floatingTextarea2">Link</label>
+                      </div>
+
+                      <div class="py-3 flex justify-content-center align-items-center">
+                        <button type="button" class="btn btn-link"
+                          (click)="modalDeleteGift.hidden=true">Indietro</button>
+                        <button type="button" class="btn btn-danger" (click)="itemDelete(dono.id)">Elimina</button>
+                      </div>
+                    </div>
+                  </modale>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- +++++++++++++++ EQUIPAGGIAMENTO +++++++++++++++ -->
+      <div class="" *ngSwitchCase="'Equip.'">
+        <div class="col-12 flex flex-column align-items-center">
+          <h2 class="m-0" style="height: fit-content;"><b>Equipaggiamento</b></h2>
+        </div>
+
+        <!-- nuovo EQUIP -->
+        <div class="flex justify-content-center align-items-center">
+          <modale #modalAddItem>
+            <button type="button"
+              class="modale--apertura button-custom p-2 m-0 mb-1 border-1 flex justify-content-center align-items-center"
+              style="border-radius: 6px;">
+              <i class="bi bi-plus-circle"></i> &nbsp; Aggiungi equip.
+            </button>
+
+            <h2 class="modale--header m-0">Aggiungi equip.</h2>
+
+            <div class="modale--contenuto">
+              <form>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" placeholder="dono">
+                  <label for="floatingInput">Nome oggetto</label>
+                </div>
+
+                <div class="form-floating">
+                  <textarea class="form-control" placeholder="descrizione" id="floatingTextarea2"
+                    style="height: 22vh"></textarea>
+                  <label for="floatingTextarea2">Descrizione</label>
+                </div>
+
+                <div class="py-3 flex justify-content-center align-items-center">
+                  <button type="button" class="btn btn-link" (click)="modalAddItem.hidden=true">Indietro</button>
+                  <button type="button" class="btn btn-primary" (click)="itemAdd()">Aggiungi</button>
+                </div>
+              </form>
+            </div>
+          </modale>
+        </div>
+
+        <div class="col-12 grid m-0 p-0 personaggio__contenuto--overflow">
+          <!-- Gestione EQUIPAGGIAMENTO -->
+          <div class="col-12 p-0">
+            <app-crud [dataset]="personaggio.equipaggiamento" name="item" description="note" fieldId="id"
+              nameLabel="Equipaggiamento" descriptionLabel="Descrizione"
+              editLabel="Modifica equip." deleteLabel="Cancella equip."
+              (updateEmit)="itemUpdate($event)" (deleteEmit)="itemDelete($event)"></app-crud>
+          </div>
+        </div>
+      </div>
+
+      <!-- +++++++++++++++ NOTE +++++++++++++++ -->
+      <div class="personaggio__contenuto__note" *ngSwitchCase="'Note'">
+        <!-- PREGI -->
+        <div class="col-12 personaggio__contenuto__note--qualità px-3 border-bottom-2"
+          style="border-color: var(--forth-color);">
+          <!-- LABEL & aggiunti PREGIO -->
+          <div class="p-1 col-12">
+            <h3 class="m-0" style="height: fit-content;"><b>Pregi</b>
+              <div style="float: right;">
+                <modale #modalAddMerit>
+                  <button type="button"
+                    class="modale--apertura button-custom p-0 px-1 m-0 border-1 flex justify-content-center align-items-center"
+                    style="border-radius: 6px;" matTooltip="Aggiungi pregio" matTooltipPosition="before">
+                    <i class="bi bi-plus-circle"></i>
+                  </button>
+
+                  <h2 class="modale--header m-0">Aggiungi pregio</h2>
+
+                  <div class="modale--contenuto">
+                    <form>
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="dono">
+                        <label for="floatingInput">Pregio</label>
+                      </div>
+
+                      <div class="py-3 flex justify-content-center align-items-center">
+                        <button type="button" class="btn btn-link" (click)="modalAddMerit.hidden=true">Indietro</button>
+                        <button type="button" class="btn btn-primary" (click)="meritAdd()">Aggiungi</button>
+                      </div>
+                    </form>
+                  </div>
+                </modale>
+              </div>
+            </h3>
+          </div>
+
+          <!-- Gestione PREGI -->
+          <div class="col-12 p-0">
+            <app-crud [dataset]="personaggio.pregi" name="nome" description="note" fieldId="id" nameLabel="Pregio"
+              descriptionLabel="Descrizione" editLabel="Modifica pregio" deleteLabel="Cancella pregio"
+              (updateEmit)="meritUpdate($event)" (deleteEmit)="meritDelete($event)"></app-crud>
+          </div>
+        </div>
+
+        <!-- DIFETTI -->
+        <div class="col-12 personaggio__contenuto__note--qualità px-3 border-bottom-2"
+          style="border-color: var(--forth-color);">
+          <!-- LABEL & aggiunti DIFETTO -->
+          <div class="p-1 col-12">
+            <h3 class="m-0" style="height: fit-content;"><b>Difetti</b>
+              <div style="float: right;">
+                <modale #modalAddFlaw>
+                  <button type="button"
+                    class="modale--apertura button-custom p-0 px-1 m-0 border-1 flex justify-content-center align-items-center"
+                    style="border-radius: 6px;" matTooltip="Aggiungi difetto" matTooltipPosition="before">
+                    <i class="bi bi-plus-circle"></i>
+                  </button>
+
+                  <h2 class="modale--header m-0">Aggiungi difetto</h2>
+
+                  <div class="modale--contenuto">
+                    <form>
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="dono">
+                        <label for="floatingInput">Difetto</label>
+                      </div>
+
+                      <div class="py-3 flex justify-content-center align-items-center">
+                        <button type="button" class="btn btn-link" (click)="modalAddFlaw.hidden=true">Indietro</button>
+                        <button type="button" class="btn btn-primary" (click)="flawAdd()">Aggiungi</button>
+                      </div>
+                    </form>
+                  </div>
+                </modale>
+              </div>
+            </h3>
+          </div>
+
+          <!-- Gestione DIFETTI -->
+          <div class="col-12 p-0">
+            <app-crud [dataset]="personaggio.difetti" name="nome" description="note" fieldId="id" nameLabel="Difetto"
+              descriptionLabel="Descrizione" editLabel="Modifica difetto" deleteLabel="Cancella difetto"
+              (updateEmit)="flawUpdate($event)" (deleteEmit)="flawDelete($event)"></app-crud>
+          </div>
+
+        </div>
+
+        <!-- CICATRICI DA BATTAGLIA -->
+        <div class="col-12 personaggio__contenuto__note--qualità px-3">
+          <!-- LABEL & aggiunti CICATRICE -->
+          <div class="p-1 col-12">
+            <h3 class="m-0" style="height: fit-content;"><b>Cicatrici</b>
+              <div style="float: right;">
+                <modale #modalAddScar>
+                  <button type="button"
+                    class="modale--apertura button-custom p-0 px-1 m-0 border-1 flex justify-content-center align-items-center"
+                    style="border-radius: 6px;" matTooltip="Aggiungi cicatrice" matTooltipPosition="before">
+                    <i class="bi bi-plus-circle"></i>
+                  </button>
+
+                  <h2 class="modale--header m-0">Aggiungi cicatrice</h2>
+
+                  <div class="modale--contenuto">
+                    <form>
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="dono">
+                        <label for="floatingInput">Cicatrice da battaglia</label>
+                      </div>
+
+                      <div class="py-3 flex justify-content-center align-items-center">
+                        <button type="button" class="btn btn-link" (click)="modalAddScar.hidden=true">Indietro</button>
+                        <button type="button" class="btn btn-primary" (click)="scarAdd()">Aggiungi</button>
+                      </div>
+                    </form>
+                  </div>
+                </modale>
+              </div>
+            </h3>
+          </div>
+
+          <!-- Gestione CICATRICI -->
+          <div class="col-12 p-0">
+            <app-crud [dataset]="personaggio.cicatriciDaBattaglia" name="nome" description="note" fieldId="id"
+              nameLabel="Cicatrice da battaglia" descriptionLabel="Descrizione"
+              editLabel="Modifica cicatrice da battaglia" deleteLabel="Cancella cicatrice da battaglia"
+              (updateEmit)="scarUpdate($event)" (deleteEmit)="scarDelete($event)"></app-crud>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-corpo-sx>

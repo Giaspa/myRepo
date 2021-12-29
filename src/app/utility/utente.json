@@ -1,0 +1,252 @@
+{
+  "id": 1,
+  "player": {
+    "auth": {
+      "nome": "Gianluca",
+      "cognome": "Spadazzi",
+      "email": "spadazzi.gianluca@gmail.com",
+      "password": "admin_123"
+    },
+    "personaggi": [
+      {
+        "pgId": 1,
+        "nomeCompleto": "Aristeo Kallios",
+        "rango": 4,
+        "razza": "Homid",
+        "auspicio": "Teurgo",
+        "tribu": "Signore delle ombre",
+        "branco": "Ceneri di Nemeo",
+        "totemBranco": "Leone",
+        "profilo": "Zelota manipolatore",
+        "forza": 3,
+        "destrezza": 3,
+        "costituzione": 3,
+        "carisma": 5,
+        "persuasione": 5,
+        "aspetto": 3,
+        "percezione": 3,
+        "intelligenza": 4,
+        "prontezza": 4,
+        "atletica": 2,
+        "autorita": 5,
+        "bassifondi": 4,
+        "empatia": 4,
+        "espressivita": 4,
+        "intimidire": 4,
+        "istintoPrimordiale": 3,
+        "rissa": 3,
+        "sestoSenso": 4,
+        "sotterfugio": 5,
+        "affinitaAnimale": 2,
+        "arceria": 1,
+        "armiDaMischia": 4,
+        "cavalcare": 2,
+        "criminalita": 4,
+        "espressioneArtistica": 2,
+        "furtivita": 4,
+        "galateo": 4,
+        "manualita": 4,
+        "sopravvivenza": 4,
+        "accademiche": 4,
+        "enigmi": 5,
+        "investigare": 4,
+        "legge": 4,
+        "linguistica": 3,
+        "medicina": 3,
+        "occulto": 5,
+        "rituali": 5,
+        "saggezzaDellaTerra": 5,
+        "scienza": 3,
+        "alleati": 3,
+        "antenati": 3,
+        "contatti": 5,
+        "destino": null,
+        "feticci": 5,
+        "kinfolk": 5,
+        "mentore": null,
+        "networkSpirituale": 5,
+        "numeTutelare": null,
+        "pesoPolitico": 5,
+        "razzaPura": 3,
+        "retaggioSpirituale": 5,
+        "risorse": 5,
+        "riti": 5,
+        "territorioDiCaccia": 5,
+        "toccatoDalWyld": null,
+        "toccatoDallaWeaver": null,
+        "toccatoDalWyrm": null,
+        "totem": 5,
+        "doni": [
+          {
+            "id": 1,
+            "dono": "Tocco della madre",
+            "link": "http://kaputtmundi.wikidot.com/doni-teurgo#:~:text=%C2%B7%20Mother%27s%20Touch%20%2D%20Tocco%20della%20Madre%20(Livello%20Uno)%20%5BWerewolf%3A%20the%20Apocalypse%2C%20Rev.%5D%2C%20%5B20th%20Anniversary%5D"
+          },
+          {
+            "id": 2,
+            "dono": "Percepire Airt",
+            "link": "http://kaputtmundi.wikidot.com/doni-teurgo#:~:text=%C2%B7%20Airt%20Perception%20%2D%20Percepire%20Airt%20(Livello%20Uno)%20%5BBook%20Of%20Auspices%5D"
+          },
+          {
+            "id": 3,
+            "dono": "Parlare con gli spiriti",
+            "link": null
+          },
+          {
+            "id": 4,
+            "dono": "Sollevare la cortina di velluto",
+            "link": null
+          },
+          {
+            "id": 5,
+            "dono": "Aegis",
+            "link": null
+          },
+          {
+            "id": 1,
+            "dono": "Tocco della madre",
+            "link": "http://kaputtmundi.wikidot.com/doni-teurgo#:~:text=%C2%B7%20Mother%27s%20Touch%20%2D%20Tocco%20della%20Madre%20(Livello%20Uno)%20%5BWerewolf%3A%20the%20Apocalypse%2C%20Rev.%5D%2C%20%5B20th%20Anniversary%5D"
+          },
+          {
+            "id": 2,
+            "dono": "Percepire Airt",
+            "link": "http://kaputtmundi.wikidot.com/doni-teurgo#:~:text=%C2%B7%20Airt%20Perception%20%2D%20Percepire%20Airt%20(Livello%20Uno)%20%5BBook%20Of%20Auspices%5D"
+          },
+          {
+            "id": 3,
+            "dono": "Parlare con gli spiriti",
+            "link": null
+          },
+          {
+            "id": 4,
+            "dono": "Sollevare la cortina di velluto",
+            "link": null
+          },
+          {
+            "id": 5,
+            "dono": "Aegis",
+            "link": null
+          },
+          {
+            "id": 1,
+            "dono": "Tocco della madre",
+            "link": "http://kaputtmundi.wikidot.com/doni-teurgo#:~:text=%C2%B7%20Mother%27s%20Touch%20%2D%20Tocco%20della%20Madre%20(Livello%20Uno)%20%5BWerewolf%3A%20the%20Apocalypse%2C%20Rev.%5D%2C%20%5B20th%20Anniversary%5D"
+          },
+          {
+            "id": 2,
+            "dono": "Percepire Airt",
+            "link": "http://kaputtmundi.wikidot.com/doni-teurgo#:~:text=%C2%B7%20Airt%20Perception%20%2D%20Percepire%20Airt%20(Livello%20Uno)%20%5BBook%20Of%20Auspices%5D"
+          },
+          {
+            "id": 3,
+            "dono": "Parlare con gli spiriti",
+            "link": null
+          },
+          {
+            "id": 4,
+            "dono": "Sollevare la cortina di velluto",
+            "link": null
+          },
+          {
+            "id": 5,
+            "dono": "Aegis",
+            "link": null
+          },
+          {
+            "id": 1,
+            "dono": "Tocco della madre",
+            "link": "http://kaputtmundi.wikidot.com/doni-teurgo#:~:text=%C2%B7%20Mother%27s%20Touch%20%2D%20Tocco%20della%20Madre%20(Livello%20Uno)%20%5BWerewolf%3A%20the%20Apocalypse%2C%20Rev.%5D%2C%20%5B20th%20Anniversary%5D"
+          },
+          {
+            "id": 2,
+            "dono": "Percepire Airt",
+            "link": "http://kaputtmundi.wikidot.com/doni-teurgo#:~:text=%C2%B7%20Airt%20Perception%20%2D%20Percepire%20Airt%20(Livello%20Uno)%20%5BBook%20Of%20Auspices%5D"
+          },
+          {
+            "id": 3,
+            "dono": "Parlare con gli spiriti",
+            "link": null
+          },
+          {
+            "id": 4,
+            "dono": "Sollevare la cortina di velluto",
+            "link": null
+          },
+          {
+            "id": 5,
+            "dono": "Aegis",
+            "link": null
+          },
+          {
+            "id": 1,
+            "dono": "Tocco della madre",
+            "link": "http://kaputtmundi.wikidot.com/doni-teurgo#:~:text=%C2%B7%20Mother%27s%20Touch%20%2D%20Tocco%20della%20Madre%20(Livello%20Uno)%20%5BWerewolf%3A%20the%20Apocalypse%2C%20Rev.%5D%2C%20%5B20th%20Anniversary%5D"
+          },
+          {
+            "id": 2,
+            "dono": "Percepire Airt",
+            "link": "http://kaputtmundi.wikidot.com/doni-teurgo#:~:text=%C2%B7%20Airt%20Perception%20%2D%20Percepire%20Airt%20(Livello%20Uno)%20%5BBook%20Of%20Auspices%5D"
+          },
+          {
+            "id": 3,
+            "dono": "Parlare con gli spiriti",
+            "link": null
+          },
+          {
+            "id": 4,
+            "dono": "Sollevare la cortina di velluto",
+            "link": null
+          },
+          {
+            "id": 5,
+            "dono": "Aegis",
+            "link": null
+          }
+        ],
+        "furia": 5,
+        "gnosi": 9,
+        "volonta": 10,
+        "pregi": [
+          {"id": 1, "nome":"Privo di odore", "note": null},
+          {"id": 2, "nome":"Glabro credibile", "note": null},
+          {"id": 3, "nome":"Leader nato", "note":"+2 dadi a tiri Autorità"},
+          {"id": 4, "nome":"Forma mista 5 pti", "note":"CD 6 e non spende Volontà per Mutazioni Parziali (Des+Ist.Prim)"}
+        ],
+        "difetti": [
+          {"id": 1, "nome":"Tracce di corruzione", "note": "I doni di percezione del Wyrm riconosco il PG come un Nemico. L'atteggiamento dei Licantropi può essere ostile nei suoi confronti."}
+        ],
+        "cicatriciDaBattaglia": [
+          {"id":1, "nome": "Ustione su viso e braccio", "note": null},
+          {"id":1, "nome": "Cicatrice sul volto", "note": null}
+        ],
+        "equipaggiamento": [
+          {
+            "id": 1,
+            "item": "Klaive Dedalea",
+            "note": "For+3, CD 6; Gnosi 7: +1 Danni Aggravati e +2 tiri Sociali"
+          },
+          {
+            "id": 2,
+            "item": "Armatura risvegliata",
+            "note": "+2 Assorbire, anche Aggravati llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll"
+          },
+          {
+            "id": 3,
+            "item": "5x Chirottero Spia",
+            "note": null
+          },
+          {
+            "id": 4,
+            "item": "3x Nocciola Spirituale",
+            "note": "Gnosi 6, restituisce 1 Gnosi per successo; OPPURe spendi 1 Gnosi e recupera 3"
+          },
+          {
+            "id": 5,
+            "item": "2x Bende Insanguinate",
+            "note": "Gnosi 7, restituisce 1 livello di Salute per successo o 1 PF extra per successo se si è al massimo"
+          }
+        ]
+      }
+    ]
+  }
+}

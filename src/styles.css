@@ -1,0 +1,184 @@
+/* You can add global styles to this file, and also import other style files */
+:root{
+  --border-radius: 1rem;
+  --first-color: rgb(255, 255, 255);
+  --second-color__light: rgb(79, 100, 219);
+  --second-color: rgb(63, 81, 181);
+  --second-color__dark: rgb(55, 71, 158);
+  --third-color: rgb(33, 37, 41);
+  --forth-color__light: rgb(190, 186, 186);
+  --forth-color: gray;
+  --forth-color__dark: rgb(97, 96, 96);
+
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mt-9 {margin-top: 6rem;}
+.mt-10 {margin-top: 7rem;}
+
+.corpo-sx, .corpo-dx{
+  height: 99vh;
+}
+
+.corpo-centrale, .corpo-rimanente{
+  height: 99vh;
+}
+.corpo-centrale--box{
+  width: 40vw
+}
+
+button{
+  font-size: 1.5rem!important;
+  width: 12vw;
+}
+
+.card--hovering{
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+.card--hovering__new{
+  background-color: var(--forth-color);
+}
+.card--hovering:hover{
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.06), 0px 7px 9px rgba(0, 0, 0, 0.12), 0px 20px 25px -8px rgba(0, 0, 0, 0.18);
+  border-color: var(--second-color);
+  color: var(--second-color);
+  cursor: pointer;
+}
+
+.h-screen--ridotto{
+  height: 95vh !important;
+}
+
+.personaggio__overflow{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+/* .personaggio__contenuto{
+  height: 43rem;
+} */
+.personaggio__contenuto--overflow{
+  position: absolute;
+  height: 53%;
+  width: 80%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.personaggio__contenuto__note{
+  position: absolute;
+  height: 69%;
+  width: 80.3%;
+}
+.personaggio__contenuto__note--qualità{
+  height: 33.33%;
+  padding: 2px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.icon--btn:hover{
+  color: #0d6efd;
+  border-radius: 10px;
+  background-color: rgb(241, 238, 238);
+}
+
+.button-custom{
+  background-color: var(--second-color);
+  color: var(--first-color);
+  font-size: initial!important;
+}
+.button-custom:hover{
+  background-color: var(--second-color__light);
+}
+.button-custom:disabled{
+  background-color: var(--forth-color);
+
+}
+.button-custom:focus{
+  background-color: var(--second-color__dark);
+}
+
+/* ----------------------CELLULARI---------------------- */
+@media only screen
+and (max-width: 414px) {
+.corpo-sx, .corpo-dx{
+  height: 10vh;
+}
+
+.corpo-centrale{
+  position: relative;
+  height: 80vh;
+  top: 10vh;
+}
+.corpo-centrale--box{
+  width: 80vw
+}
+
+.corpo-rimanente{
+  height: 90vh;
+}
+
+button{
+  font-size: 1.5rem;
+  width: auto;
+}
+
+.button__font{
+  font-size: 0.6rem!important;
+}
+
+.h-screen--ridotto{
+  height: 85vh !important;
+}
+
+/* .personaggio__contenuto{
+  height: 34rem;
+} */
+.personaggio__contenuto--overflow{
+  position: initial;
+  height: 27rem;
+  width: initial;
+}
+.personaggio__contenuto__note{
+  height: 67%;
+  width: 87.5%;
+}
+}
+
+/* ----------------------IPAD---------------------- */
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px) {
+.corpo-sx, .corpo-dx{
+  height: 99vh;
+}
+
+.corpo-centrale{
+  height: 99vh;
+}
+.corpo-centrale--box{
+  width: 40vw
+}
+
+button{
+  font-size: 1.5rem!important;
+  width: 12rem;
+}
+
+.h-screen--ridotto{
+  height: 90vh !important;
+}
+
+/* .personaggio__contenuto{
+  height: 48rem;
+} */
+
+.personaggio__contenuto--overflow{
+  height: 65%;
+}
+.personaggio__contenuto__note{
+  height: 78%;
+  width: 78.5%;
+}
+}
