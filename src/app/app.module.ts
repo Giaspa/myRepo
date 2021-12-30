@@ -30,6 +30,7 @@ import { CrudComponent } from './utility/crud/crud/crud.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { SignInComponent } from './autenticazioni/sign-in/sign-in.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import { ButtonLogoutComponent } from './pulsanti/button-logout/button-logout.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyD1mxxOj0OnJzFMwVcWCv4sKos7dq2dsxQ",
@@ -61,6 +62,7 @@ const firebaseConfig = {
     ModaleComponent,
     CrudComponent,
     SignInComponent,
+    ButtonLogoutComponent,
   ],
   imports: [
     CommonModule,

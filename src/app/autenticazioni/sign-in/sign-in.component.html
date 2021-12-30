@@ -1,144 +1,171 @@
-<!-- flex justify-content-center align-content-center  -->
-<div class="sign__form border-round shadow-7" style="position: relative;">
-  <div class="border-round flex align-items-center justify-content-center align-content-center"
-    style="position: relative; height: 15%">
-    <h1 class="pt-3" style="color: var(--second-color)"><b><u>Registrazione</u></b></h1>
+<!-- ############### REGISTRAZIONE ############### -->
+<div class="m-0 grid" style="overflow: hidden;">
+  <div class="p-0 lg:col-2 md:col-2 col-12 lg:text-lg md:text-lg sm:text-lg  ">
   </div>
 
-  <div class="border-round px-3" style="position: relative; height: 85%">
-    <mat-stepper linear labelPosition="bottom" #stepper>
-      <!-- NOME & COGNOME -->
-      <mat-step [stepControl]="bioFormGroup">
-        <form [formGroup]="bioFormGroup">
-          <ng-template matStepLabel><i class="bi bi-person"
-              [style]="bioFormGroup.touched&&bioFormGroup.invalid? 'color: red' : ''"></i></ng-template>
+  <!-- Contenuto -->
+  <div class="p-0 px-2 lg:col-8 md:col-8 col-12 lg:text-lg md:text-lg sm:text-lg  ">
+    <div class="corpo-centrale box shadow-7 border-round test ">
+      <div class="flex align-items-center justify-content-center align-content-center" style="height: 100%;">
+        <div class="grid corpo-centrale--box">
+          <!-- form di registrazione -->
+          <div class="m-0 p-0 col-12 flex align-items-center justify-content-center align-content-center">
+            <div class="sign__form border-round shadow-7" style="position: relative;">
+              <div class="border-round flex align-items-center justify-content-center align-content-center"
+                style="position: relative; height: 15%">
+                <h1 class="pt-3" style="color: var(--second-color)"><b><u>Registrazione</u></b></h1>
+              </div>
 
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingName" placeholder="Nome" formControlName="nome"
-              [style]="bioFormGroup.controls.nome.touched && bioFormGroup.controls.nome.invalid? 'border-color: red': ''">
-            <label for="floatingName"
-              [style]="bioFormGroup.controls.nome.touched && bioFormGroup.controls.nome.invalid? 'color: red': ''">Nome
-              *</label>
+              <div class="border-round px-3" style="position: relative; height: 85%">
+                <mat-stepper linear labelPosition="bottom" #stepper>
+                  <!-- NOME & COGNOME -->
+                  <mat-step [stepControl]="bioFormGroup">
+                    <form [formGroup]="bioFormGroup">
+                      <ng-template matStepLabel><i class="bi bi-person"
+                          [style]="bioFormGroup.touched&&bioFormGroup.invalid? 'color: red' : ''"></i></ng-template>
+
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingName" placeholder="Nome"
+                          formControlName="nome"
+                          [style]="bioFormGroup.controls.nome.touched && bioFormGroup.controls.nome.invalid? 'border-color: red': ''">
+                        <label for="floatingName"
+                          [style]="bioFormGroup.controls.nome.touched && bioFormGroup.controls.nome.invalid? 'color: red': ''">Nome
+                          *</label>
+                      </div>
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingSurname" placeholder="Cognome"
+                          formControlName="cognome"
+                          [style]="bioFormGroup.controls.cognome.touched && bioFormGroup.controls.cognome.invalid? 'border-color: red': ''">
+                        <label for="floatingSurname"
+                          [style]="bioFormGroup.controls.cognome.touched && bioFormGroup.controls.cognome.invalid? 'color: red': ''">Cognome
+                          *</label>
+                      </div>
+
+                      <div class="py-2">
+                        <button mat-button matStepperNext class="p-0"
+                          style="font-size: 18px!important; float: right; text-align: right;"
+                          [disabled]="bioFormGroup.invalid">Next
+                          <i class="bi bi-chevron-right"></i></button>
+                      </div>
+                    </form>
+                  </mat-step>
+
+                  <!-- EMAIL & conferma -->
+                  <mat-step [stepControl]="emailFormGroup">
+                    <form [formGroup]="emailFormGroup">
+                      <ng-template matStepLabel><i class="bi bi-envelope"
+                          [style]="emailFormGroup.touched&&emailFormGroup.invalid? 'color: red' : ''"></i></ng-template>
+
+                      <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingEmail" placeholder="email@dominio.it"
+                          formControlName="email"
+                          [style]="emailFormGroup.controls.email.touched && emailFormGroup.controls.email.invalid? 'border-color: red; color: red!important;': ''"
+                          (change)="verifyEmailUnicity($event)">
+                        <label for="floatingEmail"
+                          [style]="emailFormGroup.controls.email.touched && emailFormGroup.controls.email.invalid? 'color: red': ''"><span>E-mail
+                            *</span> <span *ngIf="!isEmailUnic">&nbsp;(<b>e-mail esistente</b>)</span></label>
+                      </div>
+
+                      <div class="form-floating">
+                        <input type="email" class="form-control" id="floatingConfEmail" placeholder="email@dominio.it"
+                          formControlName="confermaEmail"
+                          [style]="emailFormGroup.controls.confermaEmail.touched && emailFormGroup.controls.confermaEmail.invalid? 'border-color: red; color: red': ''">
+                        <label for="floatingConfEmail"
+                          [style]="emailFormGroup.controls.confermaEmail.touched && emailFormGroup.controls.confermaEmail.invalid? 'color: red': ''">
+                          Conferma e-mail *</label>
+                      </div>
+
+                      <div class="py-2">
+                        <button mat-button matStepperPrevious class="p-0 col-6"
+                          style="font-size: 18px!important; float: left; text-align: left;"><i
+                            class="bi bi-chevron-left">
+                            Back</i></button>
+                        <button mat-button matStepperNext class="p-0 col-6"
+                          style="font-size: 18px!important; float: right; text-align: right;"
+                          [disabled]="emailFormGroup.invalid">Next <i class="bi bi-chevron-right"></i></button>
+                      </div>
+                    </form>
+                  </mat-step>
+
+                  <!-- PASSWORD & conferma -->
+                  <mat-step [stepControl]="pwdFormGroup">
+                    <form [formGroup]="pwdFormGroup">
+                      <ng-template matStepLabel><i class="bi bi-shield-lock"
+                          [style]="pwdFormGroup.touched&&pwdFormGroup.invalid? 'color: red' : ''"></i></ng-template>
+
+                      <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="floatingPwd" placeholder="password"
+                          formControlName="password"
+                          [style]="pwdFormGroup.controls.password.touched && pwdFormGroup.controls.password.invalid? 'border-color: red; color: red!important;': ''"
+                          (change)="verifyPassword()">
+                        <label for="floatingPwd"
+                          [style]="pwdFormGroup.controls.password.touched && pwdFormGroup.controls.password.invalid? 'color: red': ''">Password
+                          *</label>
+                      </div>
+
+                      <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingConfPwd" placeholder="password"
+                          formControlName="confermaPassword"
+                          [style]="pwdFormGroup.controls.confermaPassword.touched && pwdFormGroup.controls.confermaPassword.invalid? 'border-color: red; color: red!important;': ''"
+                          (change)="verifyPassword()">
+                        <label for="floatingConfPwd"
+                          [style]="pwdFormGroup.controls.confermaPassword.touched && pwdFormGroup.controls.confermaPassword.invalid? 'color: red': ''">Conferma
+                          password *</label>
+                      </div>
+
+                      <div class="py-2">
+                        <button mat-button matStepperPrevious class="p-0 col-6"
+                          style="font-size: 18px!important; float: left; text-align: left;">
+                          <i class="bi bi-chevron-left"> Back</i>
+                        </button>
+
+                        <button *ngIf="pwdFormGroup.invalid; else modale" mat-stroked-button
+                          class="p-0 modale--apertura col-6" style="font-size: 18px!important; float: right;"
+                          [disabled]="pwdFormGroup.invalid" (mousedown)="findUserKey()"
+                          (mouseup)="submitRegistration()">
+                          Invia <i class="bi bi-check2-circle"></i>
+                        </button>
+
+                        <ng-template #modale>
+                          <modale>
+                            <button mat-raised-button color="primary" class="p-0 modale--apertura col-6"
+                              style="font-size: 18px!important; float: right;" [disabled]="pwdFormGroup.invalid"
+                              (mousedown)="findUserKey()" (mouseup)="submitRegistration()">
+                              Invia <i class="bi bi-check2-circle"></i>
+                            </button>
+
+                            <h2 class="modale--header m-0">Registrata/o!</h2>
+
+                            <div class="modale--contenuto col-12 grid m-0">
+                              <div class="col-12 flex align-items-center justify-content-center align-content-center">
+                                <h2>Benvenuta/o, {{bioFormGroup.value.nome}}!</h2>
+                              </div>
+
+                              <div class="col-6 flex align-items-center justify-content-center align-content-center">
+                                <button-home></button-home>
+                              </div>
+
+                              <div class="col-6 flex align-items-center justify-content-center align-content-center">
+                                <button mat-raised-button color="primary" routerLink="/signup"
+                                  routerLinkActive="active">Accedi</button>
+                              </div>
+                            </div>
+                          </modale>
+                        </ng-template>
+                      </div>
+                    </form>
+                  </mat-step>
+                </mat-stepper>
+              </div>
+            </div>
           </div>
-          <div class="form-floating">
-            <input type="text" class="form-control" id="floatingSurname" placeholder="Cognome" formControlName="cognome"
-              [style]="bioFormGroup.controls.cognome.touched && bioFormGroup.controls.cognome.invalid? 'border-color: red': ''">
-            <label for="floatingSurname"
-              [style]="bioFormGroup.controls.cognome.touched && bioFormGroup.controls.cognome.invalid? 'color: red': ''">Cognome
-              *</label>
+
+          <!-- Pulsanti -->
+          <div class="col-12 grid m-0 mt-4 flex align-items-center justify-content-center align-content-center">
+            <button-home></button-home>
           </div>
-
-          <div class="py-2">
-            <button mat-button matStepperNext class="p-0"
-              style="font-size: 18px!important; float: right; text-align: right;" [disabled]="bioFormGroup.invalid">Next
-              <i class="bi bi-chevron-right"></i></button>
-          </div>
-        </form>
-      </mat-step>
-
-      <!-- EMAIL & conferma -->
-      <mat-step [stepControl]="emailFormGroup">
-        <form [formGroup]="emailFormGroup">
-          <ng-template matStepLabel><i class="bi bi-envelope"
-              [style]="emailFormGroup.touched&&emailFormGroup.invalid? 'color: red' : ''"></i></ng-template>
-
-          <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingEmail" placeholder="email@dominio.it"
-              formControlName="email"
-              [style]="emailFormGroup.controls.email.touched && emailFormGroup.controls.email.invalid? 'border-color: red; color: red!important;': ''"
-              (change)="verifyEmailUnicity($event)">
-            <label for="floatingEmail"
-              [style]="emailFormGroup.controls.email.touched && emailFormGroup.controls.email.invalid? 'color: red': ''"><span>E-mail
-                *</span> <span *ngIf="!isEmailUnic">&nbsp;(<b>e-mail esistente</b>)</span></label>
-          </div>
-
-          <div class="form-floating">
-            <input type="email" class="form-control" id="floatingConfEmail" placeholder="email@dominio.it"
-              formControlName="confermaEmail"
-              [style]="emailFormGroup.controls.confermaEmail.touched && emailFormGroup.controls.confermaEmail.invalid? 'border-color: red; color: red': ''">
-            <label for="floatingConfEmail"
-              [style]="emailFormGroup.controls.confermaEmail.touched && emailFormGroup.controls.confermaEmail.invalid? 'color: red': ''">
-              Conferma e-mail *</label>
-          </div>
-
-          <div class="py-2">
-            <button mat-button matStepperPrevious class="p-0 col-6"
-              style="font-size: 18px!important; float: left; text-align: left;"><i class="bi bi-chevron-left">
-                Back</i></button>
-            <button mat-button matStepperNext class="p-0 col-6"
-              style="font-size: 18px!important; float: right; text-align: right;"
-              [disabled]="emailFormGroup.invalid">Next <i class="bi bi-chevron-right"></i></button>
-          </div>
-        </form>
-      </mat-step>
-
-      <!-- PASSWORD & conferma -->
-      <mat-step [stepControl]="pwdFormGroup">
-        <form [formGroup]="pwdFormGroup">
-          <ng-template matStepLabel><i class="bi bi-shield-lock"
-              [style]="pwdFormGroup.touched&&pwdFormGroup.invalid? 'color: red' : ''"></i></ng-template>
-
-          <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPwd" placeholder="password"
-              formControlName="password"
-              [style]="pwdFormGroup.controls.password.touched && pwdFormGroup.controls.password.invalid? 'border-color: red; color: red!important;': ''"
-              (change)="verifyPassword()">
-            <label for="floatingPwd"
-              [style]="pwdFormGroup.controls.password.touched && pwdFormGroup.controls.password.invalid? 'color: red': ''">Password
-              *</label>
-          </div>
-
-          <div class="form-floating">
-            <input type="password" class="form-control" id="floatingConfPwd" placeholder="password"
-              formControlName="confermaPassword"
-              [style]="pwdFormGroup.controls.confermaPassword.touched && pwdFormGroup.controls.confermaPassword.invalid? 'border-color: red; color: red!important;': ''"
-              (change)="verifyPassword()">
-            <label for="floatingConfPwd"
-              [style]="pwdFormGroup.controls.confermaPassword.touched && pwdFormGroup.controls.confermaPassword.invalid? 'color: red': ''">Conferma
-              password *</label>
-          </div>
-
-          <div class="py-2">
-            <button mat-button matStepperPrevious class="p-0 col-6"
-              style="font-size: 18px!important; float: left; text-align: left;">
-              <i class="bi bi-chevron-left"> Back</i>
-            </button>
-
-            <button *ngIf="pwdFormGroup.invalid; else modale" mat-stroked-button class="p-0 modale--apertura col-6"
-              style="font-size: 18px!important; float: right;" [disabled]="pwdFormGroup.invalid"
-              (mousedown)="findUserKey()" (mouseup)="submitRegistration()">
-              Invia <i class="bi bi-check2-circle"></i>
-            </button>
-
-            <ng-template #modale>
-              <modale>
-                <button mat-raised-button color="primary" class="p-0 modale--apertura col-6"
-                  style="font-size: 18px!important; float: right;" [disabled]="pwdFormGroup.invalid"
-                  (mousedown)="findUserKey()" (mouseup)="submitRegistration()">
-                  Invia <i class="bi bi-check2-circle"></i>
-                </button>
-
-                <h2 class="modale--header m-0">Registrata/o!</h2>
-
-                <div class="modale--contenuto col-12 grid m-0">
-                  <div class="col-12 flex align-items-center justify-content-center align-content-center">
-                    <h2>Benvenuta/o, {{bioFormGroup.value.nome}}!</h2>
-                  </div>
-
-                  <div class="col-6 flex align-items-center justify-content-center align-content-center">
-                    <button-home></button-home>
-                  </div>
-
-                  <div class="col-6 flex align-items-center justify-content-center align-content-center">
-                    <button mat-raised-button color="primary" routerLink="/signup"
-                      routerLinkActive="active">Accedi</button>
-                  </div>
-                </div>
-              </modale>
-            </ng-template>
-          </div>
-        </form>
-      </mat-step>
-    </mat-stepper>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

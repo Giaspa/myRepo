@@ -8,6 +8,22 @@ export class Root {
   static readonly MERITS = '/pregi';
   static readonly FLAWS = '/difetti';
   static readonly SCAR = '/cicatriciDaBattaglia';
+  static readonly SESSION_USER = 'user';
+
+  //inserisce un utente passato in sessione
+  static setSessionUser(user: any){
+    sessionStorage.setItem(this.SESSION_USER, JSON.stringify(user))
+  }
+
+  //legge un utente passato in sessione
+  static getSessionUser(){
+    return sessionStorage.getItem(this.SESSION_USER)
+  }
+
+  //rimuove l'utente dalla sessione
+  static removeSessionUser(){
+    sessionStorage.removeItem(this.SESSION_USER)
+  }
 
   static userEntity(id: number) {
     return {
