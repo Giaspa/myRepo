@@ -11,14 +11,12 @@ export class Root {
 
   static userEntity(id: number) {
     return {
-      "auth": {
         "id": id,
-        "nome": "PROVA",
-        "cognome": "Admin",
-        "email": "admin.admin@gmail.com",
-        "password": "admin_123"
-      },
-      "personaggi": [{}]
+        "nome": "Gianluca",
+        "cognome": "Spadazzi",
+        "email": "spadazzi.gianluca@gmail.com",
+        "password": "admin_123",
+        "login": "spadazzi.gianluca@gmail.com_admin_123"
     }
   }
 
@@ -143,7 +141,7 @@ export class Root {
   }
 
   //ARRAY di riferimento
-  static auth = ["cognome", "email", "nome", "password"];
+  static auth = ["cognome", "email", "nome", "password", "login"];
   static pgBio = ["nomeCompleto", "rango", "razza", "auspicio", "tribu", "branco", "totemBranco", "profilo"];
   static abilita = ["atletica", "autorita", "bassifondi", "empatia", "espressivita", "intimidire", "istintoPrimordiale", "rissa", "sestoSenso", "sotterfugio", "affinitaAnimale", "arceria", "armiDaMischia", "cavalcare", "criminalita", "espressioneArtistica", "furtivita", "galateo", "manualita", "sopravvivenza", "accademiche", "enigmi", "investigare", "legge", "linguistica", "medicina", "occulto", "rituali", "saggezzaDellaTerra", "scienza"];
   static attributi = ["forza", "destrezza", "costituzione", "carisma", "persuasione", "aspetto", "percezione", "intelligenza", "prontezza"];

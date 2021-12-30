@@ -20,8 +20,6 @@ export class TestService {
     // return objectVal(query(ref(this.db, '/personaggi')))
     // return objectVal(query(ref(this.db, '/personaggi'), orderByChild('pgId'), equalTo(2)))
     // return list(query(ref(this.db, '/personaggi'),orderByChild('pgId'), equalTo(2)))
-    return this.getAllPgGifts(1)
-
   }
 
   //Utility------------------------------------------------
@@ -33,17 +31,14 @@ export class TestService {
     return objectVal(query(ref(this.db, root), orderByChild(key), equalTo(id)))
   }
 
-  readDono(pgId: number, giftId: number) {
-    return this.findPgKey(pgId).subscribe(pg => {
-      var key = pg[0].snapshot.key;
-
-      this.getDono(giftId, key).subscribe(dono => {
-        console.log("DONO", dono)
-      })
-    })
-  }
 
   //READ---------------------------------------------------
+  //login
+  getLogin(email: string, password: string){
+    var login = email+"_"+password;
+    return objectVal(query(ref(this.db, Root.USER), orderByChild('auth/login'), equalTo(login)))
+  }
+
   //ritorna una lista degli utenti
   getUsersList(){
     return objectVal(query(ref(this.db, Root.USER)))
@@ -52,6 +47,10 @@ export class TestService {
   //ritorna un singolo utente
   getUser(userId: number){
     return objectVal(query(ref(this.db, Root.USER + '/' + userId)))
+  }
+
+  getUserByEmail(email:string){
+    return objectVal(query(ref(this.db, Root.USER), orderByChild('auth/email'), equalTo(email)))
   }
 
   //ritorna una lista dei personaggi di un utente
@@ -64,22 +63,12 @@ export class TestService {
   getPersonaggio(userId: number, pgId: number) {
     return objectVal(query(ref(this.db, Root.USER + '/'+ userId + Root.PGs + '/' + pgId)))
   }
-//---------------> DA QUI verificare!
-  //ritorna uno specifico dono di un pg con una specifica KEY (per ottenere la KEy usare il metodo: findPgKey(...))
-  getDono(giftId: number, key: any) {
-    return this.findById(giftId, 'id', Root.PGs + '/' + key + Root.DONI)
-  }
 
-  //ritorna tutti i doni di un pg con una specifica KEY (per ottenere la KEy usare il metodo: findPgKey(...))
-  getAllPgGifts(pgKey: any) {
-    return objectVal((ref(this.db, Root.PGs + '/' + pgKey + Root.DONI)))
-  }
-//<---------------------fino a qui!
 
   //CREATE-----------------------------
   //crea un nuovo utente
   setUser(userId: any, userEntity: {}) {
-    set(ref(this.db, Root.USER + '/' + userId), userEntity);
+    set(ref(this.db, Root.USER + '/' + userId + Root.AUTH), userEntity);
   }
 
   //crea un nuovo pg per un utente esistente
@@ -161,4 +150,33 @@ export class TestService {
     }
   }
 
+
+  //DELETE--------------------------------------------------------------------
+  deleteUser(userId: any){
+    this.setUser(userId, {});
+  }
+
+  deletePg(userId: any, pgId: any){
+    this.setPg(userId, pgId, {});
+  }
+
+  deleteGift(userId: any, pgId: any, giftId: any){
+    this.setGift(userId, pgId, giftId, {})
+  }
+
+  deleteMerit(userId: any, pgId: any, meritId: any){
+    this.setMerit(userId, pgId, meritId, {})
+  }
+
+  deleteFlaw(userId: any, pgId: any, flawId: any){
+    this.setFlaw(userId, pgId, flawId, {})
+  }
+
+  deleteScar(userId: any, pgId: any, scarId: any){
+    this.setScar(userId, pgId, scarId, {})
+  }
+
+  deleteEquip(userId: any, pgId: any, equipId: any){
+    this.setEquip(userId, pgId, equipId, {})
+  }
 }

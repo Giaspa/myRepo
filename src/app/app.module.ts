@@ -28,6 +28,8 @@ import { ModaleComponent } from './utility/modale/modale.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CrudComponent } from './utility/crud/crud/crud.component';
 import { AngularFireModule } from '@angular/fire/compat';
+import { SignInComponent } from './autenticazioni/sign-in/sign-in.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 const firebaseConfig = {
   apiKey: "AIzaSyD1mxxOj0OnJzFMwVcWCv4sKos7dq2dsxQ",
@@ -36,8 +38,8 @@ const firebaseConfig = {
   projectId: "septsheet",
   storageBucket: "septsheet.appspot.com",
   messagingSenderId: "270593044752",
-  appId: "1:270593044752:web:9062075f408eb22327f595",
-  measurementId: "G-YX1Q0R1YH3"
+  appId: "1:270593044752:web:c9e253285282eb8427f595",
+  measurementId: "G-QTLG8ZJPPP"
 };
 
 @NgModule({
@@ -58,6 +60,7 @@ const firebaseConfig = {
     TextDotterComponent,
     ModaleComponent,
     CrudComponent,
+    SignInComponent,
   ],
   imports: [
     CommonModule,
@@ -73,6 +76,7 @@ const firebaseConfig = {
     FormsModule,
     MatTooltipModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    MatStepperModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
