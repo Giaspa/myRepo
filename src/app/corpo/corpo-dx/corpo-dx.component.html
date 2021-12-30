@@ -1,24 +1,17 @@
 <!-- ############### REGISTRAZIONE ############### -->
-<div class="m-0 grid">
+<div class="m-0 grid" style="overflow: hidden;">
   <!-- Contenuto -->
   <div class="p-0 px-2 lg:col-10 md:col-10 col-12 lg:text-lg md:text-lg sm:text-lg  ">
     <div class="corpo-rimanente box shadow-7 border-round test ">
       <div class="flex align-items-center justify-content-center align-content-center" style="height: 100%;">
         <div class="grid corpo-centrale--box">
+          <!-- form di registrazione -->
           <div class="m-0 p-0 col-12 flex align-items-center justify-content-center align-content-center">
-            <h3>Form di Registrazione</h3>
+            <app-sign-in></app-sign-in>
           </div>
-
           <!-- Pulsanti -->
-          <div class="col-12 grid m-0">
-            <div class="col-6 flex align-items-center justify-content-center align-content-center">
-              <button-home></button-home>
-            </div>
-
-            <div class="col-6 flex align-items-center justify-content-center align-content-center">
-              <button mat-raised-button color="primary" routerLink="/signup"
-                routerLinkActive="active">Registrati</button>
-            </div>
+          <div class="col-12 grid m-0 mt-4 flex align-items-center justify-content-center align-content-center">
+            <button-home></button-home>
           </div>
         </div>
       </div>

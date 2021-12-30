@@ -55,9 +55,6 @@ button{
   overflow-y: auto;
   overflow-x: hidden;
 }
-/* .personaggio__contenuto{
-  height: 43rem;
-} */
 .personaggio__contenuto--overflow{
   position: absolute;
   height: 53%;
@@ -99,6 +96,11 @@ button{
   background-color: var(--second-color__dark);
 }
 
+.sign__form{
+  width: 45vmin;
+  height: 45vmin;
+}
+
 /* ----------------------CELLULARI---------------------- */
 @media only screen
 and (max-width: 414px) {
@@ -132,9 +134,6 @@ button{
   height: 85vh !important;
 }
 
-/* .personaggio__contenuto{
-  height: 34rem;
-} */
 .personaggio__contenuto--overflow{
   position: initial;
   height: 27rem;
@@ -143,6 +142,11 @@ button{
 .personaggio__contenuto__note{
   height: 67%;
   width: 87.5%;
+}
+
+.sign__form{
+  width: 80vmin;
+  height: fit-content;
 }
 }
 

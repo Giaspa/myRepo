@@ -122,13 +122,47 @@ export class PersonaggioComponent implements OnInit {
 
     var userId = 2;
     var pgId = 1;
+    var email = "aaa@gmail.com"
 
+    this.testService.getUserByEmail(email).subscribe(res => {
+      if (res) {
+        window.alert("E-mail già registrata!")
+      } else {
+        this.testService.getUsersList().subscribe(users => {
+          //@ts-ignore
+          var usersKeysArray = Object.keys(users)
+          var incrementedId = +usersKeysArray[usersKeysArray.length - 1] + 1
+          console.log("users", incrementedId)
+          var user = {
+            "id": incrementedId,
+            "nome": "Pippo",
+            "cognome": "Spadazzi",
+            "email": email,
+            "password": "admin_123",
+            "login": email + '_' + 'admin_123'
+          }
+          // this.testService.setUser(user.id, user)
+        })
+      }
+    })
     // this.testService.setUser(userId, Root.userEntity(userId))
     // this.testService.setPg(userId, pgId, Root.pgEntity(pgId))
     // this.testService.updatePgAttribute(userId, pgId, 'forza', 5);
     // this.testService.updatePgAbility(userId, pgId, 'arceria', 5);
     // this.testService.updatePgBackground(userId, pgId, 'riti', 5);
     // this.testService.updatePgFGV(userId, pgId, 'furia', 4);
+
+    // var email = 'admin.admin@gmail.com';
+    // var password = 'admin_123';
+
+    // //------------------LOGIN------------------
+    // this.testService.getLogin(email, password).subscribe(res => {
+    //   //@ts-ignore
+    //   var userKey = Object.keys(res)[0];
+    //   //@ts-ignore
+    //   var user = res[userKey].auth;
+    //   console.log("utente loggato", user)
+    // })
 
     // this.testService.getUsersList().subscribe(res =>
     //   console.log("lista utenti", res)
@@ -144,8 +178,8 @@ export class PersonaggioComponent implements OnInit {
     // );
 
     // var giftId = 2;
-    // var dono = "Tocco della madre"
-    // var link = "http://kaputtmundi.wikidot.com/doni-teurgo#:~:text=%C2%B7%20Mother%27s%20Touch%20%2D%20Tocco%20della%20Madre%20(Livello%20Uno)%20%5BWerewolf%3A%20the%20Apocalypse%2C%20Rev.%5D%2C%20%5B20th%20Anniversary%5D";
+    // var dono = "Parlare con gli spiriti"
+    // var link = null;
     // this.testService.setGift(userId, pgId, giftId, Root.giftEntity(giftId, dono, link));
     // var meritId = 2;
     // var nome = "Leader nato"
@@ -165,7 +199,7 @@ export class PersonaggioComponent implements OnInit {
     // this.testService.setEquip(userId, pgId, equipId, Root.equipEntity(equipId, item, note));
     // this.testService.updatePgBio(userId, pgId, 'rango', 4);
     // this.testService.updateUserAuth(userId, 'cognome', 'Spadazzi');
-
+    // this.testService.deleteGift(userId, pgId, 1)
 
   }
 
