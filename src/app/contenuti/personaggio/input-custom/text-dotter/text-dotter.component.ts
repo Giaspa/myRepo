@@ -35,7 +35,7 @@ export class TextDotterComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    if (!isNaN(this.value)) {
+    if (!isNaN(this.value) && this['dot' + this.value]) {
       this['dot' + this.value].nativeElement.checked = true;
       this.assignDotValue(this.value)
     }

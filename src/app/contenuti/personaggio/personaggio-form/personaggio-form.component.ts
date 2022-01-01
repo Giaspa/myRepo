@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Root } from 'src/app/service/root.model';
 
 @Component({
   selector: 'app-personaggio-form',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonaggioFormComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit(): void {
   }

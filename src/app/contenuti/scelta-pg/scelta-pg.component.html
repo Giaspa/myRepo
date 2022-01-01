@@ -6,8 +6,9 @@
     </div>
 
     <!-- NUOVO PG -->
-    <div *ngIf="utente.personaggi.length < 2" class="md:col-6 sm:col-12 lg:col-4  card m-1 card--hovering card--hovering__new sm:h-10rem md:h-15rem h-10rem flex align-items-center justify-content-center align-content-center"
-    routerLink="/sheet/new">
+    <div *ngIf="utente.personaggi.length < 2"
+      class="md:col-6 sm:col-12 lg:col-4  card m-1 card--hovering card--hovering__new sm:h-10rem md:h-15rem h-10rem flex align-items-center justify-content-center align-content-center"
+      routerLink="/sheet/new">
       <div class="card-body">
         <h3 class="card-title flex align-items-center justify-content-center align-content-center">
           <b>
@@ -29,9 +30,10 @@
     </div>
 
     <!-- PGs LIST -->
-    <div *ngFor="let personaggio of utente.personaggi"
+    <!-- <div *ngFor="let personaggio of utente.personaggi" -->
+    <div *ngFor="let personaggio of personaggi"
       class="md:col-6 sm:col-12 lg:col-4  card m-1 card--hovering sm:h-10rem md:h-15rem h-10rem flex align-items-center justify-content-center align-content-center"
-      [routerLink]="'/sheet/'+personaggio.pgId">
+      (click)="loadPg(personaggio)">
       <div class="card-body">
         <h3 class="card-title flex align-items-center justify-content-center align-content-center">
           <b>

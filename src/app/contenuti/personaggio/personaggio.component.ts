@@ -17,7 +17,10 @@ export class PersonaggioComponent implements OnInit {
 
   openedPanel: string = "Attributi"
 
-  constructor(private testService: TestService) { }
+  constructor(private testService: TestService) {
+    console.log(Root.getSessionPg())
+    Root.getSessionPg() ? this.personaggio=Root.getSessionPg() : null;
+   }
 
   ngOnInit(): void {
   }
@@ -120,33 +123,33 @@ export class PersonaggioComponent implements OnInit {
     //   console.log("TEST", res)
     // })
 
-    var userId = 2;
+    var userId = Root.getSessionUser().id;
     var pgId = 1;
     var email = "aaa@gmail.com"
 
-    this.testService.getUserByEmail(email).subscribe(res => {
-      if (res) {
-        window.alert("E-mail già registrata!")
-      } else {
-        this.testService.getUsersList().subscribe(users => {
-          //@ts-ignore
-          var usersKeysArray = Object.keys(users)
-          var incrementedId = +usersKeysArray[usersKeysArray.length - 1] + 1
-          console.log("users", incrementedId)
-          var user = {
-            "id": incrementedId,
-            "nome": "Pippo",
-            "cognome": "Spadazzi",
-            "email": email,
-            "password": "admin_123",
-            "login": email + '_' + 'admin_123'
-          }
-          // this.testService.setUser(user.id, user)
-        })
-      }
-    })
+    // this.testService.getUserByEmail(email).subscribe(res => {
+    //   if (res) {
+    //     window.alert("E-mail già registrata!")
+    //   } else {
+    //     this.testService.getUsersList().subscribe(users => {
+    //       //@ts-ignore
+    //       var usersKeysArray = Object.keys(users)
+    //       var incrementedId = +usersKeysArray[usersKeysArray.length - 1] + 1
+    //       console.log("users", incrementedId)
+    //       var user = {
+    //         "id": incrementedId,
+    //         "nome": "Pippo",
+    //         "cognome": "Spadazzi",
+    //         "email": email,
+    //         "password": "admin_123",
+    //         "login": email + '_' + 'admin_123'
+    //       }
+    //       // this.testService.setUser(user.id, user)
+    //     })
+    //   }
+    // })
     // this.testService.setUser(userId, Root.userEntity(userId))
-    // this.testService.setPg(userId, pgId, Root.pgEntity(pgId))
+    this.testService.setPg(userId, pgId, Root.pgEntity(pgId))
     // this.testService.updatePgAttribute(userId, pgId, 'forza', 5);
     // this.testService.updatePgAbility(userId, pgId, 'arceria', 5);
     // this.testService.updatePgBackground(userId, pgId, 'riti', 5);
@@ -154,15 +157,6 @@ export class PersonaggioComponent implements OnInit {
 
     // var email = 'admin.admin@gmail.com';
     // var password = 'admin_123';
-
-    // //------------------LOGIN------------------
-    // this.testService.getLogin(email, password).subscribe(res => {
-    //   //@ts-ignore
-    //   var userKey = Object.keys(res)[0];
-    //   //@ts-ignore
-    //   var user = res[userKey].auth;
-    //   console.log("utente loggato", user)
-    // })
 
     // this.testService.getUsersList().subscribe(res =>
     //   console.log("lista utenti", res)
