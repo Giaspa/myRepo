@@ -9,7 +9,7 @@
 
       <div class="col-4">
         <text-dotter type="input" [value]="personaggio.auspicio"><b>Auspicio</b></text-dotter>
-        <text-dotter type="input" [value]="personaggio.tribu"><b>Tribù</b></text-dotter>
+        <text-dotter type="input" [value]="personaggio.tribu? personaggio.tribu : 'nessuna tribù'"><b>Tribù</b></text-dotter>
       </div>
 
       <div class="col-4">

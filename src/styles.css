@@ -2,15 +2,108 @@
 :root{
   --border-radius: 1rem;
   --first-color: rgb(255, 255, 255);
+  --first-color__dark: rgb(215, 215, 215);
+
   --second-color__light: rgb(79, 100, 219);
   --second-color: rgb(63, 81, 181);
   --second-color__dark: rgb(55, 71, 158);
+
   --third-color: rgb(33, 37, 41);
+
   --forth-color__light: rgb(190, 186, 186);
-  --forth-color: gray;
+  --forth-color: rgb(128, 128, 128);
   --forth-color__dark: rgb(97, 96, 96);
 
+  --error-color__light: rgb(220, 53, 69);
+  --error-color: rgb(176, 42, 55);
 }
+
+a{
+  color: var(--second-color);
+}
+a:hover{
+  color: var(--second-color__light);
+  font-weight: bolder;
+}
+
+/* Bootstrap OVERRIDE ------------------------*/
+.btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show, .btn-outline-primary:active {
+  color: var(--first-color);
+  background-color: var(--second-color);
+  border-color: var(--second-color);
+}
+.btn-outline-primary {
+  color: var(--second-color);
+  border-color: var(--second-color);
+}
+.btn-outline-primary:hover {
+  color: var(--second-color);
+  background-color: var(--first-color__dark);
+  border-color: var(--second-color)
+}
+.btn-primary {
+  color: var(--first-color);
+  background-color: var(--second-color);
+  border-color: var(--second-color)
+}
+.btn-primary:hover {
+  color: var(--first-color);
+  background-color: var(--second-color__light);
+  border-color: var(--second-color__light)
+}
+.btn-link {
+  font-weight: 400;
+  color: var(--second-color);
+  text-decoration: underline;
+}
+.btn-link:hover {
+  color: var(--second-color__light);
+  font-weight: bolder;
+}
+.btn-danger {
+  color: var(--first-color);
+  background-color: var(--error-color);
+  border-color: var(--error-color);
+}
+.btn-danger:hover {
+  color: var(--first-color);
+  background-color: var(--error-color__light);
+  border-color: var(--error-color__light);
+}
+
+/* Overflow --------------------------------------------------------*/
+::-webkit-scrollbar{
+  width:0.4em;
+  height:0.4em;
+  background: var(--first-color__dark);
+  margin-right: 10px;
+}
+::-webkit-scrollbar:hover{
+  background-color: var(--first-color__dark) ;
+  border: none;
+}
+::-webkit-resizer{
+  border-radius:4px;
+  background-color:var(--forth-color__light);
+  border: none;
+}
+::-webkit-scrollbar-thumb{
+  min-height:0.4em;
+  min-width:0.4em;
+  border-radius:4px;
+  background-color: var(--second-color);
+  border: none;
+}
+::-webkit-scrollbar-thumb:hover{
+  background-color: var(--second-color__light);
+  border: none;
+}
+::-webkit-scrollbar-thumb:active{
+  background-color: var(--second-color);
+  border: none;
+}
+/* ----------------------------------------------------------------*/
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -30,7 +123,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 button{
-  font-size: 1.5rem!important;
+  /* font-size: 1.5rem!important; */
   width: 12vw;
 }
 
@@ -98,7 +191,7 @@ button{
 
 .sign__form{
   width: 45vmin;
-  height: 45vmin;
+  height: fit-content;
 }
 
 /* ----------------------CELLULARI---------------------- */
@@ -122,7 +215,7 @@ and (max-width: 414px) {
 }
 
 button{
-  font-size: 1.5rem;
+  font-size: 1.5rem!important;
   width: auto;
 }
 

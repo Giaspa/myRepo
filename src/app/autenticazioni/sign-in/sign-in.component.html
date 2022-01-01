@@ -94,11 +94,11 @@
                           [style]="pwdFormGroup.touched&&pwdFormGroup.invalid? 'color: red' : ''"></i></ng-template>
 
                       <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPwd" placeholder="password"
+                        <input type="password" class="form-control" id="floatingPwdSignIn" placeholder="password"
                           formControlName="password"
                           [style]="pwdFormGroup.controls.password.touched && pwdFormGroup.controls.password.invalid? 'border-color: red; color: red!important;': ''"
                           (change)="verifyPassword()">
-                        <label for="floatingPwd"
+                        <label for="floatingPwdSignIn"
                           [style]="pwdFormGroup.controls.password.touched && pwdFormGroup.controls.password.invalid? 'color: red': ''">Password
                           *</label>
                       </div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { equalTo, getDatabase, orderByChild, query, ref } from "firebase/database";
-import { list, objectVal, set } from '@angular/fire/database';
+import { list, listVal, objectVal, set } from '@angular/fire/database';
 import { Root } from './root.model';
 
 @Injectable({
@@ -53,10 +53,10 @@ export class TestService {
     return objectVal(query(ref(this.db, Root.USER), orderByChild('auth/email'), equalTo(email)))
   }
 
-  //ritorna una lista dei personaggi di un utente
+  //ritorna una lista iterabile dei personaggi di un utente
   getPersonaggiList(userId: number) {
     console.log("path: ", Root.USER + '/'+ userId + Root.PGs)
-    return objectVal(query(ref(this.db, Root.USER + '/'+ userId + Root.PGs)))
+    return listVal(query(ref(this.db, Root.USER + '/'+ userId + Root.PGs)))
   }
 
   //ritorna un singolo personaggio di un utente

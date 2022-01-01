@@ -22,20 +22,20 @@
 
                   <!-- EMAIL -->
                   <div class="form-floating mb-3" style="position: relative; width: 100%;">
-                    <input type="email" class="form-control" id="floatingPwd" placeholder="email"
+                    <input type="email" class="form-control" id="floatingEmailSignUp" placeholder="email"
                       formControlName="email"
                       [style]="loginFormGroup.controls.email.touched && loginFormGroup.controls.email.invalid? 'border-color: red; color: red!important;': ''">
-                    <label for="floatingEmail"
+                    <label for="floatingEmailSignUp"
                       [style]="loginFormGroup.controls.email.touched && loginFormGroup.controls.email.invalid? 'color: red': ''">Email
                       *</label>
                   </div>
 
                   <!-- PASSWORD -->
                   <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPwd" placeholder="password"
+                    <input type="password" class="form-control" id="floatingPwdSignUp" placeholder="password"
                       formControlName="password"
                       [style]="loginFormGroup.controls.password.touched && loginFormGroup.controls.password.invalid? 'border-color: red; color: red!important;': ''">
-                    <label for="floatingPwd"
+                    <label for="floatingPwdSignUp"
                       [style]="loginFormGroup.controls.password.touched && loginFormGroup.controls.password.invalid? 'color: red': ''">Password
                       *</label>
                   </div>

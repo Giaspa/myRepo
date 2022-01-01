@@ -4,8 +4,7 @@ import { Root } from 'src/app/service/root.model';
 
 @Component({
   selector: 'button-logout',
-  template: '<button *ngIf="isDesktop; else phonebutton" mat-stroked-button (click)="userLogout()" style="width:12vw"><i class="bi bi-door-open"></i> logout</button>' +
-    ' <ng-template #phonebutton> <button mat-icon-button (click)="userLogout()"><i class="bi bi-door-open"></i></button> </ng-template>'
+  templateUrl: 'button-logout.component.html'
 })
 export class ButtonLogoutComponent implements OnInit {
 

@@ -9,20 +9,39 @@ export class Root {
   static readonly FLAWS = '/difetti';
   static readonly SCAR = '/cicatriciDaBattaglia';
   static readonly SESSION_USER = 'user';
+  static readonly SESSION_PG = 'character';
 
   //inserisce un utente passato in sessione
   static setSessionUser(user: any){
     sessionStorage.setItem(this.SESSION_USER, JSON.stringify(user))
   }
 
-  //legge un utente passato in sessione
+  //legge l'utente in sessione
   static getSessionUser(){
-    return sessionStorage.getItem(this.SESSION_USER)
+    var user = sessionStorage.getItem(this.SESSION_USER)
+    return JSON.parse(user? user : '')
   }
 
   //rimuove l'utente dalla sessione
   static removeSessionUser(){
+    this.removeSessionPg();
     sessionStorage.removeItem(this.SESSION_USER)
+  }
+
+  //inserisce un personaggio passato in sessione
+  static setSessionPg(pg: any){
+    sessionStorage.setItem(this.SESSION_PG, JSON.stringify(pg))
+  }
+
+  //legge il personaggio in sessione
+  static getSessionPg(){
+    var pg = sessionStorage.getItem(this.SESSION_PG)
+    return JSON.parse(pg? pg : '')
+  }
+
+  //rimuove l'personaggio dalla sessione
+  static removeSessionPg(){
+    sessionStorage.removeItem(this.SESSION_PG)
   }
 
   static userEntity(id: number) {
