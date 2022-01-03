@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Root } from 'src/app/service/root.model';
 import { TestService } from 'src/app/service/test.service';
 import { ModaleComponent } from 'src/app/utility/modale/modale.component';
@@ -17,12 +18,23 @@ export class PersonaggioComponent implements OnInit {
 
   openedPanel: string = "Attributi"
 
-  constructor(private testService: TestService) {
+  giftFormGroup!: FormGroup;
+
+  constructor(
+    private testService: TestService,
+    private _formBuilder: FormBuilder) {
     console.log(Root.getSessionPg())
-    Root.getSessionPg() ? this.personaggio=Root.getSessionPg() : null;
-   }
+    Root.getSessionPg() ? this.personaggio = Root.getSessionPg() : null;
+  }
 
   ngOnInit(): void {
+
+    this.giftFormGroup = this._formBuilder.group({
+      id: ['', []],
+      dono: ['', [Validators.required]],
+      link: ['', []]
+    })
+
   }
 
   getRango(rango: number) {
@@ -52,8 +64,30 @@ export class PersonaggioComponent implements OnInit {
   }
 
   //DONI
+
+  getLastGiftId() {
+    const giftsList: [] = this.personaggio.doni;
+    //@ts-ignore
+    return this.personaggio.doni ? giftsList[giftsList.length - 1].id : 0
+  }
+
   addGift() {
     window.alert("ADD di DONO da definire")
+    const newGiftId = this.personaggio.doni ? this.getLastGiftId() + 1 : 0;
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    console.log("NEW GIFT id: ", newGiftId)
+    var newGiftEntity = {
+      id: newGiftId,
+      dono: this.giftFormGroup.value.dono,
+      link: this.giftFormGroup.value.link,
+    }
+    this.testService.setGift(userId, pgId, newGiftId, newGiftEntity);
+
+    this.recargePg(userId, pgId)
+
+    this.giftFormGroup.reset();
   }
 
   giftUpdate(event: any, id: number) {
@@ -116,6 +150,13 @@ export class PersonaggioComponent implements OnInit {
     window.alert("DELETE della CICATRICE da definire; ID = " + event)
   }
 
+  recargePg(userId: any, pgId: any) {
+    this.testService.getPersonaggio(userId, pgId).subscribe(pg => {
+      console.log("personaggio", pg)
+      Root.setSessionPg(pg)
+      this.personaggio = Root.getSessionPg();
+    });
+  }
 
   //TEST
   testDB() {
@@ -149,7 +190,7 @@ export class PersonaggioComponent implements OnInit {
     //   }
     // })
     // this.testService.setUser(userId, Root.userEntity(userId))
-    this.testService.setPg(userId, pgId, Root.pgEntity(pgId))
+    // this.testService.setPg(userId, pgId, Root.pgEntity(pgId))
     // this.testService.updatePgAttribute(userId, pgId, 'forza', 5);
     // this.testService.updatePgAbility(userId, pgId, 'arceria', 5);
     // this.testService.updatePgBackground(userId, pgId, 'riti', 5);

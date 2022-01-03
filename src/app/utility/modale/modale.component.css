@@ -2,20 +2,25 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background-color: rgba(0, 0, 0, 0.5);
 
   z-index: 2;
   display: grid;
-  grid-template-columns: auto 50% auto;
-  grid-template-rows: auto 50% auto;
+  /* grid-template-columns: auto 50% auto;
+  grid-template-rows: auto 50% auto; */
+  grid-template-columns: auto auto auto;
+  /* grid-template-rows: auto auto auto; */
 }
 
 .modale__pannello{
+  height: fit-content;
+  max-height: 80%;
+  width: 60%;
   border-radius: 1rem;
   grid-column: 2;
-  grid-row: 2;
+  /* grid-row: 2; */
   background-color: white;
   display: grid;
   grid-template-columns: 3vmax auto 3vmax;
@@ -40,6 +45,9 @@ and (max-width: 414px) {
   .modale{
     grid-template-columns: auto 80% auto;
     grid-template-rows: auto 80% auto;
+  }
+  .modale__pannello{
+    width: 95%;
   }
 }
 

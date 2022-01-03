@@ -18,13 +18,33 @@
   --error-color: rgb(176, 42, 55);
 }
 
-a{
+h2, h1, a{
   color: var(--second-color);
 }
+
 a:hover{
   color: var(--second-color__light);
   font-weight: bolder;
 }
+
+/* AngularMaterial OVERRIDE ------------------------*/
+.mat-horizontal-content-container {
+  max-height: 306px;
+  overflow: auto!important;
+  overflow-y: auto!important;
+  padding: 0 24px 24px 24px;
+}
+
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header .mat-step-label {
+  padding: 10% 0 0 0!important;
+  text-align: center;
+  width: 100%;
+}
+
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header, .mat-vertical-stepper-header {
+  padding: 4px 4px!important;
+}
+
 
 /* Bootstrap OVERRIDE ------------------------*/
 .btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show, .btn-outline-primary:active {
@@ -69,6 +89,11 @@ a:hover{
   color: var(--first-color);
   background-color: var(--error-color__light);
   border-color: var(--error-color__light);
+}
+
+.card{
+  height: fit-content;
+  position: unset;
 }
 
 /* Overflow --------------------------------------------------------*/
@@ -192,6 +217,11 @@ button{
 .sign__form{
   width: 45vmin;
   height: fit-content;
+}
+
+span.campo-obbligatorio{
+  color: var(--second-color);
+  font-weight: bolder;
 }
 
 /* ----------------------CELLULARI---------------------- */

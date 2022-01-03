@@ -26,8 +26,9 @@
                       formControlName="email"
                       [style]="loginFormGroup.controls.email.touched && loginFormGroup.controls.email.invalid? 'border-color: red; color: red!important;': ''">
                     <label for="floatingEmailSignUp"
-                      [style]="loginFormGroup.controls.email.touched && loginFormGroup.controls.email.invalid? 'color: red': ''">Email
-                      *</label>
+                      [style]="loginFormGroup.controls.email.touched && loginFormGroup.controls.email.invalid? 'color: red': ''">
+                      Email <span class="campo-obbligatorio">*</span>
+                    </label>
                   </div>
 
                   <!-- PASSWORD -->
@@ -36,8 +37,9 @@
                       formControlName="password"
                       [style]="loginFormGroup.controls.password.touched && loginFormGroup.controls.password.invalid? 'border-color: red; color: red!important;': ''">
                     <label for="floatingPwdSignUp"
-                      [style]="loginFormGroup.controls.password.touched && loginFormGroup.controls.password.invalid? 'color: red': ''">Password
-                      *</label>
+                      [style]="loginFormGroup.controls.password.touched && loginFormGroup.controls.password.invalid? 'color: red': ''">
+                      Password <span class="campo-obbligatorio">*</span>
+                    </label>
                   </div>
 
                   <!-- pulsante LOGIN -->

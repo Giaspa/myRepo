@@ -243,20 +243,20 @@
             <h2 class="modale--header m-0">Aggiungi un dono</h2>
 
             <div class="modale--contenuto">
-              <form>
+              <form [formGroup]="giftFormGroup">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingInput" placeholder="dono">
+                  <input type="text" class="form-control" id="floatingInput" placeholder="dono" formControlName="dono">
                   <label for="floatingInput">Dono</label>
                 </div>
 
                 <div class="form-floating">
-                  <input type="text" class="form-control" id="floatingInput" placeholder="link">
+                  <input type="text" class="form-control" id="floatingInput" placeholder="link" formControlName="link">
                   <label for="floatingInput">Link</label>
                 </div>
 
                 <div class="py-3 flex justify-content-center align-items-center">
                   <button type="button" class="btn btn-link" (click)="modalGiftAdd.hidden=true">Indietro</button>
-                  <button type="button" class="btn btn-primary" (click)="addGift()">Aggiungi</button>
+                  <button type="button" class="btn btn-primary" (click)="addGift()" [disabled]="giftFormGroup.invalid">Aggiungi</button>
                 </div>
               </form>
             </div>

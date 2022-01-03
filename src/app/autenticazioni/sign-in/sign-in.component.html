@@ -29,16 +29,18 @@
                           formControlName="nome"
                           [style]="bioFormGroup.controls.nome.touched && bioFormGroup.controls.nome.invalid? 'border-color: red': ''">
                         <label for="floatingName"
-                          [style]="bioFormGroup.controls.nome.touched && bioFormGroup.controls.nome.invalid? 'color: red': ''">Nome
-                          *</label>
+                          [style]="bioFormGroup.controls.nome.touched && bioFormGroup.controls.nome.invalid? 'color: red': ''">
+                          Nome <span class="campo-obbligatorio">*</span>
+                        </label>
                       </div>
                       <div class="form-floating">
                         <input type="text" class="form-control" id="floatingSurname" placeholder="Cognome"
                           formControlName="cognome"
                           [style]="bioFormGroup.controls.cognome.touched && bioFormGroup.controls.cognome.invalid? 'border-color: red': ''">
                         <label for="floatingSurname"
-                          [style]="bioFormGroup.controls.cognome.touched && bioFormGroup.controls.cognome.invalid? 'color: red': ''">Cognome
-                          *</label>
+                          [style]="bioFormGroup.controls.cognome.touched && bioFormGroup.controls.cognome.invalid? 'color: red': ''">
+                          Cognome <span class="campo-obbligatorio">*</span>
+                        </label>
                       </div>
 
                       <div class="py-2">
@@ -62,8 +64,12 @@
                           [style]="emailFormGroup.controls.email.touched && emailFormGroup.controls.email.invalid? 'border-color: red; color: red!important;': ''"
                           (change)="verifyEmailUnicity($event)">
                         <label for="floatingEmail"
-                          [style]="emailFormGroup.controls.email.touched && emailFormGroup.controls.email.invalid? 'color: red': ''"><span>E-mail
-                            *</span> <span *ngIf="!isEmailUnic">&nbsp;(<b>e-mail esistente</b>)</span></label>
+                          [style]="emailFormGroup.controls.email.touched && emailFormGroup.controls.email.invalid? 'color: red': ''">
+                          <span>
+                            E-mail <span class="campo-obbligatorio">*</span>
+                          </span>
+                          <span *ngIf="!isEmailUnic">&nbsp;(<b>e-mail esistente</b>)</span>
+                        </label>
                       </div>
 
                       <div class="form-floating">
@@ -72,7 +78,8 @@
                           [style]="emailFormGroup.controls.confermaEmail.touched && emailFormGroup.controls.confermaEmail.invalid? 'border-color: red; color: red': ''">
                         <label for="floatingConfEmail"
                           [style]="emailFormGroup.controls.confermaEmail.touched && emailFormGroup.controls.confermaEmail.invalid? 'color: red': ''">
-                          Conferma e-mail *</label>
+                          Conferma e-mail <span class="campo-obbligatorio">*</span>
+                        </label>
                       </div>
 
                       <div class="py-2">
@@ -99,8 +106,9 @@
                           [style]="pwdFormGroup.controls.password.touched && pwdFormGroup.controls.password.invalid? 'border-color: red; color: red!important;': ''"
                           (change)="verifyPassword()">
                         <label for="floatingPwdSignIn"
-                          [style]="pwdFormGroup.controls.password.touched && pwdFormGroup.controls.password.invalid? 'color: red': ''">Password
-                          *</label>
+                          [style]="pwdFormGroup.controls.password.touched && pwdFormGroup.controls.password.invalid? 'color: red': ''">
+                          Password <span class="campo-obbligatorio">*</span>
+                        </label>
                       </div>
 
                       <div class="form-floating">
@@ -109,8 +117,9 @@
                           [style]="pwdFormGroup.controls.confermaPassword.touched && pwdFormGroup.controls.confermaPassword.invalid? 'border-color: red; color: red!important;': ''"
                           (change)="verifyPassword()">
                         <label for="floatingConfPwd"
-                          [style]="pwdFormGroup.controls.confermaPassword.touched && pwdFormGroup.controls.confermaPassword.invalid? 'color: red': ''">Conferma
-                          password *</label>
+                          [style]="pwdFormGroup.controls.confermaPassword.touched && pwdFormGroup.controls.confermaPassword.invalid? 'color: red': ''">
+                          Conferma password <span class="campo-obbligatorio">*</span>
+                        </label>
                       </div>
 
                       <div class="py-2">

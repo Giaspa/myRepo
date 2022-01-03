@@ -1,2 +1,588 @@
-  <app-personaggio >
-  </app-personaggio>
+<!-- <app-personaggio>
+  </app-personaggio> -->
+<div style="background-color: red;">
+  <mat-stepper linear labelPosition="bottom" #stepper>
+    <!-- INFO Pg -->
+    <mat-step #info [stepControl]="infoPgFormGroup">
+      <form [formGroup]="infoPgFormGroup">
+        <ng-template matStepLabel><i class="bi bi-person-fill"
+            [style]="infoPgFormGroup.touched&&infoPgFormGroup.invalid? 'color: red' : ''"></i></ng-template>
+
+        <!-- Titolo -->
+        <h2 class="flex justify-content-center align-content-center align-items-center"><b><u>Info PG</u></b></h2>
+
+        <!-- nomeCompleto -->
+        <div class="form-floating mb-2">
+          <input type="text" class="form-control" id="floatingNomeCompleto" placeholder="Nome completo"
+            formControlName="nomeCompleto"
+            [style]="infoPgFormGroup.controls.nomeCompleto.touched && infoPgFormGroup.controls.nomeCompleto.invalid? 'border-color: red': ''">
+          <label for="floatingNomeCompleto"
+            [style]="infoPgFormGroup.controls.nomeCompleto.touched && infoPgFormGroup.controls.nomeCompleto.invalid? 'color: red': ''">
+            Nome completo <span class="campo-obbligatorio">*</span>
+          </label>
+        </div>
+
+        <!-- razza -->
+        <div class="form-floating mb-2">
+          <select class="form-select" id="floatingRazza" aria-label="Floating label select example"
+            formControlName="razza"
+            [style]="infoPgFormGroup.controls.razza.touched && infoPgFormGroup.controls.razza.invalid? 'border-color: red': ''">
+            <!-- <option selected>Scegli la razza</option> -->
+            <option value="Homid">Homid</option>
+            <option value="Metis">Metis</option>
+            <option value="Lupus">Lupus</option>
+          </select>
+          <label for="floatingRazza"
+            [style]="infoPgFormGroup.controls.razza.touched && infoPgFormGroup.controls.razza.invalid? 'color: red': ''">
+            Razza <span class="campo-obbligatorio">*</span>
+          </label>
+        </div>
+
+        <!-- auspicio -->
+        <div class="form-floating mb-2">
+          <select class="form-select" id="floatingAuspicio" aria-label="Floating label select example"
+            formControlName="auspicio"
+            [style]="infoPgFormGroup.controls.auspicio.touched && infoPgFormGroup.controls.auspicio.invalid? 'border-color: red': ''">
+            <!-- <option selected>Scegli l'auspicio</option> -->
+            <option value="Ragabash">Ragabash</option>
+            <option value="Teurgo">Teurgo</option>
+            <option value="Philodox">Philodox</option>
+            <option value="Galliard">Galliard</option>
+            <option value="Arhoun">Arhoun</option>
+          </select>
+          <label for="floatingAuspicio"
+            [style]="infoPgFormGroup.controls.auspicio.touched && infoPgFormGroup.controls.auspicio.invalid? 'color: red': ''">
+            Auspicio <span class="campo-obbligatorio">*</span>
+          </label>
+        </div>
+
+        <!-- rango -->
+        <div class="form-floating mb-2">
+          <select class="form-select" id="floatingRango" aria-label="Floating label select example"
+            formControlName="rango"
+            [style]="infoPgFormGroup.controls.rango.touched && infoPgFormGroup.controls.rango.invalid? 'border-color: red': ''">
+            <!-- <option selected>Scegli il rango</option> -->
+            <option value="0">Cucciolo</option>
+            <option value="1">Cliath</option>
+            <option value="2">Fostern</option>
+            <option value="3">Adren</option>
+            <option value="4">Athro</option>
+            <option value="5">Elder</option>
+            <option value="6">Grand elder</option>
+          </select>
+          <label for="floatingRango"
+            [style]="infoPgFormGroup.controls.rango.touched && infoPgFormGroup.controls.rango.invalid? 'color: red': ''">
+            Rango <span class="campo-obbligatorio">*</span>
+          </label>
+        </div>
+
+        <!-- tribu -->
+        <div class="form-floating mb-2">
+          <select class="form-select" id="floatingTribu" aria-label="Floating label select example"
+            formControlName="tribu"
+            [style]="infoPgFormGroup.controls.tribu.touched && infoPgFormGroup.controls.tribu.invalid? 'border-color: red': ''">
+            <!-- <option selected>Scegli l'auspicio</option> -->
+            <option value="null">nessuna tribù</option>
+            <option value="Artigli rossi">Artigli rossi</option>
+            <option value="Fenrir">Fenrir</option>
+            <option value="Fianna">Fianna</option>
+            <option value="Figli di Gaia">Figli di Gaia</option>
+            <option value="Furie nere">Furie nere</option>
+            <option value="Pastori dell'uomo">Pastori dell'uomo</option>
+            <option value="Rodi ossa">Rodi ossa</option>
+            <option value="Scrutastelle">Scrutastelle</option>
+            <option value="Signori delle ombre">Signori delle ombre</option>
+            <option value="Ululatori bianchi">Ululatori bianchi</option>
+            <option value="Viaggiatori silenti">Viaggiatori silenti</option>
+            <option value="Zane d'argento">Zane d'argento</option>
+          </select>
+          <label for="floatingTribu"
+            [style]="infoPgFormGroup.controls.tribu.touched && infoPgFormGroup.controls.tribu.invalid? 'color: red': ''">
+            Tribù <span class="campo-obbligatorio">*</span>
+          </label>
+        </div>
+
+        <!-- branco -->
+        <div class="form-floating mb-2">
+          <input type="text" class="form-control" id="floatingBranco" placeholder="Branco" formControlName="branco"
+            [style]="infoPgFormGroup.controls.branco.touched && infoPgFormGroup.controls.branco.invalid? 'border-color: red': ''">
+          <label for="floatingBranco"
+            [style]="infoPgFormGroup.controls.branco.touched && infoPgFormGroup.controls.branco.invalid? 'color: red': ''">
+            Branco
+          </label>
+        </div>
+
+        <!-- totemBranco -->
+        <div class="form-floating mb-2">
+          <input type="text" class="form-control" id="floatingTotemBranco" placeholder="Totem branco"
+            formControlName="totemBranco"
+            [style]="infoPgFormGroup.controls.totemBranco.touched && infoPgFormGroup.controls.totemBranco.invalid? 'border-color: red': ''">
+          <label for="floatingTotemBranco"
+            [style]="infoPgFormGroup.controls.totemBranco.touched && infoPgFormGroup.controls.totemBranco.invalid? 'color: red': ''">
+            Totem del branco
+          </label>
+        </div>
+
+        <!-- profilo -->
+        <div class="form-floating mb-2">
+          <input type="text" class="form-control" id="floatingProfilo" placeholder="Profilo" formControlName="profilo"
+            [style]="infoPgFormGroup.controls.profilo.touched && infoPgFormGroup.controls.profilo.invalid? 'border-color: red': ''">
+          <label for="floatingProfilo"
+            [style]="infoPgFormGroup.controls.profilo.touched && infoPgFormGroup.controls.profilo.invalid? 'color: red': ''">
+            Profilo <span class="campo-obbligatorio">*</span>
+          </label>
+        </div>
+
+        <!-- pulsante NEXT -->
+        <div class="py-2">
+          <button mat-button matStepperNext class="p-0"
+            style="font-size: 18px!important; float: right; text-align: right;" [disabled]="infoPgFormGroup.invalid"
+            (click)="scrollToTop($event)">Next
+            <i class="bi bi-chevron-right"></i></button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- ATTRIBUTI -->
+    <!-- <mat-step #attributs [stepControl]="attributsFormGroup" [aria-selected]="attributs.select()"> -->
+    <mat-step #attributs [stepControl]="attributsFormGroup">
+      <form [formGroup]="attributsFormGroup">
+        <ng-template matStepLabel><i class="bi bi-shield-fill"
+            [style]="attributsFormGroup.touched&&attributsFormGroup.invalid? 'color: red' : ''"></i></ng-template>
+
+        <!-- Titolo -->
+        <h2 class="flex justify-content-center align-content-center align-items-center"><b><u>Attributi</u></b></h2>
+
+        <div class="mt-2 grid">
+          <!-- fisici -->
+          <div class="lg:py-0 col-12 lg:col-4">
+            <h3 class="m-0 flex justify-content-center align-content-center align-items-center">Fisici</h3>
+            <!-- forza -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: attributsFormGroup,
+                                                                        formControlName: 'forza',
+                                                                        minOne: true,
+                                                                        label: 'Forza'}"></ng-container>
+
+            <!-- destrezza -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: attributsFormGroup,
+                                                                        formControlName: 'destrezza',
+                                                                        minOne: true,
+                                                                        label: 'Destrezza'}"></ng-container>
+
+            <!-- costituzione -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: attributsFormGroup,
+                                                                        formControlName: 'costituzione',
+                                                                        minOne: true,
+                                                                        label: 'Costituzione'}"></ng-container>
+          </div>
+
+          <!-- sociali -->
+          <div class="lg:py-0 col-12 lg:col-4 border-top-1 lg:border-top-none lg:border-left-1">
+            <h3 class="m-0 flex justify-content-center align-content-center align-items-center">Sociali</h3>
+            <!-- carisma -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: attributsFormGroup,
+                                                                        formControlName: 'carisma',
+                                                                        minOne: true,
+                                                                        label: 'Carisma'}"></ng-container>
+
+            <!-- persuasione -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: attributsFormGroup,
+                                                                        formControlName: 'persuasione',
+                                                                        minOne: true,
+                                                                        label: 'Persuasione'}"></ng-container>
+
+            <!-- aspetto -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: attributsFormGroup,
+                                                                        formControlName: 'aspetto',
+                                                                        minOne: true,
+                                                                        label: 'Aspetto'}"></ng-container>
+          </div>
+
+          <!-- mentali -->
+          <div class="lg:py-0 col-12 lg:col-4 border-top-1 lg:border-top-none lg:border-left-1">
+            <h3 class="m-0 flex justify-content-center align-content-center align-items-center">Mentali</h3>
+            <!-- percezione -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: attributsFormGroup,
+                                                                        formControlName: 'percezione',
+                                                                        minOne: true,
+                                                                        label: 'Percezione'}"></ng-container>
+
+            <!-- intelligenza -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: attributsFormGroup,
+                                                                        formControlName: 'intelligenza',
+                                                                        minOne: true,
+                                                                        label: 'Intelligenza'}"></ng-container>
+
+            <!-- prontezza -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: attributsFormGroup,
+                                                                        formControlName: 'prontezza',
+                                                                        minOne: true,
+                                                                        label: 'Prontezza'}"></ng-container>
+          </div>
+        </div>
+        <div class="py-2">
+          <button mat-button matStepperPrevious class="p-0 col-6"
+            style="font-size: 18px!important; float: left; text-align: left;"><i class="bi bi-chevron-left">
+              Back</i></button>
+          <button mat-button matStepperNext class="p-0 col-6"
+            style="font-size: 18px!important; float: right; text-align: right;"
+            [disabled]="attributsFormGroup.invalid">Next <i class="bi bi-chevron-right"></i></button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- ABILITA' -->
+    <!-- <mat-step #attributs [stepControl]="abilitiesFormGroup" [aria-selected]="attributs.select()"> -->
+    <mat-step #abilities [stepControl]="abilitiesFormGroup">
+      <form [formGroup]="abilitiesFormGroup">
+        <ng-template matStepLabel><i class="bi bi-wrench"
+            [style]="abilitiesFormGroup.touched&&abilitiesFormGroup.invalid? 'color: red' : ''"></i></ng-template>
+
+        <!-- Titolo -->
+        <h2 class="flex justify-content-center align-content-center align-items-center"><b><u>Abilità</u></b></h2>
+
+        <div class="mt-2 grid">
+          <!-- attitudini -->
+          <div class="lg:py-0 col-12 lg:col-4">
+            <h3 class="m-0 flex justify-content-center align-content-center align-items-center">Attitudini</h3>
+            <!-- atletica -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'atletica',
+                                                                          label: 'Atletica'}"></ng-container>
+            <!-- autorita -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'autorita',
+                                                                          label: 'Autorità'}"></ng-container>
+            <!-- bassifondi -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'bassifondi',
+                                                                          label: 'Bassifondi'}"></ng-container>
+            <!-- empatia -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'empatia',
+                                                                          label: 'Empatia'}"></ng-container>
+            <!-- espressivita -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'espressivita',
+                                                                          label: 'Espressività'}"></ng-container>
+            <!-- intimidire -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'intimidire',
+                                                                          label: 'Intimidire'}"></ng-container>
+            <!-- istintoPrimordiale -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'istintoPrimordiale',
+                                                                          label: 'Istinto primordiale'}">
+            </ng-container>
+            <!-- rissa -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'rissa',
+                                                                          label: 'Rissa'}"></ng-container>
+            <!-- sestoSenso -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'sestoSenso',
+                                                                          label: 'Sesto senso'}"></ng-container>
+            <!-- sotterfugio -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'sotterfugio',
+                                                                          label: 'Sotterfugio'}"></ng-container>
+
+          </div>
+
+          <!-- capacità -->
+          <div class="lg:py-0 col-12 lg:col-4 border-top-1 lg:border-top-none lg:border-left-1">
+            <h3 class="m-0 flex justify-content-center align-content-center align-items-center">Capacità</h3>
+            <!-- affinitaAnimale -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'affinitaAnimale',
+                                                                          label: 'Affinità animale'}"></ng-container>
+            <!-- arceria -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'arceria',
+                                                                          label: 'Arceria'}"></ng-container>
+            <!-- armiDaMischia -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'armiDaMischia',
+                                                                          label: 'Armi da mischia'}"></ng-container>
+            <!-- cavalcare -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'cavalcare',
+                                                                          label: 'Cavalcare'}"></ng-container>
+            <!-- criminalita -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'criminalita',
+                                                                          label: 'Criminalità'}"></ng-container>
+            <!-- espressioneArtistica -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'espressioneArtistica',
+                                                                          label: 'Espressione artistica'}">
+            </ng-container>
+            <!-- furtivita -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'furtivita',
+                                                                          label: 'Furtività'}"></ng-container>
+            <!-- galateo -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'galateo',
+                                                                          label: 'Galateo'}"></ng-container>
+            <!-- manualita -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'manualita',
+                                                                          label: 'Manualità'}"></ng-container>
+            <!-- sopravvivenza -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'sopravvivenza',
+                                                                          label: 'Sopravvivenza'}"></ng-container>
+          </div>
+
+          <!-- conoscenze -->
+          <div class="lg:py-0 col-12 lg:col-4 border-top-1 lg:border-top-none lg:border-left-1">
+            <h3 class="m-0 flex justify-content-center align-content-center align-items-center">Conoscenze</h3>
+            <!-- accademiche -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'accademiche',
+                                                                          label: 'Accademiche'}"></ng-container>
+            <!-- enigmi -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'enigmi',
+                                                                          label: 'Enigmi'}"></ng-container>
+            <!-- investigare -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'investigare',
+                                                                          label: 'Investigare'}"></ng-container>
+            <!-- legge -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'legge',
+                                                                          label: 'Legge'}"></ng-container>
+            <!-- linguistica -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'linguistica',
+                                                                          label: 'Linguistica'}"></ng-container>
+            <!-- medicina -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'medicina',
+                                                                          label: 'Medicina'}"></ng-container>
+            <!-- occulto -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'occulto',
+                                                                          label: 'Occulto'}"></ng-container>
+            <!-- rituali -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'rituali',
+                                                                          label: 'Rituali'}"></ng-container>
+            <!-- saggezzaDellaTerra -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'saggezzaDellaTerra',
+                                                                          label: 'Saggezza della terra'}">
+            </ng-container>
+            <!-- scienza -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: abilitiesFormGroup,
+                                                                          formControlName: 'scienza',
+                                                                          label: 'Scienza'}"></ng-container>
+          </div>
+        </div>
+
+        <div class="py-2">
+          <button mat-button matStepperPrevious class="p-0 col-6"
+            style="font-size: 18px!important; float: left; text-align: left;"><i class="bi bi-chevron-left">
+              Back</i></button>
+          <button mat-button matStepperNext class="p-0 col-6"
+            style="font-size: 18px!important; float: right; text-align: right;"
+            [disabled]="attributsFormGroup.invalid">Next <i class="bi bi-chevron-right"></i></button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- BACKGROUND -->
+    <!-- <mat-step #attributs [stepControl]="backgroundsFormGroup" [aria-selected]="attributs.select()"> -->
+    <mat-step #abilities [stepControl]="backgroundsFormGroup">
+      <form [formGroup]="backgroundsFormGroup">
+        <ng-template matStepLabel><i class="bi bi-piggy-bank-fill"
+            [style]="backgroundsFormGroup.touched&&backgroundsFormGroup.invalid? 'color: red' : ''"></i></ng-template>
+
+        <!-- Titolo -->
+        <h2 class="flex justify-content-center align-content-center align-items-center"><b><u>Background</u></b></h2>
+
+        <div class="mt-2 grid">
+          <div class="lg:py-0 col-12">
+            <!-- alleati -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'alleati',
+                                                                            label: 'Alleati'}"></ng-container>
+            <!-- antenati -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'antenati',
+                                                                            label: 'Antenati'}"></ng-container>
+            <!-- contatti -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'contatti',
+                                                                            label: 'Contatti'}"></ng-container>
+            <!-- destino -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'destino',
+                                                                            label: 'Destino'}"></ng-container>
+            <!-- feticci -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'feticci',
+                                                                            label: 'Feticci'}"></ng-container>
+            <!-- kinfolk -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'kinfolk',
+                                                                            label: 'Kinfolk'}"></ng-container>
+            <!-- mentore -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'mentore',
+                                                                            label: 'Mentore'}"></ng-container>
+            <!-- networkSpirituale -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'networkSpirituale',
+                                                                            label: 'Network spirituale'}">
+            </ng-container>
+            <!-- numeTutelare -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'numeTutelare',
+                                                                            label: 'Nume tutelare'}"></ng-container>
+            <!-- pesoPolitico -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'pesoPolitico',
+                                                                            label: 'Peso politico'}"></ng-container>
+            <!-- razzaPura -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'razzaPura',
+                                                                            label: 'Razza pura'}"></ng-container>
+            <!-- retaggioSpirituale -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'retaggioSpirituale',
+                                                                            label: 'Retaggio spirituale'}">
+            </ng-container>
+            <!-- risorse -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'risorse',
+                                                                            label: 'Risorse'}"></ng-container>
+            <!-- riti -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'riti',
+                                                                            label: 'Riti'}"></ng-container>
+            <!-- territorioDiCaccia -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'territorioDiCaccia',
+                                                                            label: 'Territorio di caccia'}">
+            </ng-container>
+            <!-- toccatoDalWyld -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'toccatoDalWyld',
+                                                                            label: 'Toccato dal Wyld'}"></ng-container>
+            <!-- toccatoDallaWeaver -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'toccatoDallaWeaver',
+                                                                            label: 'Toccato dalla Weaver'}">
+            </ng-container>
+            <!-- toccatoDalWyrm -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'toccatoDalWyrm',
+                                                                            label: 'Toccato dal Wyrm'}"></ng-container>
+            <!-- totem -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: backgroundsFormGroup,
+                                                                            formControlName: 'totem',
+                                                                            label: 'Totem'}"></ng-container>
+          </div>
+        </div>
+
+        <div class="py-2">
+          <button mat-button matStepperPrevious class="p-0 col-6"
+            style="font-size: 18px!important; float: left; text-align: left;"><i class="bi bi-chevron-left">
+              Back</i></button>
+
+          <button mat-button matStepperNext class="p-0 col-6"
+            style="font-size: 18px!important; float: right; text-align: right;"
+            [disabled]="attributsFormGroup.invalid">Next <i class="bi bi-chevron-right"></i></button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- FURIA, GNOSI & VOLONTA' -->
+    <!-- <mat-step #attributs [stepControl]="fgvFormGroup" [aria-selected]="attributs.select()"> -->
+    <mat-step #abilities [stepControl]="fgvFormGroup">
+      <form [formGroup]="fgvFormGroup">
+        <ng-template matStepLabel><i class="bi bi-stars"
+            [style]="fgvFormGroup.touched&&fgvFormGroup.invalid? 'color: red' : ''"></i></ng-template>
+
+        <!-- Titolo -->
+        <h2 class="flex justify-content-center align-content-center align-items-center"><b><u>Furia, Gnosi e
+              Volontà</u></b></h2>
+
+        <div class="mt-2 grid">
+          <div class="lg:py-0 col-12">
+            <!-- furia -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: fgvFormGroup,
+                                                                              formControlName: 'furia',
+                                                                              label: 'Furia',
+                                                                              maxTen: true,
+                                                                              minOne: true}"></ng-container>
+            <!-- gnosi -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: fgvFormGroup,
+                                                                              formControlName: 'gnosi',
+                                                                              label: 'Gnosi',
+                                                                              maxTen: true,
+                                                                              minOne: true}"></ng-container>
+            <!-- volonta -->
+            <ng-container *ngTemplateOutlet="caratteristica; context: { formControl: fgvFormGroup,
+                                                                              formControlName: 'volonta',
+                                                                              label: 'Volontà',
+                                                                              maxTen: true,
+                                                                              minOne: true}"></ng-container>
+          </div>
+        </div>
+
+        <div class="py-2">
+          <button mat-button matStepperPrevious class="p-0 col-6"
+            style="font-size: 18px!important; float: left; text-align: left;"><i class="bi bi-chevron-left">
+              Back</i></button>
+
+          <button
+            *ngIf="infoPgFormGroup.invalid || attributsFormGroup.invalid || abilitiesFormGroup.invalid || backgroundsFormGroup.invalid; else createButton"
+            mat-stroked-button class="p-0 modale--apertura col-6" style="font-size: 18px!important; float: right;"
+            [disabled]="infoPgFormGroup.invalid || attributsFormGroup.invalid || abilitiesFormGroup.invalid || backgroundsFormGroup.invalid"
+            (click)="submitPgCreation()">
+            Crea PG <i class="bi bi-check2-circle"></i>
+          </button>
+
+          <ng-template #createButton>
+            <button mat-raised-button color="primary" class="p-0 modale--apertura col-6"
+              style="font-size: 18px!important; float: right;"
+              [disabled]="infoPgFormGroup.invalid || attributsFormGroup.invalid || abilitiesFormGroup.invalid || backgroundsFormGroup.invalid"
+              (click)="submitPgCreation()">
+              Crea PG <i class="bi bi-check2-circle"></i>
+            </button>
+          </ng-template>
+        </div>
+      </form>
+    </mat-step>
+  </mat-stepper>
+</div>
+
+<ng-template #caratteristica let-formControl="formControl" let-formControlName="formControlName" let-label="label"
+  let-autofocus="autofocus" let-minOne="minOne" let-maxTen="maxTen">
+  <div class="form-floating mb-2" [formGroup]="formControl">
+    <select [autofocus]="autofocus" class="form-select" [id]="'floating'+label"
+      aria-label="Floating label select example" [formControlName]="formControlName"
+      [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'border-color: red': ''">
+      <option *ngIf="!minOne" [value]="0">0</option>
+      <option [value]="1">1</option>
+      <option [value]="2">2</option>
+      <option [value]="3">3</option>
+      <option [value]="4">4</option>
+      <option [value]="5">5</option>
+      <option *ngIf="maxTen" [value]="6">6</option>
+      <option *ngIf="maxTen" [value]="7">7</option>
+      <option *ngIf="maxTen" [value]="8">8</option>
+      <option *ngIf="maxTen" [value]="9">9</option>
+      <option *ngIf="maxTen" [value]="10">10</option>
+    </select>
+
+    <label [for]="'floating'+label"
+      [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'color: red': ''">
+      {{label}}
+    </label>
+  </div>
+</ng-template>

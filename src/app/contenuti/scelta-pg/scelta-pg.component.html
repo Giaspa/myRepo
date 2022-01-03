@@ -2,37 +2,53 @@
 
   <div class="grid flex align-items-center justify-content-center align-content-center">
     <div class="col-12 flex align-items-center justify-content-center align-content-center">
-      <h1>Scelta personaggio</h1>
+      <h1><b><u>Scelta personaggio</u></b></h1>
     </div>
 
     <!-- NUOVO PG -->
-    <div *ngIf="utente.personaggi.length < 2"
-      class="md:col-6 sm:col-12 lg:col-4  card m-1 card--hovering card--hovering__new sm:h-10rem md:h-15rem h-10rem flex align-items-center justify-content-center align-content-center"
-      routerLink="/sheet/new">
-      <div class="card-body">
-        <h3 class="card-title flex align-items-center justify-content-center align-content-center">
-          <b>
-            Nuovo personaggio
-          </b>
-        </h3>
-        <hr>
+    <div *ngIf="personaggi.length < 2"
+      class="md:col-6 sm:col-12 lg:col-4  card m-1 card--hovering card--hovering__new sm:h-10rem md:h-15rem h-10rem flex align-items-center justify-content-center align-content-center">
+      <modale #modalNewPg>
+        <!-- TRIGGER apertura modale -->
+        <div class="card-body modale--apertura">
+          <h3 class="card-title flex align-items-center justify-content-center align-content-center">
+            <b>
+              Nuovo personaggio
+            </b>
+          </h3>
+          <hr>
 
-        <p class="card-text flex align-items-center justify-content-center align-content-center">
-          Crea un nuovo personaggio!
-        </p>
+          <p class="card-text flex align-items-center justify-content-center align-content-center">
+            Crea un nuovo personaggio!
+          </p>
 
-        <div class="p-2 flex align-items-center justify-content-center align-content-center">
-          <h1>
-            <i class="bi bi-person-plus-fill" style="font-size: 3vmax;"></i>
-          </h1>
+          <div class="p-2 flex align-items-center justify-content-center align-content-center">
+            <h1>
+              <i class="bi bi-person-plus-fill" style="font-size: 3vmax;"></i>
+            </h1>
+          </div>
         </div>
-      </div>
+
+        <h2 class="modale--header m-0">Creazione nuovo personaggio</h2>
+
+
+        <div class="modale--contenuto">
+          <app-personaggio-form></app-personaggio-form>
+
+          <div class="py-3 flex justify-content-center align-items-center">
+            <button type="button" class="btn btn-link" (click)="modalNewPg.hidden=true">Indietro</button>
+          </div>
+        </div>
+      </modale>
     </div>
 
     <!-- PGs LIST -->
     <!-- <div *ngFor="let personaggio of utente.personaggi" -->
+    <!-- <div *ngFor="let personaggio of personaggi"
+      class="md:col-6 sm:col-12 lg:col-4 card m-1 card--hovering sm:h-10rem md:h-15rem h-10rem flex align-items-center justify-content-center align-content-center"
+      (click)="loadPg(personaggio)"> -->
     <div *ngFor="let personaggio of personaggi"
-      class="md:col-6 sm:col-12 lg:col-4  card m-1 card--hovering sm:h-10rem md:h-15rem h-10rem flex align-items-center justify-content-center align-content-center"
+      class="md:col-6 sm:col-12 lg:col-4 card m-1 card--hovering flex align-items-center justify-content-center align-content-center"
       (click)="loadPg(personaggio)">
       <div class="card-body">
         <h3 class="card-title flex align-items-center justify-content-center align-content-center">

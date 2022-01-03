@@ -36,7 +36,7 @@ export class Root {
   //legge il personaggio in sessione
   static getSessionPg(){
     var pg = sessionStorage.getItem(this.SESSION_PG)
-    return JSON.parse(pg? pg : '')
+    return pg ? JSON.parse(pg): null
   }
 
   //rimuove l'personaggio dalla sessione

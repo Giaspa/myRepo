@@ -2,7 +2,8 @@
   <ng-content select=".modale--apertura"></ng-content>
 </div>
 
-<div class="modale" [hidden]="hidden">
+<!-- <div [class]="modale" [hidden]="hidden"> -->
+<div [class]="hidden?'modale': 'modale flex flex-column align-items-center justify-content-center'" [style]="hidden? 'display: none' : ''">
   <div class="modale__pannello shadow-6">
     <div class="modale__pannello--close flex flex-column align-items-center justify-content-center" (click)="modalClose($event)">
       <i class="bi bi-x-circle icon--btn" matTooltip="Chiudi" matTooltipPosition="left"></i>

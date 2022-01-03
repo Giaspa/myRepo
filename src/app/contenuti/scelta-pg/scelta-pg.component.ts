@@ -13,10 +13,11 @@ import { ImpostazioniUtenteComponent } from '../impostazioni-utente/impostazioni
 export class SceltaPgComponent implements OnInit {
 
   utente = require("../../utility/utente.json")
-  personaggi: any;
+  personaggi: any[] = [];
 
   constructor(private service: TestService, private router: Router) {
     service.getPersonaggiList(Root.getSessionUser().id).subscribe(personaggi => {
+      //@ts-ignore
       this.personaggi = personaggi
     })
    }
@@ -31,7 +32,7 @@ export class SceltaPgComponent implements OnInit {
 
   loadPg(pg: any){
     Root.setSessionPg(pg);
-    this.router.navigate(['/sheet/'+pg.pgId]);
+    this.router.navigate(['/sheet']);
   }
 
 }
