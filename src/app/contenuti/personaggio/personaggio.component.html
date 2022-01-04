@@ -9,7 +9,8 @@
 
       <div class="col-4">
         <text-dotter type="input" [value]="personaggio.auspicio"><b>Auspicio</b></text-dotter>
-        <text-dotter type="input" [value]="personaggio.tribu? personaggio.tribu : 'nessuna tribù'"><b>Tribù</b></text-dotter>
+        <text-dotter type="input" [value]="personaggio.tribu? personaggio.tribu : 'nessuna tribù'"><b>Tribù</b>
+        </text-dotter>
       </div>
 
       <div class="col-4">
@@ -97,8 +98,6 @@
           <h2><b>Volontà</b></h2>
           <text-dotter type="dotter" [isTenDot]="true" [value]="personaggio.volonta" [isReadOnly]="true"></text-dotter>
         </div>
-
-        <button type="button" (click)="testDB()">TEST</button>
       </div>
 
       <!-- +++++++++++++++ ABILITA' +++++++++++++++ -->
@@ -227,169 +226,16 @@
 
       <!-- +++++++++++++++ DONI +++++++++++++++ -->
       <div class="" *ngSwitchCase="'Doni'">
-        <div class="col-12 flex flex-column align-items-center">
-          <h2 class="m-0" style="height: fit-content;"><b>Doni</b></h2>
-        </div>
-
-        <!-- nuovo DONO -->
-        <div class="flex justify-content-center align-items-center">
-          <modale #modalGiftAdd>
-            <button type="button"
-              class="modale--apertura button-custom p-2 m-0 mb-1 border-1 flex justify-content-center align-items-center"
-              style="border-radius: 6px;">
-              <i class="bi bi-plus-circle"></i> &nbsp; Aggiungi dono
-            </button>
-
-            <h2 class="modale--header m-0">Aggiungi un dono</h2>
-
-            <div class="modale--contenuto">
-              <form [formGroup]="giftFormGroup">
-                <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingInput" placeholder="dono" formControlName="dono">
-                  <label for="floatingInput">Dono</label>
-                </div>
-
-                <div class="form-floating">
-                  <input type="text" class="form-control" id="floatingInput" placeholder="link" formControlName="link">
-                  <label for="floatingInput">Link</label>
-                </div>
-
-                <div class="py-3 flex justify-content-center align-items-center">
-                  <button type="button" class="btn btn-link" (click)="modalGiftAdd.hidden=true">Indietro</button>
-                  <button type="button" class="btn btn-primary" (click)="addGift()" [disabled]="giftFormGroup.invalid">Aggiungi</button>
-                </div>
-              </form>
-            </div>
-          </modale>
-        </div>
-
-        <div class="col-12 grid m-0 p-0 personaggio__contenuto--overflow">
-          <div class="col-12">
-            <div *ngFor="let dono of personaggio.doni; let i = index">
-              <div class="grid pt-3">
-                <!-- voci elenco oggetti -->
-                <div class="col-10 p-0 border-bottom-1" style="border-color: lightgray; height: fit-content;">
-                  <p class="p-0 m-0 mb-1">
-                    {{i+1}}. <a *ngIf="dono.link; else noLink" [href]="dono.link" target="_blank">{{dono.dono}}</a>
-
-                    <ng-template #noLink>
-                      {{dono.dono}}
-                    </ng-template>
-                  </p>
-                </div>
-
-                <!-- pulsante "Modifica" -->
-                <div class="col-1 p-0 border-bottom-1" style="border-color: lightgray; cursor: pointer;">
-                  <modale #modalUpdateGift>
-                    <i class="modale--apertura bi bi-gear icon--btn" matTooltip="Modifica"
-                      matTooltipPosition="before"></i>
-                    <h2 class="modale--header m-0">Modifica dono</h2>
-                    <div class="modale--contenuto">
-                      <form>
-                        <div class="form-floating mb-3">
-                          <input type="text" class="form-control" id="floatingInput" placeholder="dono"
-                            value="{{dono.dono}}">
-                          <label for="floatingInput">Dono</label>
-                        </div>
-
-                        <div class="form-floating">
-                          <textarea class="form-control" placeholder="descrizione" id="floatingTextarea2"
-                            style="height: 15vh" value="{{dono.link}}"></textarea>
-                          <label for="floatingTextarea2">Link</label>
-                        </div>
-
-                        <div class="py-3 flex justify-content-center align-items-center">
-                          <button type="button" class="btn btn-link"
-                            (click)="modalUpdateGift.hidden=true">Indietro</button>
-                          <button type="button" class="btn btn-primary"
-                            (click)="giftUpdate($event, dono.id)">Modifica</button>
-                        </div>
-                      </form>
-                    </div>
-                  </modale>
-                </div>
-
-                <!-- pulsante "Elimina" -->
-                <div class="col-1 p-0 border-bottom-1" style="border-color: lightgray; cursor: pointer;">
-                  <modale #modalDeleteGift>
-                    <i class="modale--apertura bi bi-trash icon--btn" matTooltip="Elimina"
-                      matTooltipPosition="before"></i>
-                    <h2 class="modale--header m-0">Elimina dono</h2>
-                    <div class="modale--contenuto">
-                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="dono"
-                          value="{{dono.dono}}" disabled>
-                        <label for="floatingInput">Dono</label>
-                      </div>
-
-                      <div class="form-floating">
-                        <textarea class="form-control" placeholder="link" id="floatingTextarea2" style="height: 15vh"
-                          value="{{dono.link}}" disabled></textarea>
-                        <label for="floatingTextarea2">Link</label>
-                      </div>
-
-                      <div class="py-3 flex justify-content-center align-items-center">
-                        <button type="button" class="btn btn-link"
-                          (click)="modalDeleteGift.hidden=true">Indietro</button>
-                        <button type="button" class="btn btn-danger" (click)="itemDelete(dono.id)">Elimina</button>
-                      </div>
-                    </div>
-                  </modale>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <quality-form headerSingolare="Doni" headerPlurale="dono" [formGroup]="giftFormGroup" mandatoryField="dono" optionalField="link" [isLink]="true"
+          [dataSet]="sortDataset(personaggio.doni, 'dono')" (addEventEmitter)="giftAdd($event)" (updateEventEmitter)="giftUpdate($event)" (deleteEventEmitter)="giftDelete($event)">
+        </quality-form>
       </div>
 
       <!-- +++++++++++++++ EQUIPAGGIAMENTO +++++++++++++++ -->
       <div class="" *ngSwitchCase="'Equip.'">
-        <div class="col-12 flex flex-column align-items-center">
-          <h2 class="m-0" style="height: fit-content;"><b>Equipaggiamento</b></h2>
-        </div>
-
-        <!-- nuovo EQUIP -->
-        <div class="flex justify-content-center align-items-center">
-          <modale #modalAddItem>
-            <button type="button"
-              class="modale--apertura button-custom p-2 m-0 mb-1 border-1 flex justify-content-center align-items-center"
-              style="border-radius: 6px;">
-              <i class="bi bi-plus-circle"></i> &nbsp; Aggiungi equip.
-            </button>
-
-            <h2 class="modale--header m-0">Aggiungi equip.</h2>
-
-            <div class="modale--contenuto">
-              <form>
-                <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingInput" placeholder="dono">
-                  <label for="floatingInput">Nome oggetto</label>
-                </div>
-
-                <div class="form-floating">
-                  <textarea class="form-control" placeholder="descrizione" id="floatingTextarea2"
-                    style="height: 22vh"></textarea>
-                  <label for="floatingTextarea2">Descrizione</label>
-                </div>
-
-                <div class="py-3 flex justify-content-center align-items-center">
-                  <button type="button" class="btn btn-link" (click)="modalAddItem.hidden=true">Indietro</button>
-                  <button type="button" class="btn btn-primary" (click)="itemAdd()">Aggiungi</button>
-                </div>
-              </form>
-            </div>
-          </modale>
-        </div>
-
-        <div class="col-12 grid m-0 p-0 personaggio__contenuto--overflow">
-          <!-- Gestione EQUIPAGGIAMENTO -->
-          <div class="col-12 p-0">
-            <app-crud [dataset]="personaggio.equipaggiamento" name="item" description="note" fieldId="id"
-              nameLabel="Equipaggiamento" descriptionLabel="Descrizione"
-              editLabel="Modifica equip." deleteLabel="Cancella equip."
-              (updateEmit)="itemUpdate($event)" (deleteEmit)="itemDelete($event)"></app-crud>
-          </div>
-        </div>
+        <quality-form headerSingolare="Equipaggiamento" headerPlurale="equipaggiamento" [formGroup]="equipFormGroup" mandatoryField="item" optionalField="note"
+          [dataSet]="sortDataset(personaggio.equipaggiamento, 'item')" (addEventEmitter)="itemAdd($event)" (updateEventEmitter)="itemUpdate($event)" (deleteEventEmitter)="itemDelete($event)">
+        </quality-form>
       </div>
 
       <!-- +++++++++++++++ NOTE +++++++++++++++ -->
@@ -411,15 +257,23 @@
                   <h2 class="modale--header m-0">Aggiungi pregio</h2>
 
                   <div class="modale--contenuto">
-                    <form>
+                    <form [formGroup]="meritFormGroup">
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="dono">
-                        <label for="floatingInput">Pregio</label>
+                        <input type="text" class="form-control" id="floatingPregioNome" placeholder="dono"
+                          formControlName="nome">
+                        <label for="floatingPregioNome">Pregio</label>
+                      </div>
+
+                      <div class="form-floating">
+                        <textarea class="form-control" placeholder="descrizione" id="floatingPregioDescrizione"
+                          formControlName="note" style="height: 22vh"></textarea>
+                        <label for="floatingPregioDescrizione">Descrizione</label>
                       </div>
 
                       <div class="py-3 flex justify-content-center align-items-center">
-                        <button type="button" class="btn btn-link" (click)="modalAddMerit.hidden=true">Indietro</button>
-                        <button type="button" class="btn btn-primary" (click)="meritAdd()">Aggiungi</button>
+                        <button type="button" class="btn btn-link" (mouseleave)="meritFormGroup.reset()" (click)="modalAddMerit.hidden=true">Indietro</button>
+                        <button type="button" class="btn btn-primary" (click)="meritAdd()"
+                          [disabled]="meritFormGroup.invalid">Aggiungi</button>
                       </div>
                     </form>
                   </div>
@@ -430,7 +284,7 @@
 
           <!-- Gestione PREGI -->
           <div class="col-12 p-0">
-            <app-crud [dataset]="personaggio.pregi" name="nome" description="note" fieldId="id" nameLabel="Pregio"
+            <app-crud [dataset]="sortDataset(personaggio.pregi, 'nome')" [formGroup]="meritFormGroup" name="nome" description="note" fieldId="id" nameLabel="Pregio"
               descriptionLabel="Descrizione" editLabel="Modifica pregio" deleteLabel="Cancella pregio"
               (updateEmit)="meritUpdate($event)" (deleteEmit)="meritDelete($event)"></app-crud>
           </div>
@@ -453,15 +307,24 @@
                   <h2 class="modale--header m-0">Aggiungi difetto</h2>
 
                   <div class="modale--contenuto">
-                    <form>
+                    <form [formGroup]="flawFormGroup">
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="dono">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="dono"
+                          formControlName="nome">
                         <label for="floatingInput">Difetto</label>
                       </div>
 
+                      <div class="form-floating">
+                        <textarea class="form-control" placeholder="descrizione" id="floatingDifettoDescrizione"
+                          formControlName="note" style="height: 22vh"></textarea>
+                        <label for="floatingDifettoDescrizione">Descrizione</label>
+                      </div>
+
                       <div class="py-3 flex justify-content-center align-items-center">
-                        <button type="button" class="btn btn-link" (click)="modalAddFlaw.hidden=true">Indietro</button>
-                        <button type="button" class="btn btn-primary" (click)="flawAdd()">Aggiungi</button>
+                        <button type="button" class="btn btn-link" (mouseleave)="flawFormGroup.reset()"
+                        (click)="modalAddFlaw.hidden=true">Indietro</button>
+                        <button type="button" class="btn btn-primary" (click)="flawAdd()"
+                          [disabled]="flawFormGroup.invalid">Aggiungi</button>
                       </div>
                     </form>
                   </div>
@@ -472,7 +335,7 @@
 
           <!-- Gestione DIFETTI -->
           <div class="col-12 p-0">
-            <app-crud [dataset]="personaggio.difetti" name="nome" description="note" fieldId="id" nameLabel="Difetto"
+            <app-crud [dataset]="sortDataset(personaggio.difetti, 'nome')" [formGroup]="flawFormGroup" name="nome" description="note" fieldId="id" nameLabel="Difetto"
               descriptionLabel="Descrizione" editLabel="Modifica difetto" deleteLabel="Cancella difetto"
               (updateEmit)="flawUpdate($event)" (deleteEmit)="flawDelete($event)"></app-crud>
           </div>
@@ -495,15 +358,23 @@
                   <h2 class="modale--header m-0">Aggiungi cicatrice</h2>
 
                   <div class="modale--contenuto">
-                    <form>
+                    <form [formGroup]="scarFormGroup">
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="dono">
-                        <label for="floatingInput">Cicatrice da battaglia</label>
+                        <input type="text" class="form-control" id="floatingCicatriceNome" placeholder="dono"
+                          formControlName="nome">
+                        <label for="floatingCicatriceNome">Cicatrice da battaglia</label>
+                      </div>
+
+                      <div class="form-floating">
+                        <textarea class="form-control" placeholder="descrizione" id="floatingCicatriceDescrizione"
+                          formControlName="note" style="height: 22vh"></textarea>
+                        <label for="floatingCicatriceDescrizione">Descrizione</label>
                       </div>
 
                       <div class="py-3 flex justify-content-center align-items-center">
-                        <button type="button" class="btn btn-link" (click)="modalAddScar.hidden=true">Indietro</button>
-                        <button type="button" class="btn btn-primary" (click)="scarAdd()">Aggiungi</button>
+                        <button type="button" class="btn btn-link" (mouseleave)="scarFormGroup.reset()" (click)="modalAddScar.hidden=true">Indietro</button>
+                        <button type="button" class="btn btn-primary" (click)="scarAdd()"
+                          [disabled]="scarFormGroup.invalid">Aggiungi</button>
                       </div>
                     </form>
                   </div>
@@ -514,7 +385,7 @@
 
           <!-- Gestione CICATRICI -->
           <div class="col-12 p-0">
-            <app-crud [dataset]="personaggio.cicatriciDaBattaglia" name="nome" description="note" fieldId="id"
+            <app-crud [dataset]="sortDataset(personaggio.cicatriciDaBattaglia, 'nome')" [formGroup]="scarFormGroup" name="nome" description="note" fieldId="id"
               nameLabel="Cicatrice da battaglia" descriptionLabel="Descrizione"
               editLabel="Modifica cicatrice da battaglia" deleteLabel="Cancella cicatrice da battaglia"
               (updateEmit)="scarUpdate($event)" (deleteEmit)="scarDelete($event)"></app-crud>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-crud',
@@ -15,6 +16,7 @@ export class CrudComponent implements OnInit {
   @Input() descriptionLabel: string = "Note";
   @Input() editLabel: string = "Modifica nome";
   @Input() deleteLabel: string = "Elimina nome";
+  @Input() formGroup!: FormGroup;
 
   @Output() updateEmit: EventEmitter<any> = new EventEmitter<any>();
   @Output() deleteEmit: EventEmitter<any> = new EventEmitter<any>();
@@ -25,15 +27,17 @@ export class CrudComponent implements OnInit {
   }
 
   fieldUpdate(id: number){
-    window.alert("fieldUpdate di CRUD.COMPONENT.TS da sistemare per il form!")
-
-    this.updateEmit.emit(id);
+    this.updateEmit.emit(this.formGroup.value);
   }
 
   fieldDelete(id: number){
-    window.alert("fieldDelete di CRUD.COMPONENT.TS da sistemare per il form!")
-
     this.deleteEmit.emit(id);
   }
 
+  patchFormValue(data: {}) {
+    for (const [key, value] of Object.entries(data)){
+      //@ts-ignore
+      this.formGroup.get(key.toString()).patchValue(value)
+    }
+  }
 }

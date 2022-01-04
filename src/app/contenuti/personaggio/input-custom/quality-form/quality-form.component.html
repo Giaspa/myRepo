@@ -1,0 +1,145 @@
+<div class="col-12 flex flex-column align-items-center">
+  <h2 class="m-0" style="height: fit-content;"><b>{{headerSingolare}}</b></h2>
+</div>
+
+<!-- nuova QUALITY -->
+<div class="flex justify-content-center align-items-center">
+  <modale #modalAdd>
+    <button type="button"
+      class="modale--apertura button-custom p-2 m-0 mb-1 border-1 flex justify-content-center align-items-center"
+      style="border-radius: 6px;">
+      <i class="bi bi-plus-circle"></i> &nbsp; Aggiungi
+    </button>
+
+    <h2 class="modale--header m-0">Aggiungi {{headerPlurale}}</h2>
+
+    <div class="modale--contenuto">
+      <form [formGroup]="formGroup">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="newMandatory" placeholder="dono"
+            [formControlName]="mandatoryField">
+          <label for="newMandatory">{{firstLetterUpper(mandatoryField)}} <span
+              class="campo-obbligatorio">*</span></label>
+        </div>
+
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="descrizione" id="newOptional" style="height: 15vh"
+            [formControlName]="optionalField"></textarea>
+          <label for="newOptional">{{firstLetterUpper(optionalField)}}</label>
+        </div>
+
+        <div class="py-3 flex justify-content-center align-items-center">
+          <button type="button" class="btn btn-link" (mouseleave)="formGroup.reset()"
+            (click)="modalAdd.hidden=true">Indietro</button>
+          <button type="button" class="btn btn-primary" (click)="addData()"
+            [disabled]="formGroup.invalid">Aggiungi</button>
+        </div>
+      </form>
+    </div>
+  </modale>
+</div>
+
+<div class="col-12 grid m-0 p-0 personaggio__contenuto--overflow">
+  <div class="col-12">
+    <div *ngFor="let data of dataSet; let i = index">
+      <div class="grid pt-3" *ngIf="data">
+        <!-- voci elenco oggetti -->
+        <div [class]="isLink ? 'col-10 p-0 border-bottom-1' : 'col-9 p-0 border-bottom-1'" style="border-color: lightgray; height: fit-content;">
+          <p class="p-0 m-0 mb-1">
+            <i class="bi bi-dot"></i> <a *ngIf="data[optionalField] && isLink; else noLink" [href]="data[optionalField]"
+              target="_blank">{{data[mandatoryField]}}</a>
+
+            <ng-template #noLink>
+              {{data[mandatoryField]}}
+            </ng-template>
+          </p>
+        </div>
+
+        <!-- view -->
+        <span class="col-1 p-0 border-bottom-1" *ngIf="!isLink" style="border-color: lightgray; cursor: pointer;">
+          <modale #modalView>
+            <i *ngIf="data[optionalField]" class="modale--apertura bi bi-chat-text icon--btn" matTooltip="Note"
+              matTooltipPosition="before" (click)="patchFormValue(data)"></i>
+
+            <h2 class="modale--header m-0">{{data[mandatoryField]}}</h2>
+
+            <div class="modale--contenuto" [formGroup]="formGroup">
+              <div class="form-floating">
+                <textarea readOnly class="form-control" placeholder="descrizione" id="viewOptional" style="height: 15vh"
+                  value="{{data[optionalField]}}" [formControlName]="optionalField"></textarea>
+                <label for="viewOptional">{{firstLetterUpper(optionalField)}}</label>
+              </div>
+
+              <div class="py-3 flex justify-content-center align-items-center">
+                <button type="button" class="btn btn-link" (click)="modalView.hidden=true">Indietro</button>
+              </div>
+            </div>
+          </modale>
+        </span>
+
+        <!-- pulsante "Modifica" -->
+        <div class="col-1 p-0 border-bottom-1" style="border-color: lightgray; cursor: pointer;">
+          <modale #modalUpdate>
+            <i class="modale--apertura bi bi-gear icon--btn" matTooltip="Modifica" matTooltipPosition="before"
+              (click)="patchFormValue(data)"></i>
+
+            <h2 class="modale--header m-0">Modifica {{headerPlurale}}</h2>
+
+            <div class="modale--contenuto">
+              <form [formGroup]="formGroup">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="updateMandatory" placeholder="dono"
+                    value="{{data[mandatoryField]}}" [formControlName]="mandatoryField">
+                  <label for="updateMandatory">{{firstLetterUpper(mandatoryField)}} <span
+                      class="campo-obbligatorio">*</span></label>
+                </div>
+
+                <div class="form-floating">
+                  <textarea class="form-control" placeholder="descrizione" id="updateOptional" style="height: 15vh"
+                    value="{{data[optionalField]}}" [formControlName]="optionalField"></textarea>
+                  <label for="updateOptional">{{firstLetterUpper(optionalField)}}</label>
+                </div>
+
+                <div class="py-3 flex justify-content-center align-items-center">
+                  <button type="button" class="btn btn-link" (mouseleave)="formGroup.reset()"
+                    (click)="modalUpdate.hidden=true">Indietro</button>
+                  <button type="button" class="btn btn-primary" (click)="updateData(data.id)"
+                    [disabled]="formGroup.invalid">Modifica</button>
+                </div>
+              </form>
+            </div>
+          </modale>
+        </div>
+
+
+        <!-- pulsante "Elimina" -->
+        <div class="col-1 p-0 border-bottom-1" style="border-color: lightgray; cursor: pointer;">
+          <modale #modalDelete>
+            <i class="modale--apertura bi bi-trash icon--btn" matTooltip="Elimina" matTooltipPosition="before"></i>
+
+            <h2 class="modale--header m-0">Elimina {{headerPlurale}}</h2>
+
+            <div class="modale--contenuto">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="deleteMandatory" placeholder="dono"
+                  value="{{data[mandatoryField]}}" disabled>
+                <label for="deleteMandatory">{{firstLetterUpper(mandatoryField)}}</label>
+              </div>
+
+              <div class="form-floating">
+                <textarea class="form-control" placeholder="link" id="deleteOptional" style="height: 15vh"
+                  value="{{data[optionalField]}}" disabled></textarea>
+                <label for="deleteOptional">{{firstLetterUpper(optionalField)}}</label>
+              </div>
+
+              <div class="py-3 flex justify-content-center align-items-center">
+                <button type="button" class="btn btn-link" (click)="modalDelete.hidden=true">Indietro</button>
+                <button type="button" class="btn btn-danger" (click)="deleteData(data.id)">Elimina</button>
+              </div>
+            </div>
+          </modale>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

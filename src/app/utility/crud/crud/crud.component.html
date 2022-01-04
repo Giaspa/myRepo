@@ -1,81 +1,89 @@
-<p *ngFor="let data of dataset; let i = index" class="grid p-0 m-0 mb-1 border-bottom-1"
-  style="border-color: var(--forth-color__light);">
-  <span class="col-9">{{i+1}}. {{data[name]}}</span>
+<div *ngFor="let data of dataset; let i = index">
+  <p *ngIf="data" class="grid p-0 m-0 mb-1 border-bottom-1"
+    style="border-color: var(--forth-color__light);">
+    <span class="col-9"><i class="bi bi-dot"></i> {{data[name]}}</span>
 
-  <!-- view -->
-  <span class="col-1 text-center">
-    <modale #modalView>
-      <i *ngIf="data[description]" class="modale--apertura bi bi-chat-text icon--btn" matTooltip="Note"
-        matTooltipPosition="before"></i>
+    <!-- view -->
+    <span class="col-1 text-center">
+      <modale #modalView>
+        <i *ngIf="data[description]" class="modale--apertura bi bi-chat-text icon--btn" matTooltip="Note"
+          matTooltipPosition="before" (click)="patchFormValue(data)"></i>
 
-      <h2 class="modale--header m-0">{{data[name]}}</h2>
+        <h2 class="modale--header m-0">{{data[name]}}</h2>
 
-      <div class="modale--contenuto">
-        <div class="form-floating" style="bottom: 0">
-          <textarea class="form-control" placeholder="descrizione" id="floatingTextarea2" style="height: 15vh"
-            value="{{data[description]}}" disabled></textarea>
-          <label for="floatingTextarea2">{{descriptionLabel}}</label>
+        <div class="modale--contenuto" [formGroup]="formGroup">
+          <div class="form-floating" style="bottom: 0">
+            <textarea readonly class="form-control" placeholder="descrizione" id="viewDescription" style="height: 15vh"
+              value="{{data[description]}}" [formControlName]="description"></textarea>
+            <label for="viewDescription">{{descriptionLabel}}</label>
+          </div>
+
+          <div class="py-3 flex justify-content-center align-items-center">
+            <button type="button" class="btn btn-link" (click)="modalView.hidden=true">Indietro</button>
+          </div>
         </div>
+      </modale>
+    </span>
 
-        <div class="py-3 flex justify-content-center align-items-center">
-          <button type="button" class="btn btn-link" (click)="modalView.hidden=true">Indietro</button>
+    <!-- modifica -->
+    <span class="col-1 text-center">
+      <modale #modalUpdate>
+        <i class="modale--apertura bi bi-gear icon--btn" matTooltip="Modifica" matTooltipPosition="before"
+          (click)="patchFormValue(data)"></i>
+
+        <h2 class="modale--header m-0">{{editLabel}}</h2>
+
+        <div class="modale--contenuto">
+          <form [formGroup]="formGroup">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="updateName" placeholder="oggetto" value="{{data[name]}}"
+                [formControlName]="name">
+              <label for="updateName">{{nameLabel}} <span class="campo-obbligatorio">*</span></label>
+            </div>
+
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="descrizione" id="updateDescription" style="height: 15vh"
+                value="{{data[description]}}" [formControlName]="description"></textarea>
+              <label for="updateDescription">{{descriptionLabel}}</label>
+            </div>
+
+            <div class="py-3 flex justify-content-center align-items-center">
+              <button type="button" class="btn btn-link" (mouseleave)="formGroup.reset()"
+                (click)="modalUpdate.hidden=true">Indietro</button>
+              <button type="button" class="btn btn-primary" (click)="fieldUpdate(data[fieldId])"
+                [disabled]="formGroup.invalid">Modifica</button>
+            </div>
+          </form>
         </div>
-      </div>
-    </modale>
-  </span>
+      </modale>
+    </span>
 
-  <!-- modifica -->
-  <span class="col-1 text-center">
-    <modale #modalUpdate>
-      <i class="modale--apertura bi bi-gear icon--btn" matTooltip="Modifica" matTooltipPosition="before"></i>
+    <!-- elimina -->
+    <span class="col-1 text-center">
+      <modale #modalDelete>
+        <i class="modale--apertura bi bi-trash icon--btn" matTooltip="Elimina" matTooltipPosition="before"></i>
 
-      <h2 class="modale--header m-0">{{editLabel}}</h2>
+        <h2 class="modale--header m-0">{{deleteLabel}}</h2>
 
-      <div class="modale--contenuto">
-        <form>
+        <div class="modale--contenuto">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" placeholder="oggetto" value="{{data[name]}}">
+            <input type="text" class="form-control" id="floatingInput" placeholder="oggetto" value="{{data[name]}}"
+              disabled>
             <label for="floatingInput">{{nameLabel}}</label>
           </div>
 
           <div class="form-floating">
             <textarea class="form-control" placeholder="descrizione" id="floatingTextarea2" style="height: 15vh"
-              value="{{data[description]}}"></textarea>
+              value="{{data[description]}}" disabled></textarea>
             <label for="floatingTextarea2">{{descriptionLabel}}</label>
           </div>
 
           <div class="py-3 flex justify-content-center align-items-center">
-            <button type="button" class="btn btn-link" (click)="modalUpdate.hidden=true">Indietro</button>
-            <button type="button" class="btn btn-primary" (click)="fieldUpdate(data[fieldId])">Modifica</button>
+            <button type="button" class="btn btn-link" (click)="modalDelete.hidden=true">Indietro</button>
+            <button type="button" class="btn btn-danger" (click)="fieldDelete(data[fieldId])">Elimina</button>
           </div>
-        </form>
-      </div>
-    </modale>
-  </span>
-
-  <!-- elimina -->
-  <span class="col-1 text-center">
-    <modale #modalDelete>
-      <i class="modale--apertura bi bi-trash icon--btn" matTooltip="Elimina" matTooltipPosition="before"></i>
-      <h2 class="modale--header m-0">{{deleteLabel}}</h2>
-      <div class="modale--contenuto">
-        <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" placeholder="oggetto" value="{{data[name]}}"
-            disabled>
-          <label for="floatingInput">{{nameLabel}}</label>
         </div>
-
-        <div class="form-floating">
-          <textarea class="form-control" placeholder="descrizione" id="floatingTextarea2" style="height: 15vh"
-            value="{{data[description]}}" disabled></textarea>
-          <label for="floatingTextarea2">{{descriptionLabel}}</label>
-        </div>
-
-        <div class="py-3 flex justify-content-center align-items-center">
-          <button type="button" class="btn btn-link" (click)="modalDelete.hidden=true">Indietro</button>
-          <button type="button" class="btn btn-danger" (click)="fieldDelete(data[fieldId])">Elimina</button>
-        </div>
-      </div>
-    </modale>
-  </span>
-</p>
+      </modale>
+    </span>
+  </p>
+</div>

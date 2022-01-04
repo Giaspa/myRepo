@@ -31,6 +31,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { SignInComponent } from './autenticazioni/sign-in/sign-in.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import { ButtonLogoutComponent } from './pulsanti/button-logout/button-logout.component';
+import { QualityFormComponent } from './contenuti/personaggio/input-custom/quality-form/quality-form.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyD1mxxOj0OnJzFMwVcWCv4sKos7dq2dsxQ",
@@ -63,6 +64,7 @@ const firebaseConfig = {
     CrudComponent,
     SignInComponent,
     ButtonLogoutComponent,
+    QualityFormComponent,
   ],
   imports: [
     CommonModule,

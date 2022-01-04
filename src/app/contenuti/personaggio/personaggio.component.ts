@@ -19,6 +19,10 @@ export class PersonaggioComponent implements OnInit {
   openedPanel: string = "Attributi"
 
   giftFormGroup!: FormGroup;
+  equipFormGroup!: FormGroup;
+  meritFormGroup!: FormGroup;
+  flawFormGroup!: FormGroup;
+  scarFormGroup!: FormGroup;
 
   constructor(
     private testService: TestService,
@@ -28,128 +32,150 @@ export class PersonaggioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.giftFormGroup = this._formBuilder.group({
       id: ['', []],
       dono: ['', [Validators.required]],
       link: ['', []]
     })
-
+    this.equipFormGroup = this._formBuilder.group({
+      id: ['', []],
+      item: ['', [Validators.required]],
+      note: ['', []]
+    })
+    this.meritFormGroup = this._formBuilder.group({
+      id: ['', []],
+      nome: ['', [Validators.required]],
+      note: ['', []]
+    })
+    this.flawFormGroup = this._formBuilder.group({
+      id: ['', []],
+      nome: ['', [Validators.required]],
+      note: ['', []]
+    })
+    this.scarFormGroup = this._formBuilder.group({
+      id: ['', []],
+      nome: ['', [Validators.required]],
+      note: ['', []]
+    })
   }
 
+  /**
+   * Passandogli un numero da 0 a 6 restituisce la stringa relativa al nome del rango corrispondente
+   * @param rango il numero del rango di cui ottenere il nome
+   */
   getRango(rango: number) {
     return Utilities.getRango(rango)
   }
 
-  setPanelOpen(event: string) {
-    // console.log("event", event)
-    this.openedPanel = event;
+  /**
+   * Clickando sulla PULSANTIERA, apre il Pannello relativo
+   * @param pannello il nome del pannello da aprire
+   */
+  setPanelOpen(pannello: string) {
+    this.openedPanel = pannello;
   }
 
-  //EQUIPAGGIAMENTo
-  itemAdd() {
-    window.alert("ADD dell'EQUIPAGGIAMENTO da definire")
-  }
+  /**
+   * Torna l'ultimo ID utile di una qualità tra: Doni | Equipaggiamento | Pregi | Difetti | Cicatrici
+   * @param rootQuality passargli una costante di Root.model.ts tra: DONI | EQUIP | MERITS | FLAWS | SCAR
+   */
+  getLastQualityId(rootQuality: Root) {
+    var qualityList: [];
+    var id;
+    switch (rootQuality) {
+      case Root.DONI:
+        qualityList = this.personaggio.doni;
+        if (qualityList) {
+          for (let quality of qualityList) {
+            if (!quality) {
+              id = qualityList.indexOf(quality);
+              break;
+            }
+          }
+        }
 
-  itemUpdate(event: any) {
-    console.log("EVENT", event) //torna l'ID dell'equipaggiamento da modificare, ma MANCA da capire quali sono i campi modificati
+        if (id || id == 0) {
+          return id;
+        } else {
+          //@ts-ignore
+          return qualityList ? (qualityList[qualityList.length - 1].id + 1) : 0;
+        }
+      case Root.EQUIP:
+        qualityList = this.personaggio.equipaggiamento;
+        if (qualityList) {
+          for (let quality of qualityList) {
+            if (!quality) {
+              id = qualityList.indexOf(quality);
+              break;
+            }
+          }
+        }
 
-    window.alert("UPDATE del EQUIP da definire; ID = " + event)
-  }
+        if (id || id == 0) {
+          return id;
+        } else {
+          //@ts-ignore
+          return qualityList ? (qualityList[qualityList.length - 1].id + 1) : 0
+        }
+      case Root.MERITS:
+        qualityList = this.personaggio.pregi;
+        if (qualityList) {
+          for (let quality of qualityList) {
+            if (!quality) {
+              id = qualityList.indexOf(quality);
+              break;
+            }
+          }
+        }
 
-  itemDelete(event: any) {
-    console.log("EVENT", event) //torna l'ID dell'equipaggiamento da eliminare
+        if (id || id == 0) {
+          return id;
+        } else {
+          //@ts-ignore
+          return qualityList ? (qualityList[qualityList.length - 1].id + 1) : 0
+        }
+      case Root.FLAWS:
+        qualityList = this.personaggio.difetti;
+        if (qualityList) {
+          for (let quality of qualityList) {
+            if (!quality) {
+              id = qualityList.indexOf(quality);
+              break;
+            }
+          }
+        }
 
-    window.alert("DELETE del EQUIP da definire; ID = " + event)
-  }
+        if (id || id == 0) {
+          return id;
+        } else {
+          //@ts-ignore
+          return qualityList ? (qualityList[qualityList.length - 1].id + 1) : 0
+        }
+      case Root.SCAR:
+        qualityList = this.personaggio.cicatriciDaBattaglia;
+        if (qualityList) {
+          for (let quality of qualityList) {
+            if (!quality) {
+              id = qualityList.indexOf(quality);
+              break;
+            }
+          }
+        }
 
-  //DONI
-
-  getLastGiftId() {
-    const giftsList: [] = this.personaggio.doni;
-    //@ts-ignore
-    return this.personaggio.doni ? giftsList[giftsList.length - 1].id : 0
-  }
-
-  addGift() {
-    window.alert("ADD di DONO da definire")
-    const newGiftId = this.personaggio.doni ? this.getLastGiftId() + 1 : 0;
-    const userId = Root.getSessionUser().id;
-    const pgId = Root.getSessionPg().pgId
-
-    console.log("NEW GIFT id: ", newGiftId)
-    var newGiftEntity = {
-      id: newGiftId,
-      dono: this.giftFormGroup.value.dono,
-      link: this.giftFormGroup.value.link,
+        if (id || id == 0) {
+          return id;
+        } else {
+          //@ts-ignore
+          return qualityList ? (qualityList[qualityList.length - 1].id + 1) : 0
+        }
     }
-    this.testService.setGift(userId, pgId, newGiftId, newGiftEntity);
-
-    this.recargePg(userId, pgId)
-
-    this.giftFormGroup.reset();
   }
 
-  giftUpdate(event: any, id: number) {
-    console.log("EVENT", event)
-    window.alert("UPDATE del DONO da definire; ID = " + id)
-  }
-
-  giftDelete(id: number) {
-    window.alert("DELETE del DONO da definire; ID = " + id)
-  }
-
-  //PREGI
-  meritAdd() {
-    window.alert("ADD di PREGIO da definire")
-  }
-
-  meritUpdate(event: any) {
-    console.log("EVENT", event) //torna l'ID del pregio da modificare, ma MANCA da capire quali sono i campi modificati
-
-    window.alert("UPDATE del PREGIO da definire; ID = " + event)
-  }
-
-  meritDelete(event: any) {
-    console.log("EVENT", event) //torna l'ID del pregio da eliminare
-
-    window.alert("DELETE del PREGIO da definire; ID = " + event)
-  }
-
-  //DIFETTI
-  flawAdd() {
-    window.alert("ADD di DIFETTO da definire")
-  }
-
-  flawUpdate(event: any) {
-    console.log("EVENT", event) //torna l'ID del difetto da modificare, ma MANCA da capire quali sono i campi modificati
-
-    window.alert("UPDATE del DIFETTO da definire; ID = " + event)
-  }
-
-  flawDelete(event: any) {
-    console.log("EVENT", event) //torna l'ID del difetto da eliminare
-
-    window.alert("DELETE del DIFETTO da definire; ID = " + event)
-  }
-
-  //CICATRICI DA BATTAGLIA
-  scarAdd() {
-    window.alert("ADD di CICATRICE da definire")
-  }
-
-  scarUpdate(event: any) {
-    console.log("EVENT", event) //torna l'ID della cicatrice da modificare, ma MANCA da capire quali sono i campi modificati
-
-    window.alert("UPDATE della CICATRICE da definire; ID = " + event)
-  }
-
-  scarDelete(event: any) {
-    console.log("EVENT", event) //torna l'ID della cicatrice da eliminare
-
-    window.alert("DELETE della CICATRICE da definire; ID = " + event)
-  }
-
+  /**
+   * Ricarica in sessione il personaggio
+   * @param userId l'ID dell'User in sessione
+   * @param pgId l'ID del Character in sessione
+   */
   recargePg(userId: any, pgId: any) {
     this.testService.getPersonaggio(userId, pgId).subscribe(pg => {
       console.log("personaggio", pg)
@@ -158,7 +184,228 @@ export class PersonaggioComponent implements OnInit {
     });
   }
 
-  //TEST
+  sortDataset(dataSet: [], sortCriteria: any): [] {
+    var sortedDataSet: [] = [];
+    //@ts-ignore
+    sortedDataSet = dataSet.sort((x, y) => {
+      if (x[sortCriteria] < y[sortCriteria]) { return -1; }
+      if (x[sortCriteria] > y[sortCriteria]) { return 1; }
+      return 0
+    })
+    return sortedDataSet;
+  }
+
+  //EQUIPAGGIAMENTO-------------------------------------------------------------
+  itemAdd(event: any) {
+    const newEquipId = this.personaggio.equipaggiamento ? this.getLastQualityId(Root.EQUIP) : 0;
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    var newItemEntity = {
+      id: newEquipId,
+      item: event.item,
+      note: event.note,
+    }
+    this.testService.setEquip(userId, pgId, newEquipId, newItemEntity);
+
+    this.recargePg(userId, pgId)
+    this.equipFormGroup.reset();
+  }
+
+  itemUpdate(event: any) {
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    var updateItemEntity = {
+      id: event.id,
+      dono: event.dono,
+      link: event.link,
+    }
+    this.testService.setEquip(userId, pgId, event.id, updateItemEntity);
+
+    this.recargePg(userId, pgId)
+    this.equipFormGroup.reset();
+  }
+
+  itemDelete(event: any) {
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    this.testService.deleteEquip(userId, pgId, event);
+
+    this.recargePg(userId, pgId)
+    this.equipFormGroup.reset();
+  }
+
+  //DONI------------------------------------------------------------------------
+  giftAdd(event: any) {
+    const newGiftId = this.personaggio.doni ? this.getLastQualityId(Root.DONI) : 0;
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    var newGiftEntity = {
+      id: newGiftId,
+      dono: event.dono,
+      link: event.link,
+    }
+    this.testService.setGift(userId, pgId, newGiftId, newGiftEntity);
+
+    this.recargePg(userId, pgId)
+    this.giftFormGroup.reset();
+  }
+
+  giftUpdate(event: any) {
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    var updateGiftEntity = {
+      id: event.id,
+      dono: event.dono,
+      link: event.link,
+    }
+    this.testService.setGift(userId, pgId, event.id, updateGiftEntity);
+
+    this.recargePg(userId, pgId)
+    this.giftFormGroup.reset();
+  }
+
+  giftDelete(event: any) {
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    this.testService.deleteGift(userId, pgId, event);
+
+    this.recargePg(userId, pgId)
+    this.giftFormGroup.reset();
+  }
+
+  //PREGI-----------------------------------------------------------------------
+  meritAdd() {
+    const newMeritId = this.personaggio.pregi ? this.getLastQualityId(Root.MERITS) : 0;
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    var newMeritEntity = {
+      id: newMeritId,
+      nome: this.meritFormGroup.value.nome,
+      note: this.meritFormGroup.value.note,
+    }
+    this.testService.setMerit(userId, pgId, newMeritId, newMeritEntity);
+
+    this.recargePg(userId, pgId)
+    this.meritFormGroup.reset();
+  }
+
+  meritUpdate(event: any) {
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    var updateMeritEntity = {
+      id: event.id,
+      nome: event.nome,
+      note: event.note,
+    }
+    this.testService.setMerit(userId, pgId, event.id, updateMeritEntity);
+
+    this.recargePg(userId, pgId)
+    this.meritFormGroup.reset();
+  }
+
+  meritDelete(event: any) {
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    this.testService.deleteMerit(userId, pgId, event);
+
+    this.recargePg(userId, pgId)
+    this.meritFormGroup.reset();
+  }
+
+  //DIFETTI--------------------------------------------------------------------
+  flawAdd() {
+    const newFlawId = this.personaggio.difetti ? this.getLastQualityId(Root.FLAWS) : 0;
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    var newFlawEntity = {
+      id: newFlawId,
+      nome: this.flawFormGroup.value.nome,
+      note: this.flawFormGroup.value.note,
+    }
+    this.testService.setFlaw(userId, pgId, newFlawId, newFlawEntity);
+
+    this.recargePg(userId, pgId)
+    this.flawFormGroup.reset();
+  }
+
+  flawUpdate(event: any) {
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    var updateFlawEntity = {
+      id: event.id,
+      nome: event.nome,
+      note: event.note,
+    }
+    this.testService.setFlaw(userId, pgId, event.id, updateFlawEntity);
+
+    this.recargePg(userId, pgId)
+    this.flawFormGroup.reset();
+  }
+
+  flawDelete(event: any) {
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    this.testService.deleteFlaw(userId, pgId, event);
+
+    this.recargePg(userId, pgId)
+    this.flawFormGroup.reset();
+  }
+
+  //CICATRICI DA BATTAGLIA----------------------------------------------------
+  scarAdd() {
+    const newScarId = this.personaggio.cicatriciDaBattaglia ? this.getLastQualityId(Root.SCAR) : 0;
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    var newScarEntity = {
+      id: newScarId,
+      nome: this.scarFormGroup.value.nome,
+      note: this.scarFormGroup.value.note,
+    }
+    this.testService.setScar(userId, pgId, newScarId, newScarEntity);
+
+    this.recargePg(userId, pgId)
+    this.scarFormGroup.reset();
+  }
+
+  scarUpdate(event: any) {
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    var updateScarEntity = {
+      id: event.id,
+      nome: event.nome,
+      note: event.note,
+    }
+    this.testService.setScar(userId, pgId, event.id, updateScarEntity);
+
+    this.recargePg(userId, pgId)
+    this.scarFormGroup.reset();
+  }
+
+  scarDelete(event: any) {
+    const userId = Root.getSessionUser().id;
+    const pgId = Root.getSessionPg().pgId
+
+    this.testService.deleteScar(userId, pgId, event);
+
+    this.recargePg(userId, pgId)
+    this.scarFormGroup.reset();
+  }
+
+  //TEST----------------------------------------------------
   testDB() {
     // this.testService.test().subscribe(res => {
     //   console.log("TEST", res)
@@ -212,10 +459,6 @@ export class PersonaggioComponent implements OnInit {
     //   console.log("personaggio", res)
     // );
 
-    // var giftId = 2;
-    // var dono = "Parlare con gli spiriti"
-    // var link = null;
-    // this.testService.setGift(userId, pgId, giftId, Root.giftEntity(giftId, dono, link));
     // var meritId = 2;
     // var nome = "Leader nato"
     // var note = "+2 dadi a tiri Autorità";

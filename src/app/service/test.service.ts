@@ -77,7 +77,7 @@ export class TestService {
   }
 
   //crea o modifica un dono per un pg esistente di un utente esistente
-  setGift(userId: any, pgId: any, giftId: any, giftEntity: {}) {
+  setGift(userId: any, pgId: any, giftId: any, giftEntity: {} | null) {
     set(ref(this.db, Root.USER + '/' + userId + Root.PGs + '/' + pgId + Root.DONI + '/' + giftId), giftEntity);
   }
 
@@ -161,7 +161,7 @@ export class TestService {
   }
 
   deleteGift(userId: any, pgId: any, giftId: any){
-    this.setGift(userId, pgId, giftId, {})
+    this.setGift(userId, pgId, giftId, null)
   }
 
   deleteMerit(userId: any, pgId: any, meritId: any){
