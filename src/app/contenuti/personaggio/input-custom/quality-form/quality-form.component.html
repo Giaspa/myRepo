@@ -29,7 +29,7 @@
         </div>
 
         <div class="py-3 flex justify-content-center align-items-center">
-          <button type="button" class="btn btn-link" (mouseleave)="formGroup.reset()"
+          <button type="button" class="btn btn-link" (mouseup)="formGroup.reset()"
             (click)="modalAdd.hidden=true">Indietro</button>
           <button type="button" class="btn btn-primary" (click)="addData()"
             [disabled]="formGroup.invalid">Aggiungi</button>
@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="py-3 flex justify-content-center align-items-center">
-                  <button type="button" class="btn btn-link" (mouseleave)="formGroup.reset()"
+                  <button type="button" class="btn btn-link" (mouseup)="formGroup.reset()"
                     (click)="modalUpdate.hidden=true">Indietro</button>
                   <button type="button" class="btn btn-primary" (click)="updateData(data.id)"
                     [disabled]="formGroup.invalid">Modifica</button>

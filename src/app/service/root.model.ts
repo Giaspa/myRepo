@@ -1,3 +1,5 @@
+import { SheetDataSet } from "../model/sheetDataSet.model";
+
 export class Root {
 
   static readonly USER = 'users';
@@ -182,4 +184,113 @@ export class Root {
   static attributi = ["forza", "destrezza", "costituzione", "carisma", "persuasione", "aspetto", "percezione", "intelligenza", "prontezza"];
   static background = ["alleati", "antenati", "contatti", "destino", "feticci", "kinfolk", "mentore", "networkSpirituale", "numeTutelare", "pesoPolitico", "razzaPura", "retaggioSpirituale", "risorse", "riti", "territorioDiCaccia", "toccatoDalWyld", "toccatoDallaWeaver", "toccatoDalWyrm", "totem"];
   static FGV = ["furia", "gnosi", "volonta"];
+
+  //oggetti di riferimento
+  static userAuth: SheetDataSet[] = [
+    {key:'cognome', value:'Cognome', type:'string', min:null, max:null, mandatory: true},
+    {key:'nome', value:'Nome', type:'string', min:null, max:null, mandatory: true},
+    {key:'email', value:'E-mail', type:'string', min:null, max:null, mandatory: true},
+    {key:'password', value:'Password', type:'string', min:null, max:null, mandatory: true},
+    {key:'login', value:'Login', type:'string', min:null, max:null, mandatory: false},
+  ]
+
+  static characterBio: SheetDataSet[] = [
+    {key:'nomeCompleto', value:'Personaggio', type:'string', min:null, max:null, mandatory: true},
+    {key:'rango', value:'Rango', type:'rango', min:0, max:6, mandatory: true},
+    {key:'razza', value:'Razza', type:'razza', min:null, max:null, mandatory: true},
+    {key:'auspicio', value:'Auspicio', type:'auspicio', min:null, max:null, mandatory: true},
+    {key:'tribu', value:'Tribù', type:'tribu', min:null, max:null, mandatory: true},
+    {key:'branco', value:'Branco', type:'string', min:null, max:null, mandatory: false},
+    {key:'totemBranco', value:'Totem di branco', type:'string', min:null, max:null, mandatory: false},
+    {key:'profilo', value:'Profilo', type:'string', min:null, max:null, mandatory: true},
+  ]
+
+  static characterAttrFisici: SheetDataSet[] = [
+    {key:'forza', value:'Forza', type:'number', min:1, max:5, mandatory: false},
+    {key:'destrezza', value:'Destrezza', type:'number', min:1, max:5, mandatory: false},
+    {key:'costituzione', value:'Costituzione', type:'number', min:1, max:5, mandatory: false},
+  ]
+
+  static characterAttrSociali: SheetDataSet[] = [
+    {key:'carisma', value:'Carisma', type:'number', min:1, max:5, mandatory: false},
+    {key:'persuasione', value:'Persuasione', type:'number', min:1, max:5, mandatory: false},
+    {key:'aspetto', value:'Aspetto', type:'number', min:1, max:5, mandatory: false},
+  ]
+
+  static characterAttrMentali: SheetDataSet[] = [
+    {key:'percezione', value:'Percezione', type:'number', min:1, max:5, mandatory: false},
+    {key:'intelligenza', value:'Intelligenza', type:'number', min:1, max:5, mandatory: false},
+    {key:'prontezza', value:'Prontezza', type:'number', min:1, max:5, mandatory: false},
+  ]
+
+  static characterAttributs: SheetDataSet[] = Root.characterAttrFisici.concat(Root.characterAttrSociali.concat(Root.characterAttrMentali));
+
+  static characterAbilAttitudini: SheetDataSet[] = [
+    {key:'atletica', value:'Atletica', type:'number', min:0, max:5, mandatory: false},
+    {key:'autorita', value:'Autorità', type:'number', min:0, max:5, mandatory: false},
+    {key:'bassifondi', value:'Bassifondi', type:'number', min:0, max:5, mandatory: false},
+    {key:'empatia', value:'Empatia', type:'number', min:0, max:5, mandatory: false},
+    {key:'espressivita', value:'Espressività', type:'number', min:0, max:5, mandatory: false},
+    {key:'intimidire', value:'Intimidire', type:'number', min:0, max:5, mandatory: false},
+    {key:'istintoPrimordiale', value:'Istinto primordiale', type:'number', min:0, max:5, mandatory: false},
+    {key:'rissa', value:'Rissa', type:'number', min:0, max:5, mandatory: false},
+    {key:'sestoSenso', value:'Sesto senso', type:'number', min:0, max:5, mandatory: false},
+    {key:'sotterfugio', value:'Sotterfugio', type:'number', min:0, max:5, mandatory: false},
+  ]
+
+  static characterAbilCapacita: SheetDataSet[] = [
+    {key:'affinitaAnimale', value:'Affinità animale', type:'number', min:0, max:5, mandatory: false},
+    {key:'arceria', value:'Arceria', type:'number', min:0, max:5, mandatory: false},
+    {key:'armiDaMischia', value:'Armi da mischia', type:'number', min:0, max:5, mandatory: false},
+    {key:'cavalcare', value:'Cavalcare', type:'number', min:0, max:5, mandatory: false},
+    {key:'criminalita', value:'Criminalità', type:'number', min:0, max:5, mandatory: false},
+    {key:'espressioneArtistica', value:'Espressione artistica', type:'number', min:0, max:5, mandatory: false},
+    {key:'furtivita', value:'Furtività', type:'number', min:0, max:5, mandatory: false},
+    {key:'galateo', value:'Galateo', type:'number', min:0, max:5, mandatory: false},
+    {key:'manualita', value:'Manualità', type:'number', min:0, max:5, mandatory: false},
+    {key:'sopravvivenza', value:'Sopravvivenza', type:'number', min:0, max:5, mandatory: false},
+  ]
+
+  static characterAbilConoscenze: SheetDataSet[] = [
+    {key:'accademiche', value:'Accademiche', type:'number', min:0, max:5, mandatory: false},
+    {key:'enigmi', value:'Enigmi', type:'number', min:0, max:5, mandatory: false},
+    {key:'investigare', value:'Investigare', type:'number', min:0, max:5, mandatory: false},
+    {key:'legge', value:'Legge', type:'number', min:0, max:5, mandatory: false},
+    {key:'linguistica', value:'Linguistica', type:'number', min:0, max:5, mandatory: false},
+    {key:'medicina', value:'Medicina', type:'number', min:0, max:5, mandatory: false},
+    {key:'occulto', value:'Occulto', type:'number', min:0, max:5, mandatory: false},
+    {key:'rituali', value:'Rituali', type:'number', min:0, max:5, mandatory: false},
+    {key:'saggezzaDellaTerra', value:'Saggezza della terra', type:'number', min:0, max:5, mandatory: false},
+    {key:'scienza', value:'Scienza', type:'number', min:0, max:5, mandatory: false},
+  ]
+
+  static characterAbilities: SheetDataSet[] = Root.characterAbilAttitudini.concat(Root.characterAbilCapacita.concat(Root.characterAbilConoscenze));
+
+  static characterBackgrounds: SheetDataSet[] = [
+    {key:'alleati', value:'Alleati', type:'number', min:0, max:5, mandatory: false},
+    {key:'antenati', value:'Antenati', type:'number', min:0, max:5, mandatory: false},
+    {key:'contatti', value:'Contatti', type:'number', min:0, max:5, mandatory: false},
+    {key:'destino', value:'Destino', type:'number', min:0, max:5, mandatory: false},
+    {key:'feticci', value:'Feticci', type:'number', min:0, max:5, mandatory: false},
+    {key:'kinfolk', value:'Kinfolk', type:'number', min:0, max:5, mandatory: false},
+    {key:'mentore', value:'Mentore', type:'number', min:0, max:5, mandatory: false},
+    {key:'networkSpirituale', value:'Network spirituale', type:'number', min:0, max:5, mandatory: false},
+    {key:'numeTutelare', value:'Nume tutelare', type:'number', min:0, max:5, mandatory: false},
+    {key:'pesoPolitico', value:'Peso politico', type:'number', min:0, max:5, mandatory: false},
+    {key:'razzaPura', value:'Razza pura', type:'number', min:0, max:5, mandatory: false},
+    {key:'retaggioSpirituale', value:'Retaggio spirituale', type:'number', min:0, max:5, mandatory: false},
+    {key:'risorse', value:'Risorse', type:'number', min:0, max:5, mandatory: false},
+    {key:'riti', value:'Riti', type:'number', min:0, max:5, mandatory: false},
+    {key:'territorioDiCaccia', value:'Territorio di caccia', type:'number', min:0, max:5, mandatory: false},
+    {key:'toccatoDalWyld', value:'Toccato dal Wyld', type:'number', min:0, max:5, mandatory: false},
+    {key:'toccatoDallaWeaver', value:'Toccato dalla Weaver', type:'number', min:0, max:5, mandatory: false},
+    {key:'toccatoDalWyrm', value:'Toccato dal Wyrm', type:'number', min:0, max:5, mandatory: false},
+    {key:'totem', value:'Totem', type:'number', min:0, max:5, mandatory: false},
+  ]
+
+  static characterFGV: SheetDataSet[] = [
+    {key:'furia', value:'Furia', type:'number', min:1, max:10, mandatory: false},
+    {key:'gnosi', value:'Gnosi', type:'number', min:1, max:10, mandatory: false},
+    {key:'volonta', value:'Volontà', type:'number', min:1, max:10, mandatory: false},
+  ]
 }

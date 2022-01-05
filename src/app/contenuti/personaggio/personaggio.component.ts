@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SheetDataSet } from 'src/app/model/sheetDataSet.model';
 import { Root } from 'src/app/service/root.model';
 import { TestService } from 'src/app/service/test.service';
 import { ModaleComponent } from 'src/app/utility/modale/modale.component';
@@ -16,7 +18,10 @@ export class PersonaggioComponent implements OnInit {
   @Input() utente: any = require("../../utility/utente.json").auth;
   @Input() personaggio: any = require("../../utility/utente.json").personaggi[0];
 
-  openedPanel: string = "Attributi"
+  userId = Root.getSessionUser().id;
+  pgId = Root.getSessionPg().pgId;
+
+  openedPanel: string = sessionStorage.getItem('openedPanel') || "Attributi";
 
   giftFormGroup!: FormGroup;
   equipFormGroup!: FormGroup;
@@ -24,11 +29,22 @@ export class PersonaggioComponent implements OnInit {
   flawFormGroup!: FormGroup;
   scarFormGroup!: FormGroup;
 
+  dsFisici: SheetDataSet[] = Root.characterAttrFisici;
+  dsSociali: SheetDataSet[] = Root.characterAttrSociali;
+  dsMentali: SheetDataSet[] = Root.characterAttrMentali;
+  dsFGV: SheetDataSet[] = Root.characterFGV;
+  dsAttitudini: SheetDataSet[] = Root.characterAbilAttitudini;
+  dsCapacita: SheetDataSet[] = Root.characterAbilCapacita;
+  dsConoscenze: SheetDataSet[] = Root.characterAbilConoscenze;
+  dtBackground: SheetDataSet[] = Root.characterBackgrounds;
+  dtBio: SheetDataSet[] = Root.characterBio;
+
   constructor(
     private testService: TestService,
-    private _formBuilder: FormBuilder) {
-    console.log(Root.getSessionPg())
+    private _formBuilder: FormBuilder,
+    private router: Router) {
     Root.getSessionPg() ? this.personaggio = Root.getSessionPg() : null;
+
   }
 
   ngOnInit(): void {
@@ -73,6 +89,7 @@ export class PersonaggioComponent implements OnInit {
    */
   setPanelOpen(pannello: string) {
     this.openedPanel = pannello;
+    sessionStorage.setItem('openedPanel', pannello);
   }
 
   /**
@@ -80,94 +97,32 @@ export class PersonaggioComponent implements OnInit {
    * @param rootQuality passargli una costante di Root.model.ts tra: DONI | EQUIP | MERITS | FLAWS | SCAR
    */
   getLastQualityId(rootQuality: Root) {
-    var qualityList: [];
-    var id;
+    var qualityList: [] = [];
+    var id: number | undefined = 0;
     switch (rootQuality) {
       case Root.DONI:
         qualityList = this.personaggio.doni;
-        if (qualityList) {
-          for (let quality of qualityList) {
-            if (!quality) {
-              id = qualityList.indexOf(quality);
-              break;
-            }
-          }
-        }
-
-        if (id || id == 0) {
-          return id;
-        } else {
-          //@ts-ignore
-          return qualityList ? (qualityList[qualityList.length - 1].id + 1) : 0;
-        }
+        break;
       case Root.EQUIP:
         qualityList = this.personaggio.equipaggiamento;
-        if (qualityList) {
-          for (let quality of qualityList) {
-            if (!quality) {
-              id = qualityList.indexOf(quality);
-              break;
-            }
-          }
-        }
-
-        if (id || id == 0) {
-          return id;
-        } else {
-          //@ts-ignore
-          return qualityList ? (qualityList[qualityList.length - 1].id + 1) : 0
-        }
+        break;
       case Root.MERITS:
         qualityList = this.personaggio.pregi;
-        if (qualityList) {
-          for (let quality of qualityList) {
-            if (!quality) {
-              id = qualityList.indexOf(quality);
-              break;
-            }
-          }
-        }
-
-        if (id || id == 0) {
-          return id;
-        } else {
-          //@ts-ignore
-          return qualityList ? (qualityList[qualityList.length - 1].id + 1) : 0
-        }
+        break;
       case Root.FLAWS:
         qualityList = this.personaggio.difetti;
-        if (qualityList) {
-          for (let quality of qualityList) {
-            if (!quality) {
-              id = qualityList.indexOf(quality);
-              break;
-            }
-          }
-        }
-
-        if (id || id == 0) {
-          return id;
-        } else {
-          //@ts-ignore
-          return qualityList ? (qualityList[qualityList.length - 1].id + 1) : 0
-        }
+        break;
       case Root.SCAR:
         qualityList = this.personaggio.cicatriciDaBattaglia;
-        if (qualityList) {
-          for (let quality of qualityList) {
-            if (!quality) {
-              id = qualityList.indexOf(quality);
-              break;
-            }
-          }
-        }
+        break;
+    }
 
-        if (id || id == 0) {
-          return id;
-        } else {
-          //@ts-ignore
-          return qualityList ? (qualityList[qualityList.length - 1].id + 1) : 0
-        }
+    if (Utilities.getFirstEmptyId(qualityList) || Utilities.getFirstEmptyId(qualityList) == 0) {
+      console.log("Utilities.getFirstEmptyId(qualityList)", Utilities.getFirstEmptyId(qualityList))
+      return id = Utilities.getFirstEmptyId(qualityList);
+    } else {
+      console.log("qualityList ? qualityList.length : 0", qualityList ? qualityList.length : 0)
+      return qualityList ? qualityList.length : 0;
     }
   }
 
@@ -178,9 +133,9 @@ export class PersonaggioComponent implements OnInit {
    */
   recargePg(userId: any, pgId: any) {
     this.testService.getPersonaggio(userId, pgId).subscribe(pg => {
-      console.log("personaggio", pg)
       Root.setSessionPg(pg)
       this.personaggio = Root.getSessionPg();
+      location.reload();
     });
   }
 
@@ -188,8 +143,14 @@ export class PersonaggioComponent implements OnInit {
     var sortedDataSet: [] = [];
     //@ts-ignore
     sortedDataSet = dataSet.sort((x, y) => {
-      if (x[sortCriteria] < y[sortCriteria]) { return -1; }
-      if (x[sortCriteria] > y[sortCriteria]) { return 1; }
+      if (x && y && x[sortCriteria] && y[sortCriteria]) {
+        if (x[sortCriteria] < y[sortCriteria]) {
+          return -1;
+        }
+        if (x[sortCriteria] > y[sortCriteria]) {
+          return 1;
+        }
+      }
       return 0
     })
     return sortedDataSet;
@@ -198,6 +159,8 @@ export class PersonaggioComponent implements OnInit {
   //EQUIPAGGIAMENTO-------------------------------------------------------------
   itemAdd(event: any) {
     const newEquipId = this.personaggio.equipaggiamento ? this.getLastQualityId(Root.EQUIP) : 0;
+    console.log("ID NUOVO equip", newEquipId)
+
     const userId = Root.getSessionUser().id;
     const pgId = Root.getSessionPg().pgId
 
@@ -240,6 +203,7 @@ export class PersonaggioComponent implements OnInit {
   //DONI------------------------------------------------------------------------
   giftAdd(event: any) {
     const newGiftId = this.personaggio.doni ? this.getLastQualityId(Root.DONI) : 0;
+    console.log("ID NUOVO dono", newGiftId)
     const userId = Root.getSessionUser().id;
     const pgId = Root.getSessionPg().pgId
 
@@ -403,6 +367,38 @@ export class PersonaggioComponent implements OnInit {
 
     this.recargePg(userId, pgId)
     this.scarFormGroup.reset();
+  }
+
+  //QUALITY-------------------------------------------------------------------
+  updateQuality(event: any, quality: string) {
+    // const userId = Root.getSessionUser().id;
+    // const pgId = this.personaggio.pgId;
+
+    for (const [key, value] of Object.entries(event)) {
+      switch (quality) {
+        case 'attributi':
+          //@ts-ignore
+          this.testService.updatePgAttribute(this.userId, this.pgId, key, +value)
+          break;
+        case 'abilità':
+          //@ts-ignore
+          this.testService.updatePgAbility(this.userId, this.pgId, key, +value)
+          break;
+        case 'background':
+          //@ts-ignore
+          this.testService.updatePgBackground(this.userId, this.pgId, key, +value)
+          break;
+        case 'FGV':
+          //@ts-ignore
+          this.testService.updatePgFGV(this.userId, this.pgId, key, +value)
+          break;
+        case 'pgBio':
+          this.testService.updatePgBio(this.userId, this.pgId, key, value)
+          break;
+      }
+    }
+
+    this.recargePg(this.userId, this.pgId)
   }
 
   //TEST----------------------------------------------------

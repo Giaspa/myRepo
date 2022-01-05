@@ -224,6 +224,12 @@ span.campo-obbligatorio{
   font-weight: bolder;
 }
 
+.modale--contenuto{
+  max-height: 32vmax;
+  height: fit-content;
+  overflow-y: auto;
+}
+
 /* ----------------------CELLULARI---------------------- */
 @media only screen
 and (max-width: 414px) {
@@ -271,6 +277,10 @@ button{
   width: 80vmin;
   height: fit-content;
 }
+
+.modale--contenuto{
+  max-height: 60vmax;
+}
 }
 
 /* ----------------------IPAD---------------------- */
@@ -307,5 +317,9 @@ button{
 .personaggio__contenuto__note{
   height: 78%;
   width: 78.5%;
+}
+
+.modale--contenuto{
+  max-height: 60vmax;
 }
 }

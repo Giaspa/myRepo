@@ -9,8 +9,6 @@ import { PersonaggioFormComponent } from './contenuti/personaggio/personaggio-fo
 import { PersonaggioComponent } from './contenuti/personaggio/personaggio.component';
 import { SceltaPgComponent } from './contenuti/scelta-pg/scelta-pg.component';
 import { CorpoCentraleComponent } from './corpo/corpo-centrale/corpo-centrale.component';
-import { CorpoDxComponent } from './corpo/corpo-dx/corpo-dx.component';
-import { CorpoSxComponent } from './corpo/corpo-sx/corpo-sx.component';
 
 const routes: Routes = [
   { path: '', component: CorpoCentraleComponent },

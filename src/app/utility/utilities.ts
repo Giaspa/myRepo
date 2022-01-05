@@ -18,4 +18,17 @@ export class Utilities {
         return "Cucciolo"
     }
   }
+
+  static getFirstEmptyId(dataSet: []){
+    var id;
+    if (dataSet) {
+      for (let data of dataSet) {
+        if (!data) {
+          id = dataSet.indexOf(data);
+          break;
+        }
+      }
+    }
+    return id;
+  }
 }

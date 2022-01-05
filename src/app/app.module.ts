@@ -32,6 +32,7 @@ import { SignInComponent } from './autenticazioni/sign-in/sign-in.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import { ButtonLogoutComponent } from './pulsanti/button-logout/button-logout.component';
 import { QualityFormComponent } from './contenuti/personaggio/input-custom/quality-form/quality-form.component';
+import { DynamicUpdaterComponent } from './contenuti/personaggio/input-custom/dynamic-updater/dynamic-updater.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyD1mxxOj0OnJzFMwVcWCv4sKos7dq2dsxQ",
@@ -65,6 +66,7 @@ const firebaseConfig = {
     SignInComponent,
     ButtonLogoutComponent,
     QualityFormComponent,
+    DynamicUpdaterComponent,
   ],
   imports: [
     CommonModule,

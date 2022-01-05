@@ -1,0 +1,79 @@
+<modale #dynamicModal>
+  <!-- Apertura -->
+  <label class="modale--apertura">
+    <h2>
+      <ng-content select="b"></ng-content> &nbsp;
+      <i class="bi bi-gear" matTooltip="Modifica" matTooltipPosition="before"></i>
+    </h2>
+  </label>
+
+  <!-- Header -->
+  <h2 class="modale--header m-0">Modifica <ng-content select=".dynamic-updater__header"></ng-content>
+  </h2>
+
+  <!-- Contenuto -->
+  <div class="modale--contenuto grid">
+    <div class="col-6 py-0 pb-2">
+      <div *ngFor="let data of dataSet" class="py-0 pb-2">
+        <ng-container *ngTemplateOutlet=" data.type=='string'? stringForm : numberForm;
+                                      context: {formControl: dynamicFormGroup,
+                                                formControlName: data.key,
+                                                minZero: data.min==0 ? true : false,
+                                                max: data.max,
+                                                label: data.value,
+                                                mandatory: data.mandatory}">
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="col-6 py-0 pb-2">
+      <div class="py-3 flex justify-content-center align-items-center">
+        <button type="button" class="btn btn-link" (click)="dynamicModal.hidden=true">Indietro</button>
+        <button type="button" class="btn btn-primary" (click)="dynamicUpdate()" [disabled]="dynamicFormGroup.invalid">Modifica</button>
+      </div>
+    </div>
+  </div>
+
+</modale>
+
+<!-- TEMPLATE data.type=='number' -->
+<ng-template #numberForm let-formControl="formControl" let-formControlName="formControlName" let-label="label"
+  let-autofocus="autofocus" let-minZero="minZero" let-max="max" let-mandatory="mandatory">
+  <div class="form-floating mb-2" [formGroup]="formControl">
+    <select [autofocus]="autofocus" class="form-select" [id]="'floating'+label"
+      aria-label="Floating label select example" [formControlName]="formControlName"
+      [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'border-color: red': ''">
+      <option *ngIf="minZero" value="0">0</option>
+      <option [value]="1">1</option>
+      <option [value]="2">2</option>
+      <option [value]="3">3</option>
+      <option [value]="4">4</option>
+      <option [value]="5">5</option>
+      <option *ngIf="max>5" [value]="6">6</option>
+      <option *ngIf="max>6" [value]="7">7</option>
+      <option *ngIf="max>7" [value]="8">8</option>
+      <option *ngIf="max>8" [value]="9">9</option>
+      <option *ngIf="max>9" [value]="10">10</option>
+    </select>
+
+    <label [for]="'floating'+label"
+      [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'color: red': ''">
+      {{label}} <span *ngIf="mandatory" class="campo-obbligatorio">*</span>
+    </label>
+  </div>
+</ng-template>
+
+<!-- TEMPLATE data.type=='string' -->
+<ng-template #stringForm let-formControl="formControl" let-formControlName="formControlName" let-label="label"
+  let-autofocus="autofocus" let-minZero="minZero" let-maxTen="maxTen" let-mandatory="mandatory">
+  <div class="form-floating mb-2" [formGroup]="formControl">
+    <input type="text" class="form-control" [id]="'floating'+label" [placeholder]="label"
+      [formControlName]="formControlName"
+      [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'border-color: red': ''">
+
+    <label [for]="'floating'+label"
+      [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'color: red': ''">
+      {{label}} <span *ngIf="mandatory" class="campo-obbligatorio">*</span>
+    </label>
+  </div>
+</ng-template>

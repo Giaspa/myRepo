@@ -118,7 +118,7 @@ export class TestService {
     }
   }
 
-  updatePgAttribute(userId: any, pgId: any, parameter: string, value: number) {
+  updatePgAttribute(userId: any, pgId: any, parameter: string, value: any) {
     if (Root.attributi.includes(parameter)) {
       set(ref(this.db, Root.USER + '/' + userId + Root.PGs + '/' + pgId + '/' + parameter), value);
     } else {
@@ -126,7 +126,7 @@ export class TestService {
     }
   }
 
-  updatePgAbility(userId: any, pgId: any, parameter: string, value: number) {
+  updatePgAbility(userId: any, pgId: any, parameter: string, value: any) {
     if (Root.abilita.includes(parameter)) {
       set(ref(this.db, Root.USER + '/' + userId + Root.PGs + '/' + pgId + '/' + parameter), value);
     } else {
@@ -134,7 +134,7 @@ export class TestService {
     }
   }
 
-  updatePgBackground(userId: any, pgId: any, parameter: string, value: number) {
+  updatePgBackground(userId: any, pgId: any, parameter: string, value: any) {
     if (Root.background.includes(parameter)) {
       set(ref(this.db, Root.USER + '/' + userId + Root.PGs + '/' + pgId + '/' + parameter), value);
     } else {
@@ -142,7 +142,7 @@ export class TestService {
     }
   }
 
-  updatePgFGV(userId: any, pgId: any, parameter: string, value: number) {
+  updatePgFGV(userId: any, pgId: any, parameter: string, value: any) {
     if (Root.FGV.includes(parameter)) {
       set(ref(this.db, Root.USER + '/' + userId + Root.PGs + '/' + pgId + '/' + parameter), value);
     } else {

@@ -2,50 +2,56 @@
   <div class="w-full h-screen--ridotto" style="background-color: none;">
     <!-- +++++++++++++++ INFO personaggio +++++++++++++++ -->
     <div class="grid">
-      <div class="col-4">
-        <text-dotter type="input" [value]="personaggio.nomeCompleto"><b>Personaggio</b></text-dotter>
-        <text-dotter type="input" [value]="personaggio.razza"><b>Razza</b></text-dotter>
-      </div>
+      <div class="col-11 grid">
+        <div class="col-4">
+          <text-dotter type="input" [value]="personaggio.nomeCompleto"><b>Personaggio</b></text-dotter>
+          <text-dotter type="input" [value]="personaggio.razza"><b>Razza</b></text-dotter>
+        </div>
 
-      <div class="col-4">
-        <text-dotter type="input" [value]="personaggio.auspicio"><b>Auspicio</b></text-dotter>
-        <text-dotter type="input" [value]="personaggio.tribu? personaggio.tribu : 'nessuna tribù'"><b>Tribù</b>
-        </text-dotter>
-      </div>
+        <div class="col-4">
+          <text-dotter type="input" [value]="personaggio.auspicio"><b>Auspicio</b></text-dotter>
+          <text-dotter type="input" [value]="personaggio.tribu? personaggio.tribu : 'nessuna tribù'"><b>Tribù</b>
+          </text-dotter>
+        </div>
 
-      <div class="col-4">
-        <text-dotter type="input" [value]="getRango(personaggio.rango)"><b>Rango</b></text-dotter>
-        <text-dotter type="input" [value]="personaggio.branco"><b>Branco</b></text-dotter>
+        <div class="col-4">
+          <text-dotter type="input" [value]="getRango(personaggio.rango)"><b>Rango</b></text-dotter>
+          <text-dotter type="input" [value]="personaggio.branco"><b>Branco</b></text-dotter>
+        </div>
+      </div>
+      <div class="col-1">
+        <dynamic-updater [dataSet]="dtBio" [entity]="personaggio"
+          (dynamicEventEmitter)="updateQuality($event, 'pgBio')">
+          <span class="dynamic-updater__header">info su {{personaggio.nomeCompleto}}</span>
+        </dynamic-updater>
       </div>
     </div>
 
     <hr>
     <!-- PULSANTIERA -->
     <div class="btn-group flex align-items-center justify-content-center align-content-center mb-2" role="group">
-      <!-- <button type="button" class="button__font btn btn-outline-primary">Furia, Gnosi & Volontà</button> -->
-
-      <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked
-        (click)="setPanelOpen('Attributi')">
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off"
+        [checked]="openedPanel=='Attributi'" (click)="setPanelOpen('Attributi')">
       <label class="button__font btn btn-outline-primary" for="btnradio1">Attributi</label>
 
       <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"
-        (click)="setPanelOpen('Abilità')">
+        [checked]="openedPanel=='Abilità'" (click)="setPanelOpen('Abilità')">
       <label class="button__font btn btn-outline-primary" for="btnradio2">Abilità</label>
 
       <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off"
-        (click)="setPanelOpen('Background')">
+        [checked]="openedPanel=='Background'" (click)="setPanelOpen('Background')">
       <label class="button__font btn btn-outline-primary" for="btnradio3">Background</label>
 
       <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off"
-        (click)="setPanelOpen('Doni')">
+        [checked]="openedPanel=='Doni'" (click)="setPanelOpen('Doni')">
       <label class="button__font btn btn-outline-primary" for="btnradio4">Doni</label>
 
       <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off"
-        (click)="setPanelOpen('Equip.')">
+        [checked]="openedPanel=='Equip.'" (click)="setPanelOpen('Equip.')">
       <label class="button__font btn btn-outline-primary" for="btnradio5">Equip.</label>
 
       <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off"
-        (click)="setPanelOpen('Note')">
+        [checked]="openedPanel=='Note'" (click)="setPanelOpen('Note')">
       <label class="button__font btn btn-outline-primary" for="btnradio6">Note</label>
     </div>
 
@@ -55,7 +61,13 @@
       <div class="grid" *ngSwitchCase="'Attributi'">
         <!-- ----- FISICI ----- -->
         <div class="col-4 flex flex-column align-items-center">
-          <h2><b>Fisici</b></h2>
+          <!-- header e modifica -->
+          <dynamic-updater [dataSet]="dsFisici" [entity]="personaggio"
+            (dynamicEventEmitter)="updateQuality($event, 'attributi')">
+            <b>Fisici</b>
+            <span class="dynamic-updater__header">attributi fisici</span>
+          </dynamic-updater>
+
           <text-dotter type="dotter" [value]="personaggio.forza" [isReadOnly]="true"><b>Forza</b></text-dotter>
           <text-dotter type="dotter" [value]="personaggio.destrezza" [isReadOnly]="true"><b>Destrezza</b></text-dotter>
           <text-dotter type="dotter" [value]="personaggio.costituzione" [isReadOnly]="true"><b>Costituzione</b>
@@ -64,7 +76,13 @@
 
         <!-- ----- SOCIALI ----- -->
         <div class="col-4 flex flex-column align-items-center">
-          <h2><b>Sociali</b></h2>
+          <!-- header e modifica -->
+          <dynamic-updater [dataSet]="dsSociali" [entity]="personaggio"
+            (dynamicEventEmitter)="updateQuality($event, 'attributi')">
+            <b>Sociali</b>
+            <span class="dynamic-updater__header">attributi sociali</span>
+          </dynamic-updater>
+
           <text-dotter type="dotter" [value]="personaggio.carisma" [isReadOnly]="true"><b>Carisma</b></text-dotter>
           <text-dotter type="dotter" [value]="personaggio.persuasione" [isReadOnly]="true"><b>Persuasione</b>
           </text-dotter>
@@ -73,7 +91,13 @@
 
         <!-- ----- MENTALI ----- -->
         <div class="col-4 flex flex-column align-items-center">
-          <h2><b>Mentali</b></h2>
+          <!-- header e modifica -->
+          <dynamic-updater [dataSet]="dsMentali" [entity]="personaggio"
+            (dynamicEventEmitter)="updateQuality($event, 'attributi')">
+            <b>Mentali</b>
+            <span class="dynamic-updater__header">attributi mentali</span>
+          </dynamic-updater>
+
           <text-dotter type="dotter" [value]="personaggio.percezione" [isReadOnly]="true"><b>Percezione</b>
           </text-dotter>
           <text-dotter type="dotter" [value]="personaggio.intelligenza" [isReadOnly]="true"><b>Intelligenza</b>
@@ -83,19 +107,35 @@
 
         <!-- Furia -->
         <div class="col-12 flex flex-column align-items-center">
-          <h2><b>Furia</b></h2>
+          <!-- header e modifica -->
+          <dynamic-updater [dataSet]="dsFGV" [entity]="personaggio"
+            (dynamicEventEmitter)="updateQuality($event, 'FGV')">
+            <b>Furia</b>
+            <span class="dynamic-updater__header">furia, gnosi & volontà</span>
+          </dynamic-updater>
+
           <text-dotter type="dotter" [isTenDot]="true" [value]="personaggio.furia" [isReadOnly]="true"></text-dotter>
         </div>
 
         <!-- Gnosi -->
         <div class="col-12 flex flex-column align-items-center" style="margin-top: -5vh;">
-          <h2><b>Gnosi</b></h2>
+          <dynamic-updater [dataSet]="dsFGV" [entity]="personaggio"
+            (dynamicEventEmitter)="updateQuality($event, 'FGV')">
+            <b>Gnosi</b>
+            <span class="dynamic-updater__header">furia, gnosi & volontà</span>
+          </dynamic-updater>
+
           <text-dotter type="dotter" [isTenDot]="true" [value]="personaggio.gnosi" [isReadOnly]="true"></text-dotter>
         </div>
 
         <!-- Volontà -->
         <div class="col-12 flex flex-column align-items-center" style="margin-top: -5vh;">
-          <h2><b>Volontà</b></h2>
+          <dynamic-updater [dataSet]="dsFGV" [entity]="personaggio"
+            (dynamicEventEmitter)="updateQuality($event, 'FGV')">
+            <b>Volontà</b>
+            <span class="dynamic-updater__header">furia, gnosi & volontà</span>
+          </dynamic-updater>
+
           <text-dotter type="dotter" [isTenDot]="true" [value]="personaggio.volonta" [isReadOnly]="true"></text-dotter>
         </div>
       </div>
@@ -104,7 +144,12 @@
       <div class="grid" *ngSwitchCase="'Abilità'">
         <!-- ----- ATTITUDINI ----- -->
         <div class="col-4 flex flex-column align-items-center">
-          <h2><b>Attitudini</b></h2>
+          <dynamic-updater [dataSet]="dsAttitudini" [entity]="personaggio"
+            (dynamicEventEmitter)="updateQuality($event, 'abilità')">
+            <b>Attitudini</b>
+            <span class="dynamic-updater__header">abilità attitudini</span>
+          </dynamic-updater>
+
           <text-dotter type="dotter" [value]="personaggio.atletica" [isReadOnly]="true"><b>Atletica</b></text-dotter>
           <text-dotter type="dotter" [value]="personaggio.autorita" [isReadOnly]="true"><b>Autorita</b></text-dotter>
           <text-dotter type="dotter" [value]="personaggio.bassifondi" [isReadOnly]="true"><b>Bassifondi</b>
@@ -126,7 +171,12 @@
 
         <!-- ----- CAPACITA' ----- -->
         <div class="col-4 flex flex-column align-items-center">
-          <h2><b>Capacità</b></h2>
+          <dynamic-updater [dataSet]="dsCapacita" [entity]="personaggio"
+            (dynamicEventEmitter)="updateQuality($event, 'abilità')">
+            <b>Capacità</b>
+            <span class="dynamic-updater__header">abilità capacità</span>
+          </dynamic-updater>
+
           <text-dotter type="dotter" [value]="personaggio.affinitaAnimale" [isReadOnly]="true"><b>Aff. Animale</b>
           </text-dotter>
           <text-dotter type="dotter" [value]="personaggio.arceria" [isReadOnly]="true"><b>Arceria</b></text-dotter>
@@ -146,7 +196,12 @@
 
         <!-- ----- CONOSCENZE ----- -->
         <div class="col-4 flex flex-column align-items-center">
-          <h2><b>Conoscenze</b></h2>
+          <dynamic-updater [dataSet]="dsConoscenze" [entity]="personaggio"
+            (dynamicEventEmitter)="updateQuality($event, 'abilità')">
+            <b>Conoscenze</b>
+            <span class="dynamic-updater__header">abilità conoscenze</span>
+          </dynamic-updater>
+
           <text-dotter type="dotter" [value]="personaggio.accademiche" [isReadOnly]="true"><b>Accademiche</b>
           </text-dotter>
           <text-dotter type="dotter" [value]="personaggio.enigmi" [isReadOnly]="true"><b>Enigmi</b></text-dotter>
@@ -167,7 +222,13 @@
       <!-- +++++++++++++++ BACKGROUND +++++++++++++++ -->
       <div class="grid" *ngSwitchCase="'Background'">
         <div class="col-12 flex flex-column align-items-center">
-          <h2 class="m-0" style="height: fit-content;"><b>Background</b></h2>
+          <h2 class="m-0" style="height: fit-content;">
+            <dynamic-updater [dataSet]="dtBackground" [entity]="personaggio"
+              (dynamicEventEmitter)="updateQuality($event, 'background')">
+              <b>Background</b>
+              <span class="dynamic-updater__header">background</span>
+            </dynamic-updater>
+          </h2>
         </div>
 
         <div class="col-6 flex flex-column align-items-center">
@@ -226,15 +287,19 @@
 
       <!-- +++++++++++++++ DONI +++++++++++++++ -->
       <div class="" *ngSwitchCase="'Doni'">
-        <quality-form headerSingolare="Doni" headerPlurale="dono" [formGroup]="giftFormGroup" mandatoryField="dono" optionalField="link" [isLink]="true"
-          [dataSet]="sortDataset(personaggio.doni, 'dono')" (addEventEmitter)="giftAdd($event)" (updateEventEmitter)="giftUpdate($event)" (deleteEventEmitter)="giftDelete($event)">
+        <quality-form headerSingolare="Doni" headerPlurale="dono" [formGroup]="giftFormGroup" mandatoryField="dono"
+          optionalField="link" [isLink]="true" [dataSet]="sortDataset(personaggio.doni, 'dono')"
+          (addEventEmitter)="giftAdd($event)" (updateEventEmitter)="giftUpdate($event)"
+          (deleteEventEmitter)="giftDelete($event)">
         </quality-form>
       </div>
 
       <!-- +++++++++++++++ EQUIPAGGIAMENTO +++++++++++++++ -->
       <div class="" *ngSwitchCase="'Equip.'">
-        <quality-form headerSingolare="Equipaggiamento" headerPlurale="equipaggiamento" [formGroup]="equipFormGroup" mandatoryField="item" optionalField="note"
-          [dataSet]="sortDataset(personaggio.equipaggiamento, 'item')" (addEventEmitter)="itemAdd($event)" (updateEventEmitter)="itemUpdate($event)" (deleteEventEmitter)="itemDelete($event)">
+        <quality-form headerSingolare="Equipaggiamento" headerPlurale="equipaggiamento" [formGroup]="equipFormGroup"
+          mandatoryField="item" optionalField="note" [dataSet]="sortDataset(personaggio.equipaggiamento, 'item')"
+          (addEventEmitter)="itemAdd($event)" (updateEventEmitter)="itemUpdate($event)"
+          (deleteEventEmitter)="itemDelete($event)">
         </quality-form>
       </div>
 
@@ -271,7 +336,8 @@
                       </div>
 
                       <div class="py-3 flex justify-content-center align-items-center">
-                        <button type="button" class="btn btn-link" (mouseleave)="meritFormGroup.reset()" (click)="modalAddMerit.hidden=true">Indietro</button>
+                        <button type="button" class="btn btn-link" (mouseup)="meritFormGroup.reset()"
+                          (click)="modalAddMerit.hidden=true">Indietro</button>
                         <button type="button" class="btn btn-primary" (click)="meritAdd()"
                           [disabled]="meritFormGroup.invalid">Aggiungi</button>
                       </div>
@@ -284,9 +350,10 @@
 
           <!-- Gestione PREGI -->
           <div class="col-12 p-0">
-            <app-crud [dataset]="sortDataset(personaggio.pregi, 'nome')" [formGroup]="meritFormGroup" name="nome" description="note" fieldId="id" nameLabel="Pregio"
-              descriptionLabel="Descrizione" editLabel="Modifica pregio" deleteLabel="Cancella pregio"
-              (updateEmit)="meritUpdate($event)" (deleteEmit)="meritDelete($event)"></app-crud>
+            <app-crud [dataset]="sortDataset(personaggio.pregi, 'nome')" [formGroup]="meritFormGroup" name="nome"
+              description="note" fieldId="id" nameLabel="Pregio" descriptionLabel="Descrizione"
+              editLabel="Modifica pregio" deleteLabel="Cancella pregio" (updateEmit)="meritUpdate($event)"
+              (deleteEmit)="meritDelete($event)"></app-crud>
           </div>
         </div>
 
@@ -321,8 +388,8 @@
                       </div>
 
                       <div class="py-3 flex justify-content-center align-items-center">
-                        <button type="button" class="btn btn-link" (mouseleave)="flawFormGroup.reset()"
-                        (click)="modalAddFlaw.hidden=true">Indietro</button>
+                        <button type="button" class="btn btn-link" (mouseup)="flawFormGroup.reset()"
+                          (click)="modalAddFlaw.hidden=true">Indietro</button>
                         <button type="button" class="btn btn-primary" (click)="flawAdd()"
                           [disabled]="flawFormGroup.invalid">Aggiungi</button>
                       </div>
@@ -335,9 +402,10 @@
 
           <!-- Gestione DIFETTI -->
           <div class="col-12 p-0">
-            <app-crud [dataset]="sortDataset(personaggio.difetti, 'nome')" [formGroup]="flawFormGroup" name="nome" description="note" fieldId="id" nameLabel="Difetto"
-              descriptionLabel="Descrizione" editLabel="Modifica difetto" deleteLabel="Cancella difetto"
-              (updateEmit)="flawUpdate($event)" (deleteEmit)="flawDelete($event)"></app-crud>
+            <app-crud [dataset]="sortDataset(personaggio.difetti, 'nome')" [formGroup]="flawFormGroup" name="nome"
+              description="note" fieldId="id" nameLabel="Difetto" descriptionLabel="Descrizione"
+              editLabel="Modifica difetto" deleteLabel="Cancella difetto" (updateEmit)="flawUpdate($event)"
+              (deleteEmit)="flawDelete($event)"></app-crud>
           </div>
 
         </div>
@@ -372,7 +440,8 @@
                       </div>
 
                       <div class="py-3 flex justify-content-center align-items-center">
-                        <button type="button" class="btn btn-link" (mouseleave)="scarFormGroup.reset()" (click)="modalAddScar.hidden=true">Indietro</button>
+                        <button type="button" class="btn btn-link" (mouseup)="scarFormGroup.reset()"
+                          (click)="modalAddScar.hidden=true">Indietro</button>
                         <button type="button" class="btn btn-primary" (click)="scarAdd()"
                           [disabled]="scarFormGroup.invalid">Aggiungi</button>
                       </div>
@@ -385,10 +454,11 @@
 
           <!-- Gestione CICATRICI -->
           <div class="col-12 p-0">
-            <app-crud [dataset]="sortDataset(personaggio.cicatriciDaBattaglia, 'nome')" [formGroup]="scarFormGroup" name="nome" description="note" fieldId="id"
-              nameLabel="Cicatrice da battaglia" descriptionLabel="Descrizione"
-              editLabel="Modifica cicatrice da battaglia" deleteLabel="Cancella cicatrice da battaglia"
-              (updateEmit)="scarUpdate($event)" (deleteEmit)="scarDelete($event)"></app-crud>
+            <app-crud [dataset]="sortDataset(personaggio.cicatriciDaBattaglia, 'nome')" [formGroup]="scarFormGroup"
+              name="nome" description="note" fieldId="id" nameLabel="Cicatrice da battaglia"
+              descriptionLabel="Descrizione" editLabel="Modifica cicatrice da battaglia"
+              deleteLabel="Cancella cicatrice da battaglia" (updateEmit)="scarUpdate($event)"
+              (deleteEmit)="scarDelete($event)"></app-crud>
           </div>
         </div>
       </div>

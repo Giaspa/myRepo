@@ -45,7 +45,8 @@ export class ButtonLogoutComponent implements OnInit {
   }
 
   userLogout(){
-    Root.removeSessionUser();
+    // Root.removeSessionUser();
+    sessionStorage.clear()
     this.router.navigate([""])
   }
 }
