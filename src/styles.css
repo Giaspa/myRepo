@@ -18,6 +18,15 @@
   --error-color: rgb(176, 42, 55);
 }
 
+body{
+  overflow: hidden;
+}
+
+hr{
+  margin-top: 0;
+  margin-bottom: 1.5%!important;
+}
+
 h2, h1, a{
   color: var(--second-color);
 }
@@ -28,6 +37,11 @@ a:hover{
 }
 
 /* AngularMaterial OVERRIDE ------------------------*/
+.mat-body, .mat-body-1, .mat-typography {
+  font: 400 20px/30px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+}
+
 .mat-horizontal-content-container {
   max-height: 306px;
   overflow: auto!important;
@@ -43,6 +57,40 @@ a:hover{
 
 .mat-stepper-label-position-bottom .mat-horizontal-stepper-header, .mat-vertical-stepper-header {
   padding: 4px 4px!important;
+}
+
+.mat-expansion-panel-spacing {
+  margin: 0.3% 0!important;
+}
+.mat-expansion-panel-header.mat-expanded {
+  height: 3rem!important;
+}
+.mat-h2, .mat-title, .mat-typography h2 {
+  font: unset;
+  font-weight: bolder;
+  letter-spacing: normal;
+  margin: 0 0;
+}
+.mat-expansion-panel-body {
+  padding: 0 24px 5px!important;
+  height: 34.5rem;
+}
+#infoPgPanel>#cdk-accordion-child-0>.mat-expansion-panel-body {
+  padding: 0 24px 5px!important;
+  height: 38rem;
+}
+#infoPgPanel>#cdk-accordion-child-0>.mat-expansion-panel-body>div>div>div>text-dotter>div>.form-control {
+  font-size: 2rem;
+}
+.mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+  display: flex;
+  flex-grow: 1;
+}
+.mat-expansion-panel-header {
+  height: 3rem;
+}
+.mat-expansion-panel-content {
+  font: 400 20px/36px Roboto, "Helvetica Neue", sans-serif;
 }
 
 
@@ -94,6 +142,10 @@ a:hover{
 .card{
   height: fit-content;
   position: unset;
+}
+
+.form-floating>.form-control:focus, .form-floating>.form-control:not(:placeholder-shown) {
+  padding-top: 2rem;
 }
 
 /* Overflow --------------------------------------------------------*/
@@ -175,18 +227,18 @@ button{
 }
 .personaggio__contenuto--overflow{
   position: absolute;
-  height: 53%;
-  width: 80%;
+  height: 71%;
+  width: 89%;
   overflow-y: auto;
   overflow-x: hidden;
 }
 .personaggio__contenuto__note{
   position: absolute;
   height: 69%;
-  width: 80.3%;
+  width: 89%;
 }
 .personaggio__contenuto__note--qualità{
-  height: 33.33%;
+  height: 100%;
   padding: 2px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -230,9 +282,197 @@ span.campo-obbligatorio{
   overflow-y: auto;
 }
 
-/* ----------------------CELLULARI---------------------- */
-@media only screen
-and (max-width: 414px) {
+.custom__overflow{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/**
+320px — 480px: Mobile devices
+481px — 768px: iPads, Tablets
+769px — 1024px: Small screens, laptops
+1025px — 1200px: Desktops, large screens
+1201px and more —  Extra large screens, TV
+*/
+
+/* ----------------------IPAD: potrait---------------------- */
+@media
+/* only screen and (min-device-width: 700px) and (max-device-width: 900px) and (orientation:portrait)  */
+all and (min-width: 481px) and (max-width: 1024px) and (orientation:portrait)
+{
+  body{
+    background-color: lightcoral;
+  }
+
+  /* AngularMaterial OVERRIDE ------------------------*/
+  .mat-body, .mat-body-1, .mat-typography {
+    font: 400 20px/40px Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: normal;
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0 24px 5px!important;
+    height: 44rem;
+  }
+  #infoPgPanel>#cdk-accordion-child-0>.mat-expansion-panel-body {
+    padding: 0 24px 5px!important;
+    height: 50rem;
+  }
+  #infoPgPanel>#cdk-accordion-child-0>.mat-expansion-panel-body>div>div>div>text-dotter>div>.form-control {
+    font-size: 2rem;
+  }
+  /*Bootstrap OVERRIDE ------------------------*/
+  .form-floating>.form-control:focus, .form-floating>.form-control:not(:placeholder-shown) {
+    padding-top: 2.3rem;
+  }
+  /* -------------------------------------------*/
+  .corpo-sx, .corpo-dx{
+    height: 99vh;
+  }
+
+  .corpo-centrale{
+    height: 99vh;
+  }
+  .corpo-centrale--box{
+    width: 40vw
+  }
+
+  button{
+    font-size: 1.5rem!important;
+    width: 12rem;
+  }
+
+  .h-screen--ridotto{
+    height: 90vh !important;
+  }
+
+  .personaggio__contenuto{
+    height: 85%;
+  }
+  .personaggio__contenuto--overflow{
+    height: 81%;
+    width: 86%;
+  }
+  .personaggio__contenuto__note{
+    height: 76%;
+    width: 86.5%;
+  }
+
+  .modale--contenuto{
+    max-height: 60vmax;
+  }
+}
+
+/* ----------------------IPAD: landscape---------------------- */
+@media
+/* only screen and (min-device-width: 901px) and (max-device-width: 1024px) and (orientation:landscape)  */
+all and (min-width: 481px) and (max-width: 1024px) and (orientation:landscape)
+{
+  body{
+    background-color: green;
+  }
+
+  /* AngularMaterial OVERRIDE ------------------------*/
+  .mat-expansion-panel-body {
+    padding: 0 24px 5px!important;
+    height: 29rem;
+  }
+  #infoPgPanel>#cdk-accordion-child-0>.mat-expansion-panel-body {
+    padding: 0 24px 5px!important;
+    height: 38rem;
+  }
+  #infoPgPanel>#cdk-accordion-child-0>.mat-expansion-panel-body>div>div>div>text-dotter>div>.form-control {
+    font-size: 1.5rem;
+  }
+  /* -------------------------------------------*/
+
+  .corpo-sx, .corpo-dx{
+    height: 99vh;
+  }
+
+  .corpo-centrale{
+    height: 99vh;
+  }
+  .corpo-centrale--box{
+    width: 40vw
+  }
+
+  button{
+    font-size: 1.5rem!important;
+    width: 12rem;
+  }
+
+  .h-screen--ridotto{
+    height: 90vh !important;
+  }
+
+  .personaggio__contenuto{
+    height: 78%;
+  }
+  .personaggio__contenuto--overflow{
+    height: 77%;
+    width: 87%;
+  }
+  .personaggio__contenuto__note{
+    height: 78%;
+    width: 86.5%;
+  }
+
+  .modale--contenuto{
+    max-height: 60vmax;
+  }
+}
+
+/* ----------------------CELLULARI: potrait---------------------- */
+@media
+/* only screen and (max-width: 414px) and (orientation:portrait)  */
+all and (max-width: 480px) and (orientation:portrait)
+{
+  body{
+    background-color: pink;
+  }
+
+  /* AngularMaterial OVERRIDE ------------------------*/
+  .mat-body, .mat-body-1, .mat-typography {
+    font: 400 15px/30px Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: normal;
+  }
+
+  .mat-expansion-panel-spacing {
+    margin: 0.3% 0!important;
+  }
+  .mat-expansion-panel-header.mat-expanded {
+    height: auto!important;
+  }
+  .mat-h2, .mat-title, .mat-typography h2 {
+    font: unset;
+    font-weight: bolder;
+    letter-spacing: normal;
+    margin: 0 0;
+  }
+  .mat-expansion-panel-body {
+    padding: 0 24px 5px!important;
+    height: 30rem;
+  }
+  #infoPgPanel>#cdk-accordion-child-0>.mat-expansion-panel-body {
+    padding: 0 24px 5px!important;
+    height: 39rem;
+  }
+  #infoPgPanel>#cdk-accordion-child-0>.mat-expansion-panel-body>div>div>div>text-dotter>div>.form-control {
+    font-size: 1rem;
+  }
+  .mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+    display: flex;
+    flex-grow: 1;
+    margin-right: 16px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+  }
+  .mat-expansion-panel-content {
+    font: 400 16px/25px Roboto, "Helvetica Neue", sans-serif;
+  }
+  /* -------------------------------------------*/
+
 .corpo-sx, .corpo-dx{
   height: 10vh;
 }
@@ -265,7 +505,7 @@ button{
 
 .personaggio__contenuto--overflow{
   position: initial;
-  height: 27rem;
+  height: 37rem;
   width: initial;
 }
 .personaggio__contenuto__note{
@@ -279,47 +519,106 @@ button{
 }
 
 .modale--contenuto{
-  max-height: 60vmax;
+  max-height: 69vmax;
 }
 }
 
-/* ----------------------IPAD---------------------- */
-@media only screen
-and (min-device-width: 768px)
-and (max-device-width: 1024px) {
-.corpo-sx, .corpo-dx{
-  height: 99vh;
+/* ----------------------CELLULARI: landscape---------------------- */
+@media
+/* only screen and (min-device-width: 415px) and (max-device-width: 699px) and (orientation:landscape)  */
+all and (max-width: 950px) and (max-height: 400px) and (orientation:landscape)
+{
+  body{
+    background-color: violet;
+  }
+
+  /* Bootstrap OVERRIDE ------------------------*/
+  .btn {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.75rem;
+  }
+
+  /* AngularMaterial OVERRIDE ------------------------*/
+  .mat-expansion-panel-spacing {
+    margin: 0.3% 0!important;
+  }
+  .mat-expansion-panel-header.mat-expanded {
+    height: auto!important;
+  }
+  .mat-h2, .mat-title, .mat-typography h2 {
+    font: unset;
+    font-weight: bolder;
+    letter-spacing: normal;
+    margin: 0 0;
+  }
+  .mat-expansion-panel-body {
+    padding: 0 24px 5px!important;
+    height: 11.3rem;
+  }
+  #infoPgPanel>#cdk-accordion-child-0>.mat-expansion-panel-body {
+    padding: 0 24px 5px!important;
+    height: 17.8rem;
+  }
+  #infoPgPanel>#cdk-accordion-child-0>.mat-expansion-panel-body>div>div>div>text-dotter>div>.form-control {
+    font-size: 1rem;
+  }
+  .mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+    display: flex;
+    flex-grow: 1;
+    margin-right: 16px;
+    margin-bottom: 10px;
+  }
+  .mat-expansion-panel-header {
+    height: 2rem;
+  }
+  .mat-expansion-panel-content {
+    font: 400 16px/25px Roboto, "Helvetica Neue", sans-serif;
+  }
+  /* -------------------------------------------*/
+
+  .corpo-sx, .corpo-dx{
+    height: 99vh;
+  }
+
+  .corpo-centrale{
+    height: 99vh;
+  }
+  .corpo-centrale--box{
+    width: 40vw
+  }
+
+  button{
+    font-size: 1.5rem!important;
+    width: 12rem;
+  }
+
+  .h-screen--ridotto{
+    height: 90vh !important;
+  }
+
+  .personaggio__contenuto{
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 82%;
+  }
+  .personaggio__contenuto--overflow{
+    height: 69%;
+    width: 86%;
+  }
+  .personaggio__contenuto__note{
+    height: 57%;
+    width: 85.5%;
+  }
+  .personaggio__contenuto__note--qualità{
+    height: 100%;
+    padding: 2px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .modale--contenuto{
+    max-height: 28vmax;
+  }
 }
 
-.corpo-centrale{
-  height: 99vh;
-}
-.corpo-centrale--box{
-  width: 40vw
-}
 
-button{
-  font-size: 1.5rem!important;
-  width: 12rem;
-}
-
-.h-screen--ridotto{
-  height: 90vh !important;
-}
-
-/* .personaggio__contenuto{
-  height: 48rem;
-} */
-
-.personaggio__contenuto--overflow{
-  height: 65%;
-}
-.personaggio__contenuto__note{
-  height: 78%;
-  width: 78.5%;
-}
-
-.modale--contenuto{
-  max-height: 60vmax;
-}
-}

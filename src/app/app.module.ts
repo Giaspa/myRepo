@@ -33,6 +33,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { ButtonLogoutComponent } from './pulsanti/button-logout/button-logout.component';
 import { QualityFormComponent } from './contenuti/personaggio/input-custom/quality-form/quality-form.component';
 import { DynamicUpdaterComponent } from './contenuti/personaggio/input-custom/dynamic-updater/dynamic-updater.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyD1mxxOj0OnJzFMwVcWCv4sKos7dq2dsxQ",
@@ -83,6 +85,7 @@ const firebaseConfig = {
     MatTooltipModule,
     AngularFireModule.initializeApp(firebaseConfig),
     MatStepperModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent],

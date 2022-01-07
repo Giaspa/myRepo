@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'button-choice-menu',
-  template: '<button *ngIf="isDesktop; else phonebutton" mat-stroked-button [color]="color" [routerLink]="path" routerLinkActive="active" style="width:12vw"><i class="bi bi-people"></i> personaggi</button>' +
+  template: '<button *ngIf="isDesktop; else phonebutton" mat-stroked-button [color]="color" [routerLink]="path" routerLinkActive="active" style="width:7vw"><i class="bi bi-people"></i> personaggi</button>' +
     ' <ng-template #phonebutton> <button mat-icon-button [color]="color" [routerLink]="path" routerLinkActive="active"><i class="bi bi-people"></i></button> </ng-template>'
 })
 export class ButtonChoiceMenuComponent implements OnInit {

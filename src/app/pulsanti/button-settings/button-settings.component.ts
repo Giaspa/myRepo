@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'button-settings',
-  template: '<button *ngIf="isDesktop; else phonebutton" mat-stroked-button [color]="color" [routerLink]="path" routerLinkActive="active" style="width:12vw"><i class="bi bi-gear"></i> impostazioni</button>'+
+  template: '<button *ngIf="isDesktop; else phonebutton" mat-stroked-button [color]="color" [routerLink]="path" routerLinkActive="active" style="width:7vw"><i class="bi bi-gear"></i> impostazioni</button>'+
   ' <ng-template #phonebutton> <button mat-icon-button [color]="color" [routerLink]="path" routerLinkActive="active"><i class="bi bi-gear"></i></button> </ng-template>'
 })
 export class ButtonSettingsComponent implements OnInit {

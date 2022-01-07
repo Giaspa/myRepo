@@ -1,35 +1,82 @@
 <modale #dynamicModal>
   <!-- Apertura -->
   <label class="modale--apertura">
-    <h2>
+    <h2 class="text-sm lg:text-lg">
       <ng-content select="b"></ng-content> &nbsp;
-      <i class="bi bi-gear" matTooltip="Modifica" matTooltipPosition="before"></i>
+      <i class="text-xs lg:text-lg bi bi-gear" matTooltip="Modifica" matTooltipPosition="after"></i>
     </h2>
   </label>
 
   <!-- Header -->
-  <h2 class="modale--header m-0">Modifica <ng-content select=".dynamic-updater__header"></ng-content>
+  <h2 class="modale--header m-0">Modifica: <ng-content select=".dynamic-updater__header"></ng-content>
   </h2>
 
   <!-- Contenuto -->
   <div class="modale--contenuto grid">
-    <div class="col-6 py-0 pb-2">
+    <div class="col-12 lg:col-6 py-0 pb-2">
       <div *ngFor="let data of dataSet" class="py-0 pb-2">
-        <ng-container *ngTemplateOutlet=" data.type=='string'? stringForm : numberForm;
-                                      context: {formControl: dynamicFormGroup,
-                                                formControlName: data.key,
-                                                minZero: data.min==0 ? true : false,
-                                                max: data.max,
-                                                label: data.value,
-                                                mandatory: data.mandatory}">
-        </ng-container>
+        <div [ngSwitch]="data.type">
+          <div *ngSwitchCase="'number'">
+            <ng-container *ngTemplateOutlet=" numberForm;
+                                              context: {formControl: dynamicFormGroup,
+                                                        formControlName: data.key,
+                                                        minZero: data.min==0 ? true : false,
+                                                        max: data.max,
+                                                        label: data.value,
+                                                        mandatory: data.mandatory}">
+            </ng-container>
+          </div>
+          <div *ngSwitchCase="'string'">
+            <ng-container *ngTemplateOutlet=" stringForm;
+                                            context: {formControl: dynamicFormGroup,
+                                                      formControlName: data.key,
+                                                      minZero: data.min==0 ? true : false,
+                                                      max: data.max,
+                                                      label: data.value,
+                                                      mandatory: data.mandatory}">
+            </ng-container>
+          </div>
+          <div *ngSwitchCase="'rango'">
+            <ng-container *ngTemplateOutlet=" rangoForm;
+                                            context: {formControl: dynamicFormGroup,
+                                                      formControlName: data.key,
+                                                      label: data.value,
+                                                      mandatory: data.mandatory}">
+            </ng-container>
+          </div>
+          <div *ngSwitchCase="'razza'">
+            <ng-container *ngTemplateOutlet=" razzaForm;
+                                            context: {formControl: dynamicFormGroup,
+                                                      formControlName: data.key,
+                                                      label: data.value,
+                                                      mandatory: data.mandatory}">
+            </ng-container>
+          </div>
+          <div *ngSwitchCase="'auspicio'">
+            <ng-container *ngTemplateOutlet=" auspicioForm;
+                                            context: {formControl: dynamicFormGroup,
+                                                      formControlName: data.key,
+                                                      label: data.value,
+                                                      mandatory: data.mandatory}">
+            </ng-container>
+          </div>
+          <div *ngSwitchCase="'tribu'">
+            <ng-container *ngTemplateOutlet=" tribuForm;
+                                            context: {formControl: dynamicFormGroup,
+                                                      formControlName: data.key,
+                                                      label: data.value,
+                                                      mandatory: data.mandatory}">
+            </ng-container>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="col-6 py-0 pb-2">
+    <div class="col-12 lg:col-6 py-0 pb-2">
       <div class="py-3 flex justify-content-center align-items-center">
         <button type="button" class="btn btn-link" (click)="dynamicModal.hidden=true">Indietro</button>
-        <button type="button" class="btn btn-primary" (click)="dynamicUpdate()" [disabled]="dynamicFormGroup.invalid">Modifica</button>
+        <button type="button" class="btn btn-primary" (click)="dynamicUpdate()"
+          [disabled]="dynamicFormGroup.invalid">Modifica</button>
       </div>
     </div>
   </div>
@@ -70,6 +117,98 @@
     <input type="text" class="form-control" [id]="'floating'+label" [placeholder]="label"
       [formControlName]="formControlName"
       [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'border-color: red': ''">
+
+    <label [for]="'floating'+label"
+      [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'color: red': ''">
+      {{label}} <span *ngIf="mandatory" class="campo-obbligatorio">*</span>
+    </label>
+  </div>
+</ng-template>
+
+<!-- TEMPLATE data.type=='rango' -->
+<ng-template #rangoForm let-formControl="formControl" let-formControlName="formControlName" let-label="label"
+  let-autofocus="autofocus" let-mandatory="mandatory">
+  <div class="form-floating mb-2" [formGroup]="formControl">
+    <select [autofocus]="autofocus" class="form-select" [id]="'floating'+label"
+      aria-label="Floating label select example" [formControlName]="formControlName"
+      [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'border-color: red': ''">
+      <option value="0">Cucciolo</option>
+      <option value="1">Cliath</option>
+      <option value="2">Fostern</option>
+      <option value="3">Adren</option>
+      <option value="4">Athro</option>
+      <option value="5">Elder</option>
+      <option value="6">Grand elder</option>
+    </select>
+
+    <label [for]="'floating'+label"
+      [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'color: red': ''">
+      {{label}} <span *ngIf="mandatory" class="campo-obbligatorio">*</span>
+    </label>
+  </div>
+</ng-template>
+
+<!-- TEMPLATE data.type=='razza' -->
+<ng-template #razzaForm let-formControl="formControl" let-formControlName="formControlName" let-label="label"
+  let-autofocus="autofocus" let-mandatory="mandatory">
+  <div class="form-floating mb-2" [formGroup]="formControl">
+    <select [autofocus]="autofocus" class="form-select" [id]="'floating'+label"
+      aria-label="Floating label select example" [formControlName]="formControlName"
+      [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'border-color: red': ''">
+      <option value="Homid">Homid</option>
+      <option value="Metis">Metis</option>
+      <option value="Lupus">Lupus</option>
+    </select>
+
+    <label [for]="'floating'+label"
+      [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'color: red': ''">
+      {{label}} <span *ngIf="mandatory" class="campo-obbligatorio">*</span>
+    </label>
+  </div>
+</ng-template>
+
+<!-- TEMPLATE data.type=='auspicio' -->
+<ng-template #auspicioForm let-formControl="formControl" let-formControlName="formControlName" let-label="label"
+  let-autofocus="autofocus" let-mandatory="mandatory">
+  <div class="form-floating mb-2" [formGroup]="formControl">
+    <select [autofocus]="autofocus" class="form-select" [id]="'floating'+label"
+      aria-label="Floating label select example" [formControlName]="formControlName"
+      [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'border-color: red': ''">
+      <option value="Ragabash">Ragabash</option>
+      <option value="Teurgo">Teurgo</option>
+      <option value="Philodox">Philodox</option>
+      <option value="Galliard">Galliard</option>
+      <option value="Arhoun">Arhoun</option>
+    </select>
+
+    <label [for]="'floating'+label"
+      [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'color: red': ''">
+      {{label}} <span *ngIf="mandatory" class="campo-obbligatorio">*</span>
+    </label>
+  </div>
+</ng-template>
+
+<!-- TEMPLATE data.type=='tribu' -->
+<ng-template #tribuForm let-formControl="formControl" let-formControlName="formControlName" let-label="label"
+  let-autofocus="autofocus" let-mandatory="mandatory">
+  <div class="form-floating mb-2" [formGroup]="formControl">
+    <select [autofocus]="autofocus" class="form-select" [id]="'floating'+label"
+      aria-label="Floating label select example" [formControlName]="formControlName"
+      [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'border-color: red': ''">
+      <option value="null">nessuna tribù</option>
+      <option value="Artigli rossi">Artigli rossi</option>
+      <option value="Fenrir">Fenrir</option>
+      <option value="Fianna">Fianna</option>
+      <option value="Figli di Gaia">Figli di Gaia</option>
+      <option value="Furie nere">Furie nere</option>
+      <option value="Pastori dell'uomo">Pastori dell'uomo</option>
+      <option value="Rodi ossa">Rodi ossa</option>
+      <option value="Scrutastelle">Scrutastelle</option>
+      <option value="Signori delle ombre">Signori delle ombre</option>
+      <option value="Ululatori bianchi">Ululatori bianchi</option>
+      <option value="Viaggiatori silenti">Viaggiatori silenti</option>
+      <option value="Zanne d'argento">Zanne d'argento</option>
+    </select>
 
     <label [for]="'floating'+label"
       [style]="formControl.get(formControlName).touched && formControl.get(formControlName).invalid? 'color: red': ''">

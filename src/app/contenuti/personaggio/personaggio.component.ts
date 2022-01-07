@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { SheetDataSet } from 'src/app/model/sheetDataSet.model';
 import { Root } from 'src/app/service/root.model';
@@ -15,11 +16,13 @@ import { Utilities } from 'src/app/utility/utilities';
 export class PersonaggioComponent implements OnInit {
 
   @ViewChild('modalDelete') modalDelete: any;
+  @ViewChild('infoPgAccordion') infoPgAccordion!: MatExpansionPanel;
   @Input() utente: any = require("../../utility/utente.json").auth;
   @Input() personaggio: any = require("../../utility/utente.json").personaggi[0];
 
   userId = Root.getSessionUser().id;
   pgId = Root.getSessionPg().pgId;
+  pgName = Utilities.getFirstName(Root.getSessionPg().nomeCompleto);
 
   openedPanel: string = sessionStorage.getItem('openedPanel') || "Attributi";
 
@@ -88,6 +91,8 @@ export class PersonaggioComponent implements OnInit {
    * @param pannello il nome del pannello da aprire
    */
   setPanelOpen(pannello: string) {
+    //se è aperto, chiudi l'accordion di INFO_PG_ACCORDION
+    this.infoPgAccordion.close()
     this.openedPanel = pannello;
     sessionStorage.setItem('openedPanel', pannello);
   }
@@ -401,80 +406,23 @@ export class PersonaggioComponent implements OnInit {
     this.recargePg(this.userId, this.pgId)
   }
 
+  //PANEL---------------------------------------------------
+  extensionPanelEmitter(opened: boolean) {
+    const prevOpenedPanel = JSON.stringify(sessionStorage.getItem('openedPanel'))
+
+    if(opened){
+      this.openedPanel = "";
+      console.log("PANEL opened: OPEN", this.openedPanel)
+    } else {
+      this.openedPanel = prevOpenedPanel;
+      location.reload();
+      console.log("PANEL opened: CLOSE", this.openedPanel)
+    }
+  }
+
   //TEST----------------------------------------------------
   testDB() {
-    // this.testService.test().subscribe(res => {
-    //   console.log("TEST", res)
-    // })
-
-    var userId = Root.getSessionUser().id;
-    var pgId = 1;
-    var email = "aaa@gmail.com"
-
-    // this.testService.getUserByEmail(email).subscribe(res => {
-    //   if (res) {
-    //     window.alert("E-mail già registrata!")
-    //   } else {
-    //     this.testService.getUsersList().subscribe(users => {
-    //       //@ts-ignore
-    //       var usersKeysArray = Object.keys(users)
-    //       var incrementedId = +usersKeysArray[usersKeysArray.length - 1] + 1
-    //       console.log("users", incrementedId)
-    //       var user = {
-    //         "id": incrementedId,
-    //         "nome": "Pippo",
-    //         "cognome": "Spadazzi",
-    //         "email": email,
-    //         "password": "admin_123",
-    //         "login": email + '_' + 'admin_123'
-    //       }
-    //       // this.testService.setUser(user.id, user)
-    //     })
-    //   }
-    // })
-    // this.testService.setUser(userId, Root.userEntity(userId))
-    // this.testService.setPg(userId, pgId, Root.pgEntity(pgId))
-    // this.testService.updatePgAttribute(userId, pgId, 'forza', 5);
-    // this.testService.updatePgAbility(userId, pgId, 'arceria', 5);
-    // this.testService.updatePgBackground(userId, pgId, 'riti', 5);
-    // this.testService.updatePgFGV(userId, pgId, 'furia', 4);
-
-    // var email = 'admin.admin@gmail.com';
-    // var password = 'admin_123';
-
-    // this.testService.getUsersList().subscribe(res =>
-    //   console.log("lista utenti", res)
-    // );
-    // this.testService.getUser(userId).subscribe(res =>
-    //   console.log("utente", res)
-    // );
-    // this.testService.getPersonaggiList(userId).subscribe(res =>
-    //   console.log("lista personaggi", res)
-    // );
-    // this.testService.getPersonaggio(userId, pgId).subscribe(res =>
-    //   console.log("personaggio", res)
-    // );
-
-    // var meritId = 2;
-    // var nome = "Leader nato"
-    // var note = "+2 dadi a tiri Autorità";
-    // this.testService.setMerit(userId, pgId, meritId, Root.meritEntity(meritId, nome, note));
-    // var flawId = 1;
-    // var nome = "Tracce di corruzione"
-    // var note = "I doni di percezione del Wyrm riconosco il PG come un Nemico. L'atteggiamento dei Licantropi può essere ostile nei suoi confronti.";
-    // this.testService.setFlaw(userId, pgId, flawId, Root.flawEntity(flawId, nome, note));
-    // var scarId = 1;
-    // var nome = "Ustione su viso e braccio"
-    // var note = "Quando la temperatura è bassa, fa male...";
-    // this.testService.setScar(userId, pgId, scarId, Root.scarEntity(scarId, nome, note));
-    // var equipId = 1;
-    // var item = "Klaive Dedalea"
-    // var note = "For+3, CD 6; Gnosi 7: +1 Danni Aggravati e +2 tiri Sociali";
-    // this.testService.setEquip(userId, pgId, equipId, Root.equipEntity(equipId, item, note));
-    // this.testService.updatePgBio(userId, pgId, 'rango', 4);
-    // this.testService.updateUserAuth(userId, 'cognome', 'Spadazzi');
-    // this.testService.deleteGift(userId, pgId, 1)
-
+    Utilities.getDeviceOrientation();
   }
 
 

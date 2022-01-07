@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Root } from 'src/app/service/root.model';
+import { Utilities } from 'src/app/utility/utilities';
 
 @Component({
   selector: 'button-sheet',
-  template: '<button [disabled]="!isPgLoaded" *ngIf="isDesktop; else phonebutton" mat-stroked-button [color]="color" [routerLink]="path" routerLinkActive="active" style="width:12vw"><i class="bi bi-person-circle"></i> scheda</button>'+
-  ' <ng-template #phonebutton> <button mat-icon-button [disabled]="!isPgLoaded" [color]="color" [routerLink]="path" routerLinkActive="active"><i class="bi bi-person-circle"></i></button> </ng-template>'
+  template: '<button [disabled]="!isPgLoaded" *ngIf="isDesktop; else phonebutton" mat-stroked-button [color]="color" [routerLink]="path" routerLinkActive="active" style="width:7vw"><i class="bi bi-person-square"></i> {{label}}</button>'+
+  ' <ng-template #phonebutton> <button mat-icon-button [disabled]="!isPgLoaded" [color]="color" [routerLink]="path" routerLinkActive="active"><i class="text-2xl bi bi-person-square"></i></button> </ng-template>'
 })
 export class ButtonSheetComponent implements OnInit {
 
@@ -12,6 +13,7 @@ export class ButtonSheetComponent implements OnInit {
   isIpad: boolean = false;
   isDesktop: boolean = false;
   isPgLoaded: boolean = false;
+  label: string = Root.getSessionPg() ? Utilities.getFirstName(Root.getSessionPg().nomeCompleto) : 'scheda'
 
   path: string = "/sheet"
   color: string = ""

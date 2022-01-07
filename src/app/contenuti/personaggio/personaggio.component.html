@@ -1,153 +1,181 @@
 <app-corpo-sx>
   <div class="w-full h-screen--ridotto" style="background-color: none;">
     <!-- +++++++++++++++ INFO personaggio +++++++++++++++ -->
-    <div class="grid">
-      <div class="col-11 grid">
-        <div class="col-4">
-          <text-dotter type="input" [value]="personaggio.nomeCompleto"><b>Personaggio</b></text-dotter>
-          <text-dotter type="input" [value]="personaggio.razza"><b>Razza</b></text-dotter>
-        </div>
+    <mat-accordion>
+      <mat-expansion-panel id="infoPgPanel" (opened)="extensionPanelEmitter(true)"
+        (closed)="extensionPanelEmitter(false)" #infoPgAccordion>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h2>{{personaggio.nomeCompleto}}</h2>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
 
-        <div class="col-4">
-          <text-dotter type="input" [value]="personaggio.auspicio"><b>Auspicio</b></text-dotter>
-          <text-dotter type="input" [value]="personaggio.tribu? personaggio.tribu : 'nessuna tribù'"><b>Tribù</b>
-          </text-dotter>
-        </div>
+        <div class="grid custom__overflow h-full">
+          <div class="col-11 grid">
+            <div class="col-12 pb-0 pt-0">
+              <text-dotter type="input" [value]="personaggio.nomeCompleto"><b>Personaggio</b></text-dotter>
+            </div>
 
-        <div class="col-4">
-          <text-dotter type="input" [value]="getRango(personaggio.rango)"><b>Rango</b></text-dotter>
-          <text-dotter type="input" [value]="personaggio.branco"><b>Branco</b></text-dotter>
-        </div>
-      </div>
-      <div class="col-1">
-        <dynamic-updater [dataSet]="dtBio" [entity]="personaggio"
-          (dynamicEventEmitter)="updateQuality($event, 'pgBio')">
-          <span class="dynamic-updater__header">info su {{personaggio.nomeCompleto}}</span>
-        </dynamic-updater>
-      </div>
-    </div>
+            <div class="col-12 pb-0 pt-0">
+              <text-dotter type="input" [value]="personaggio.razza"><b>Razza</b></text-dotter>
+            </div>
 
-    <hr>
+            <div class="col-12 pb-0 pt-0">
+              <text-dotter type="input" [value]="personaggio.auspicio"><b>Auspicio</b></text-dotter>
+            </div>
+
+            <div class="col-12 pb-0 pt-0">
+              <text-dotter type="input" [value]="personaggio.tribu? personaggio.tribu : 'nessuna tribù'"><b>Tribù</b>
+              </text-dotter>
+            </div>
+
+            <div class="col-12 pb-0 pt-0">
+              <text-dotter type="input" [value]="getRango(personaggio.rango)"><b>Rango</b></text-dotter>
+            </div>
+
+            <div class="col-12 pb-0 pt-0">
+              <text-dotter type="input" [value]="personaggio.branco"><b>Branco</b></text-dotter>
+            </div>
+          </div>
+
+          <div class="col-1">
+            <dynamic-updater [dataSet]="dtBio" [entity]="personaggio"
+              (dynamicEventEmitter)="updateQuality($event, 'pgBio')">
+              <span class="dynamic-updater__header">Info <i class="bi bi-chevron-right"></i> {{pgName}}</span>
+            </dynamic-updater>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
     <!-- PULSANTIERA -->
     <div class="btn-group flex align-items-center justify-content-center align-content-center mb-2" role="group">
       <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off"
-        [checked]="openedPanel=='Attributi'" (click)="setPanelOpen('Attributi')">
+        [checked]="openedPanel==='Attributi'" (click)="setPanelOpen('Attributi')">
       <label class="button__font btn btn-outline-primary" for="btnradio1">Attributi</label>
 
       <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"
-        [checked]="openedPanel=='Abilità'" (click)="setPanelOpen('Abilità')">
+        [checked]="openedPanel==='Abilità'" (click)="setPanelOpen('Abilità')">
       <label class="button__font btn btn-outline-primary" for="btnradio2">Abilità</label>
 
       <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off"
-        [checked]="openedPanel=='Background'" (click)="setPanelOpen('Background')">
+        [checked]="openedPanel==='Background'" (click)="setPanelOpen('Background')">
       <label class="button__font btn btn-outline-primary" for="btnradio3">Background</label>
 
       <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off"
-        [checked]="openedPanel=='Doni'" (click)="setPanelOpen('Doni')">
+        [checked]="openedPanel==='Doni'" (click)="setPanelOpen('Doni')">
       <label class="button__font btn btn-outline-primary" for="btnradio4">Doni</label>
 
       <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off"
-        [checked]="openedPanel=='Equip.'" (click)="setPanelOpen('Equip.')">
+        [checked]="openedPanel==='Equip.'" (click)="setPanelOpen('Equip.')">
       <label class="button__font btn btn-outline-primary" for="btnradio5">Equip.</label>
 
       <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off"
-        [checked]="openedPanel=='Note'" (click)="setPanelOpen('Note')">
+        [checked]="openedPanel==='Note'" (click)="setPanelOpen('Note')">
       <label class="button__font btn btn-outline-primary" for="btnradio6">Note</label>
     </div>
 
     <!-- CONTENUTO -->
     <div class="personaggio__contenuto" style="background-color: none;" [ngSwitch]="openedPanel">
       <!-- +++++++++++++++ ATTRIBUTI +++++++++++++++ -->
-      <div class="grid" *ngSwitchCase="'Attributi'">
-        <!-- ----- FISICI ----- -->
-        <div class="col-4 flex flex-column align-items-center">
-          <!-- header e modifica -->
-          <dynamic-updater [dataSet]="dsFisici" [entity]="personaggio"
-            (dynamicEventEmitter)="updateQuality($event, 'attributi')">
-            <b>Fisici</b>
-            <span class="dynamic-updater__header">attributi fisici</span>
-          </dynamic-updater>
+      <div class="grid flex align-items-center justify-content-center align-content-center" *ngSwitchCase="'Attributi'">
+        <div class="col-12 grid">
+          <!-- ----- FISICI ----- -->
+          <div class="col-4 p-1 flex flex-column align-items-center">
+            <!-- header e modifica -->
+            <dynamic-updater [dataSet]="dsFisici" [entity]="personaggio"
+              (dynamicEventEmitter)="updateQuality($event, 'attributi')">
+              <b>Fisici</b>
+              <span class="dynamic-updater__header">Attributi <i class="bi bi-chevron-right"></i> Fisici</span>
+            </dynamic-updater>
 
-          <text-dotter type="dotter" [value]="personaggio.forza" [isReadOnly]="true"><b>Forza</b></text-dotter>
-          <text-dotter type="dotter" [value]="personaggio.destrezza" [isReadOnly]="true"><b>Destrezza</b></text-dotter>
-          <text-dotter type="dotter" [value]="personaggio.costituzione" [isReadOnly]="true"><b>Costituzione</b>
-          </text-dotter>
+            <text-dotter type="dotter" [value]="personaggio.forza" [isReadOnly]="true"><b>Forza</b></text-dotter>
+            <text-dotter type="dotter" [value]="personaggio.destrezza" [isReadOnly]="true"><b>Destrezza</b>
+            </text-dotter>
+            <text-dotter type="dotter" [value]="personaggio.costituzione" [isReadOnly]="true"><b>Costituzione</b>
+            </text-dotter>
+          </div>
+
+          <!-- ----- SOCIALI ----- -->
+          <div class="col-4 p-1 flex flex-column align-items-center">
+            <!-- header e modifica -->
+            <dynamic-updater [dataSet]="dsSociali" [entity]="personaggio"
+              (dynamicEventEmitter)="updateQuality($event, 'attributi')">
+              <b>Sociali</b>
+              <span class="dynamic-updater__header">Attributi <i class="bi bi-chevron-right"></i> Sociali</span>
+            </dynamic-updater>
+
+            <text-dotter type="dotter" [value]="personaggio.carisma" [isReadOnly]="true"><b>Carisma</b></text-dotter>
+            <text-dotter type="dotter" [value]="personaggio.persuasione" [isReadOnly]="true"><b>Persuasione</b>
+            </text-dotter>
+            <text-dotter type="dotter" [value]="personaggio.aspetto" [isReadOnly]="true"><b>Aspetto</b></text-dotter>
+          </div>
+
+          <!-- ----- MENTALI ----- -->
+          <div class="col-4 p-1 flex flex-column align-items-center">
+            <!-- header e modifica -->
+            <dynamic-updater [dataSet]="dsMentali" [entity]="personaggio"
+              (dynamicEventEmitter)="updateQuality($event, 'attributi')">
+              <b>Mentali</b>
+              <span class="dynamic-updater__header">Attributi <i class="bi bi-chevron-right"></i> Mentali</span>
+            </dynamic-updater>
+
+            <text-dotter type="dotter" [value]="personaggio.percezione" [isReadOnly]="true"><b>Percezione</b>
+            </text-dotter>
+            <text-dotter type="dotter" [value]="personaggio.intelligenza" [isReadOnly]="true"><b>Intelligenza</b>
+            </text-dotter>
+            <text-dotter type="dotter" [value]="personaggio.prontezza" [isReadOnly]="true"><b>Prontezza</b>
+            </text-dotter>
+          </div>
         </div>
 
-        <!-- ----- SOCIALI ----- -->
-        <div class="col-4 flex flex-column align-items-center">
-          <!-- header e modifica -->
-          <dynamic-updater [dataSet]="dsSociali" [entity]="personaggio"
-            (dynamicEventEmitter)="updateQuality($event, 'attributi')">
-            <b>Sociali</b>
-            <span class="dynamic-updater__header">attributi sociali</span>
-          </dynamic-updater>
+        <!-- FGV -->
+        <div class="col-12 grid border-top-1" style="border-color: var(--second-color);">
+          <!-- Furia -->
+          <div class="col-12 md:col-4 lg:col-4 flex flex-column align-items-center">
+            <!-- header e modifica -->
+            <dynamic-updater [dataSet]="dsFGV" [entity]="personaggio"
+              (dynamicEventEmitter)="updateQuality($event, 'FGV')">
+              <b>Furia</b>
+              <span class="dynamic-updater__header">Furia, Gnosi & Volontà</span>
+            </dynamic-updater>
 
-          <text-dotter type="dotter" [value]="personaggio.carisma" [isReadOnly]="true"><b>Carisma</b></text-dotter>
-          <text-dotter type="dotter" [value]="personaggio.persuasione" [isReadOnly]="true"><b>Persuasione</b>
-          </text-dotter>
-          <text-dotter type="dotter" [value]="personaggio.aspetto" [isReadOnly]="true"><b>Aspetto</b></text-dotter>
-        </div>
+            <text-dotter type="dotter" [isTenDot]="true" [value]="personaggio.furia" [isReadOnly]="true"></text-dotter>
+          </div>
 
-        <!-- ----- MENTALI ----- -->
-        <div class="col-4 flex flex-column align-items-center">
-          <!-- header e modifica -->
-          <dynamic-updater [dataSet]="dsMentali" [entity]="personaggio"
-            (dynamicEventEmitter)="updateQuality($event, 'attributi')">
-            <b>Mentali</b>
-            <span class="dynamic-updater__header">attributi mentali</span>
-          </dynamic-updater>
+          <!-- Gnosi -->
+          <div class="col-12 md:col-4 lg:col-4 flex flex-column align-items-center">
+            <dynamic-updater [dataSet]="dsFGV" [entity]="personaggio"
+              (dynamicEventEmitter)="updateQuality($event, 'FGV')">
+              <b>Gnosi</b>
+              <span class="dynamic-updater__header">Furia, Gnosi & Volontà</span>
+            </dynamic-updater>
 
-          <text-dotter type="dotter" [value]="personaggio.percezione" [isReadOnly]="true"><b>Percezione</b>
-          </text-dotter>
-          <text-dotter type="dotter" [value]="personaggio.intelligenza" [isReadOnly]="true"><b>Intelligenza</b>
-          </text-dotter>
-          <text-dotter type="dotter" [value]="personaggio.prontezza" [isReadOnly]="true"><b>Prontezza</b></text-dotter>
-        </div>
+            <text-dotter type="dotter" [isTenDot]="true" [value]="personaggio.gnosi" [isReadOnly]="true"></text-dotter>
+          </div>
 
-        <!-- Furia -->
-        <div class="col-12 flex flex-column align-items-center">
-          <!-- header e modifica -->
-          <dynamic-updater [dataSet]="dsFGV" [entity]="personaggio"
-            (dynamicEventEmitter)="updateQuality($event, 'FGV')">
-            <b>Furia</b>
-            <span class="dynamic-updater__header">furia, gnosi & volontà</span>
-          </dynamic-updater>
+          <!-- Volontà -->
+          <div class="col-12 md:col-4 lg:col-4 flex flex-column align-items-center">
+            <dynamic-updater [dataSet]="dsFGV" [entity]="personaggio"
+              (dynamicEventEmitter)="updateQuality($event, 'FGV')">
+              <b>Volontà</b>
+              <span class="dynamic-updater__header">Furia, Gnosi & Volontà</span>
+            </dynamic-updater>
 
-          <text-dotter type="dotter" [isTenDot]="true" [value]="personaggio.furia" [isReadOnly]="true"></text-dotter>
-        </div>
-
-        <!-- Gnosi -->
-        <div class="col-12 flex flex-column align-items-center" style="margin-top: -5vh;">
-          <dynamic-updater [dataSet]="dsFGV" [entity]="personaggio"
-            (dynamicEventEmitter)="updateQuality($event, 'FGV')">
-            <b>Gnosi</b>
-            <span class="dynamic-updater__header">furia, gnosi & volontà</span>
-          </dynamic-updater>
-
-          <text-dotter type="dotter" [isTenDot]="true" [value]="personaggio.gnosi" [isReadOnly]="true"></text-dotter>
-        </div>
-
-        <!-- Volontà -->
-        <div class="col-12 flex flex-column align-items-center" style="margin-top: -5vh;">
-          <dynamic-updater [dataSet]="dsFGV" [entity]="personaggio"
-            (dynamicEventEmitter)="updateQuality($event, 'FGV')">
-            <b>Volontà</b>
-            <span class="dynamic-updater__header">furia, gnosi & volontà</span>
-          </dynamic-updater>
-
-          <text-dotter type="dotter" [isTenDot]="true" [value]="personaggio.volonta" [isReadOnly]="true"></text-dotter>
+            <text-dotter type="dotter" [isTenDot]="true" [value]="personaggio.volonta" [isReadOnly]="true">
+            </text-dotter>
+          </div>
         </div>
       </div>
 
       <!-- +++++++++++++++ ABILITA' +++++++++++++++ -->
       <div class="grid" *ngSwitchCase="'Abilità'">
         <!-- ----- ATTITUDINI ----- -->
-        <div class="col-4 flex flex-column align-items-center">
+        <div class="col-4 p-1 flex flex-column align-items-center">
           <dynamic-updater [dataSet]="dsAttitudini" [entity]="personaggio"
             (dynamicEventEmitter)="updateQuality($event, 'abilità')">
             <b>Attitudini</b>
-            <span class="dynamic-updater__header">abilità attitudini</span>
+            <span class="dynamic-updater__header">Abilità <i class="bi bi-chevron-right"></i> Attitudini</span>
           </dynamic-updater>
 
           <text-dotter type="dotter" [value]="personaggio.atletica" [isReadOnly]="true"><b>Atletica</b></text-dotter>
@@ -170,11 +198,11 @@
         </div>
 
         <!-- ----- CAPACITA' ----- -->
-        <div class="col-4 flex flex-column align-items-center">
+        <div class="col-4 p-1 flex flex-column align-items-center">
           <dynamic-updater [dataSet]="dsCapacita" [entity]="personaggio"
             (dynamicEventEmitter)="updateQuality($event, 'abilità')">
             <b>Capacità</b>
-            <span class="dynamic-updater__header">abilità capacità</span>
+            <span class="dynamic-updater__header">Abilità <i class="bi bi-chevron-right"></i> Capacità</span>
           </dynamic-updater>
 
           <text-dotter type="dotter" [value]="personaggio.affinitaAnimale" [isReadOnly]="true"><b>Aff. Animale</b>
@@ -182,24 +210,27 @@
           <text-dotter type="dotter" [value]="personaggio.arceria" [isReadOnly]="true"><b>Arceria</b></text-dotter>
           <text-dotter type="dotter" [value]="personaggio.armiDaMischia" [isReadOnly]="true"><b>Mischia</b>
           </text-dotter>
-          <text-dotter type="dotter" [value]="personaggio.cavalcare" [isReadOnly]="true"><b>Cavalcare</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.cavalcare" [isReadOnly]="true"><b>Cavalcare</b>
+          </text-dotter>
           <text-dotter type="dotter" [value]="personaggio.criminalita" [isReadOnly]="true"><b>Criminalita</b>
           </text-dotter>
           <text-dotter type="dotter" [value]="personaggio.espressioneArtistica" [isReadOnly]="true"><b>Espr.
               Artistica</b></text-dotter>
-          <text-dotter type="dotter" [value]="personaggio.furtivita" [isReadOnly]="true"><b>Furtivita</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.furtivita" [isReadOnly]="true"><b>Furtivita</b>
+          </text-dotter>
           <text-dotter type="dotter" [value]="personaggio.galateo" [isReadOnly]="true"><b>Galateo</b></text-dotter>
-          <text-dotter type="dotter" [value]="personaggio.manualita" [isReadOnly]="true"><b>Manualita</b></text-dotter>
+          <text-dotter type="dotter" [value]="personaggio.manualita" [isReadOnly]="true"><b>Manualita</b>
+          </text-dotter>
           <text-dotter type="dotter" [value]="personaggio.sopravvivenza" [isReadOnly]="true"><b>Sopravvivenza</b>
           </text-dotter>
         </div>
 
         <!-- ----- CONOSCENZE ----- -->
-        <div class="col-4 flex flex-column align-items-center">
+        <div class="col-4 p-1 flex flex-column align-items-center">
           <dynamic-updater [dataSet]="dsConoscenze" [entity]="personaggio"
             (dynamicEventEmitter)="updateQuality($event, 'abilità')">
             <b>Conoscenze</b>
-            <span class="dynamic-updater__header">abilità conoscenze</span>
+            <span class="dynamic-updater__header">Abilità <i class="bi bi-chevron-right"></i> Conoscenze</span>
           </dynamic-updater>
 
           <text-dotter type="dotter" [value]="personaggio.accademiche" [isReadOnly]="true"><b>Accademiche</b>
@@ -305,19 +336,25 @@
 
       <!-- +++++++++++++++ NOTE +++++++++++++++ -->
       <div class="personaggio__contenuto__note" *ngSwitchCase="'Note'">
-        <!-- PREGI -->
-        <div class="col-12 personaggio__contenuto__note--qualità px-3 border-bottom-2"
-          style="border-color: var(--forth-color);">
-          <!-- LABEL & aggiunti PREGIO -->
-          <div class="p-1 col-12">
-            <h3 class="m-0" style="height: fit-content;"><b>Pregi</b>
-              <div style="float: right;">
+
+
+        <mat-accordion>
+          <!-- PREGI -->
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h2>Pregi</h2>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="col-12 personaggio__contenuto__note--qualità px-3 grid"
+              style="border-color: var(--forth-color);">
+              <!-- LABEL & aggiunti PREGIO -->
+              <div class="p-1 col-1">
                 <modale #modalAddMerit>
-                  <button type="button"
-                    class="modale--apertura button-custom p-0 px-1 m-0 border-1 flex justify-content-center align-items-center"
-                    style="border-radius: 6px;" matTooltip="Aggiungi pregio" matTooltipPosition="before">
+                  <h2 class="text-sm lg:text-lg m-0 modale--apertura pt-2" style="height: fit-content;">
                     <i class="bi bi-plus-circle"></i>
-                  </button>
+                  </h2>
 
                   <h2 class="modale--header m-0">Aggiungi pregio</h2>
 
@@ -345,31 +382,33 @@
                   </div>
                 </modale>
               </div>
-            </h3>
-          </div>
 
-          <!-- Gestione PREGI -->
-          <div class="col-12 p-0">
-            <app-crud [dataset]="sortDataset(personaggio.pregi, 'nome')" [formGroup]="meritFormGroup" name="nome"
-              description="note" fieldId="id" nameLabel="Pregio" descriptionLabel="Descrizione"
-              editLabel="Modifica pregio" deleteLabel="Cancella pregio" (updateEmit)="meritUpdate($event)"
-              (deleteEmit)="meritDelete($event)"></app-crud>
-          </div>
-        </div>
+              <!-- Gestione PREGI -->
+              <div class="col-11 p-0">
+                <app-crud [dataset]="sortDataset(personaggio.pregi, 'nome')" [formGroup]="meritFormGroup" name="nome"
+                  description="note" fieldId="id" nameLabel="Pregio" descriptionLabel="Descrizione"
+                  editLabel="Modifica pregio" deleteLabel="Cancella pregio" (updateEmit)="meritUpdate($event)"
+                  (deleteEmit)="meritDelete($event)"></app-crud>
+              </div>
+            </div>
+          </mat-expansion-panel>
 
-        <!-- DIFETTI -->
-        <div class="col-12 personaggio__contenuto__note--qualità px-3 border-bottom-2"
-          style="border-color: var(--forth-color);">
-          <!-- LABEL & aggiunti DIFETTO -->
-          <div class="p-1 col-12">
-            <h3 class="m-0" style="height: fit-content;"><b>Difetti</b>
-              <div style="float: right;">
+          <!-- DIFETTI -->
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h2>Difetti</h2>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="col-12 personaggio__contenuto__note--qualità px-3 grid"
+              style="border-color: var(--forth-color);">
+              <!-- LABEL & aggiunti DIFETTO -->
+              <div class="p-1 col-1">
                 <modale #modalAddFlaw>
-                  <button type="button"
-                    class="modale--apertura button-custom p-0 px-1 m-0 border-1 flex justify-content-center align-items-center"
-                    style="border-radius: 6px;" matTooltip="Aggiungi difetto" matTooltipPosition="before">
+                  <h2 class="text-sm lg:text-lg m-0 modale--apertura pt-2" style="height: fit-content;">
                     <i class="bi bi-plus-circle"></i>
-                  </button>
+                  </h2>
 
                   <h2 class="modale--header m-0">Aggiungi difetto</h2>
 
@@ -397,31 +436,34 @@
                   </div>
                 </modale>
               </div>
-            </h3>
-          </div>
 
-          <!-- Gestione DIFETTI -->
-          <div class="col-12 p-0">
-            <app-crud [dataset]="sortDataset(personaggio.difetti, 'nome')" [formGroup]="flawFormGroup" name="nome"
-              description="note" fieldId="id" nameLabel="Difetto" descriptionLabel="Descrizione"
-              editLabel="Modifica difetto" deleteLabel="Cancella difetto" (updateEmit)="flawUpdate($event)"
-              (deleteEmit)="flawDelete($event)"></app-crud>
-          </div>
+              <!-- Gestione DIFETTI -->
+              <div class="col-11 p-0">
+                <app-crud [dataset]="sortDataset(personaggio.difetti, 'nome')" [formGroup]="flawFormGroup" name="nome"
+                  description="note" fieldId="id" nameLabel="Difetto" descriptionLabel="Descrizione"
+                  editLabel="Modifica difetto" deleteLabel="Cancella difetto" (updateEmit)="flawUpdate($event)"
+                  (deleteEmit)="flawDelete($event)"></app-crud>
+              </div>
 
-        </div>
+            </div>
+          </mat-expansion-panel>
 
-        <!-- CICATRICI DA BATTAGLIA -->
-        <div class="col-12 personaggio__contenuto__note--qualità px-3">
-          <!-- LABEL & aggiunti CICATRICE -->
-          <div class="p-1 col-12">
-            <h3 class="m-0" style="height: fit-content;"><b>Cicatrici</b>
-              <div style="float: right;">
+          <!-- CICATRICI DA BATTAGLIA -->
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h2>Cicatrici da battaglia</h2>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="col-12 personaggio__contenuto__note--qualità px-3 grid">
+              <!-- LABEL & aggiunti CICATRICE -->
+              <div class="p-1 col-1">
                 <modale #modalAddScar>
-                  <button type="button"
-                    class="modale--apertura button-custom p-0 px-1 m-0 border-1 flex justify-content-center align-items-center"
-                    style="border-radius: 6px;" matTooltip="Aggiungi cicatrice" matTooltipPosition="before">
+                  <h2 class="text-sm lg:text-lg m-0 modale--apertura pt-2" style="height: fit-content;">
                     <i class="bi bi-plus-circle"></i>
-                  </button>
+                  </h2>
+
 
                   <h2 class="modale--header m-0">Aggiungi cicatrice</h2>
 
@@ -449,18 +491,18 @@
                   </div>
                 </modale>
               </div>
-            </h3>
-          </div>
 
-          <!-- Gestione CICATRICI -->
-          <div class="col-12 p-0">
-            <app-crud [dataset]="sortDataset(personaggio.cicatriciDaBattaglia, 'nome')" [formGroup]="scarFormGroup"
-              name="nome" description="note" fieldId="id" nameLabel="Cicatrice da battaglia"
-              descriptionLabel="Descrizione" editLabel="Modifica cicatrice da battaglia"
-              deleteLabel="Cancella cicatrice da battaglia" (updateEmit)="scarUpdate($event)"
-              (deleteEmit)="scarDelete($event)"></app-crud>
-          </div>
-        </div>
+              <!-- Gestione CICATRICI -->
+              <div class="col-11 p-0">
+                <app-crud [dataset]="sortDataset(personaggio.cicatriciDaBattaglia, 'nome')" [formGroup]="scarFormGroup"
+                  name="nome" description="note" fieldId="id" nameLabel="Cicatrice da battaglia"
+                  descriptionLabel="Descrizione" editLabel="Modifica cicatrice da battaglia"
+                  deleteLabel="Cancella cicatrice da battaglia" (updateEmit)="scarUpdate($event)"
+                  (deleteEmit)="scarDelete($event)"></app-crud>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
     </div>
   </div>

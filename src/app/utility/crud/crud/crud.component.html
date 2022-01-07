@@ -1,10 +1,10 @@
 <div *ngFor="let data of dataset; let i = index">
   <p *ngIf="data" class="grid p-0 m-0 mb-1 border-bottom-1"
     style="border-color: var(--forth-color__light);">
-    <span class="col-9"><i class="bi bi-dot"></i> {{data[name]}}</span>
+    <span class="lg:col-9 md:col-6 col-12"><i class="bi bi-dot"></i> {{data[name]}}</span>
 
     <!-- view -->
-    <span class="col-1 text-center">
+    <span class="lg:col-1 md:col-2 col-4 text-center">
       <modale #modalView>
         <i *ngIf="data[description]" class="modale--apertura bi bi-chat-text icon--btn" matTooltip="Note"
           matTooltipPosition="before" (click)="patchFormValue(data)"></i>
@@ -26,7 +26,7 @@
     </span>
 
     <!-- modifica -->
-    <span class="col-1 text-center">
+    <span class="lg:col-1 md:col-2 col-4 text-center">
       <modale #modalUpdate>
         <i class="modale--apertura bi bi-gear icon--btn" matTooltip="Modifica" matTooltipPosition="before"
           (click)="patchFormValue(data)"></i>
@@ -59,7 +59,7 @@
     </span>
 
     <!-- elimina -->
-    <span class="col-1 text-center">
+    <span class="lg:col-1 md:col-2 col-4 text-center">
       <modale #modalDelete>
         <i class="modale--apertura bi bi-trash icon--btn" matTooltip="Elimina" matTooltipPosition="before"></i>
 

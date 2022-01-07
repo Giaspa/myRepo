@@ -1,17 +1,18 @@
-<div class="col-12 flex flex-column align-items-center">
-  <h2 class="m-0" style="height: fit-content;"><b>{{headerSingolare}}</b></h2>
-</div>
+<!-- <div class="col-12 flex flex-column align-items-center">
+  <h2 class="m-0 text-sm lg:text-lg" style="height: fit-content;"><b>{{headerSingolare}}</b></h2>
+</div> -->
 
 <!-- nuova QUALITY -->
 <div class="flex justify-content-center align-items-center">
   <modale #modalAdd>
-    <button type="button"
+    <!-- <button type="button"
       class="modale--apertura button-custom p-2 m-0 mb-1 border-1 flex justify-content-center align-items-center"
       style="border-radius: 6px;">
       <i class="bi bi-plus-circle"></i> &nbsp; Aggiungi
-    </button>
+    </button> -->
+    <h2 class="m-0 text-sm lg:text-lg modale--apertura" style="height: fit-content;"><b>{{headerSingolare}} &nbsp; <i class="bi bi-plus-circle" matTooltip="Nuovo" matTooltipPosition="after"></i></b></h2>
 
-    <h2 class="modale--header m-0">Aggiungi {{headerPlurale}}</h2>
+    <h2 class="modale--header m-0 text-sm lg:text-lg">Aggiungi {{headerPlurale}}</h2>
 
     <div class="modale--contenuto">
       <form [formGroup]="formGroup">
